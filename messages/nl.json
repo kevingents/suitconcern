@@ -165,5 +165,83 @@
     "nogGeenAccount": "Nog geen account?",
     "accountAanvragen": "B2B-account aanvragen",
     "lockLine": "Prijzen en voorraad zijn alleen zichtbaar voor goedgekeurde accounts."
+  },
+  "product": {
+    "artNr": "Art.nr",
+    "crossSellEyebrow": "Maak het af",
+    "crossSellTitle": "Bijpassend assortiment",
+    "relatedEyebrow": "Meer uit deze collectie",
+    "relatedTitle": "Gerelateerde producten",
+    "nietGevonden": "Product niet gevonden",
+    "metaDescription": "{name} ({color}, {fit}) van {brand}. {sku}. Inloggen voor prijzen en voorraad.",
+    "views": {
+      "voor": "Vooraanzicht",
+      "achter": "Achterzijde",
+      "detail": "Detail stof",
+      "model": "Op model"
+    },
+    "gate": {
+      "pendingTitle": "Account in behandeling",
+      "lockedTitle": "Prijzen en voorraad afgeschermd",
+      "pendingText": "Uw account wordt beoordeeld. Zodra het is goedgekeurd, ziet u prijzen, voorraad en kunt u bestellen.",
+      "lockedText": "Log in of vraag een B2B-account aan om prijzen en voorraad te bekijken en te bestellen.",
+      "beschikbareMaten": "Beschikbare maten",
+      "inloggenVoorPrijs": "Inloggen voor prijs",
+      "accountAanvragen": "Account aanvragen",
+      "naarAccount": "Naar mijn account"
+    },
+    "perStuk": "per stuk",
+    "exclBtw": "excl. btw",
+    "prijsOpAanvraag": "Prijs op aanvraag",
+    "offerteHint": "Vraag een offerte aan voor dit artikel.",
+    "staffel": "Staffel: vanaf {from} stuks {price} per stuk",
+    "staffelToegepast": " — toegepast",
+    "maatmatrix": "Maatmatrix",
+    "voorraadPerMaat": "Voorraad per maat",
+    "opVoorraad": "{stock} op voorraad",
+    "uitverkocht": "Uitverkocht",
+    "minderMaat": "Minder maat {size}",
+    "meerMaat": "Meer maat {size}",
+    "geselecteerd": "{count, plural, one {# stuk geselecteerd} other {# stuks geselecteerd}}",
+    "prijsVolgtOfferte": "Prijs volgt in de offerte",
+    "toegevoegd": "Toegevoegd",
+    "inWinkelwagen": "In winkelwagen",
+    "offerteAanvragen": "Offerte aanvragen",
+    "toegevoegdAanWinkelwagen": "Toegevoegd aan winkelwagen.",
+    "bekijkWinkelwagen": "Bekijk winkelwagen",
+    "productblad": "Productblad (PDF)",
+    "catalogus": "Catalogus",
+    "tabs": {
+      "beschrijving": "Beschrijving",
+      "specificaties": "Specificaties",
+      "maatinformatie": "Maatinformatie",
+      "levering": "Levering"
+    },
+    "desc": {
+      "p1": "De {name} van {brand} combineert een bewezen commerciële pasvorm met een verfijnde afwerking. Een {fit} silhouet in {color}, ontworpen voor zowel zakelijke als ceremoniële gelegenheden.",
+      "p2": "Onderdeel van de Suitconcern-kerncollectie en daarmee doorlopend uit voorraad leverbaar, met een ruime matenrange en korte naleveringstijden — zodat u nooit nee hoeft te verkopen aan uw klant."
+    },
+    "spec": {
+      "merk": "Merk",
+      "artikelnummer": "Artikelnummer",
+      "kleur": "Kleur",
+      "pasvorm": "Pasvorm",
+      "samenstelling": "Samenstelling",
+      "samenstellingValue": "55% wol, 43% polyester, 2% elastaan",
+      "voering": "Voering",
+      "voeringValue": "Volledig gevoerd",
+      "onderhoud": "Onderhoud",
+      "onderhoudValue": "Stomen",
+      "herkomst": "Herkomst",
+      "herkomstValue": "Geweven in Europa"
+    },
+    "maatinfo": {
+      "p1": "De maten vallen volgens de standaard Europese confectiematen. Voor pakken en colberts geldt de borstwijdte-maat; voor overhemden de kraagmaat.",
+      "p2": "Twijfelt u over de juiste maatverdeling voor uw inkoop? Onze accountmanagers adviseren u graag over een commercieel afgestemde maatstaffel per model."
+    },
+    "leveringInfo": {
+      "p1": "Voorraadartikelen worden doorgaans binnen 1–3 werkdagen geleverd. Bestellingen die vóór de dagelijkse cut-off worden geplaatst, gaan dezelfde dag de deur uit.",
+      "p2": "Levering verloopt franco huis vanaf het met u afgesproken orderbedrag. Naleveringen en backorders worden automatisch aangevuld vanuit het voorraadprogramma."
+    }
   }
 }

@@ -165,5 +165,83 @@
     "nogGeenAccount": "Noch kein Konto?",
     "accountAanvragen": "B2B-Konto anfragen",
     "lockLine": "Preise und Lagerbestand sind nur für freigegebene Konten sichtbar."
+  },
+  "product": {
+    "artNr": "Art.-Nr.",
+    "crossSellEyebrow": "Runden Sie es ab",
+    "crossSellTitle": "Passendes Sortiment",
+    "relatedEyebrow": "Mehr aus dieser Kollektion",
+    "relatedTitle": "Verwandte Produkte",
+    "nietGevonden": "Produkt nicht gefunden",
+    "metaDescription": "{name} ({color}, {fit}) von {brand}. {sku}. Zur Anzeige von Preisen und Lagerbestand anmelden.",
+    "views": {
+      "voor": "Vorderansicht",
+      "achter": "Rückseite",
+      "detail": "Stoffdetail",
+      "model": "Am Modell"
+    },
+    "gate": {
+      "pendingTitle": "Konto in Bearbeitung",
+      "lockedTitle": "Preise und Lagerbestand ausgeblendet",
+      "pendingText": "Ihr Konto wird geprüft. Sobald es freigegeben ist, sehen Sie Preise und Lagerbestand und können bestellen.",
+      "lockedText": "Melden Sie sich an oder beantragen Sie ein B2B-Konto, um Preise und Lagerbestand zu sehen und zu bestellen.",
+      "beschikbareMaten": "Verfügbare Größen",
+      "inloggenVoorPrijs": "Zur Preisanzeige anmelden",
+      "accountAanvragen": "Konto anfragen",
+      "naarAccount": "Zu meinem Konto"
+    },
+    "perStuk": "pro Stück",
+    "exclBtw": "zzgl. MwSt.",
+    "prijsOpAanvraag": "Preis auf Anfrage",
+    "offerteHint": "Fordern Sie für diesen Artikel ein Angebot an.",
+    "staffel": "Staffelpreis: ab {from} Stück {price} pro Stück",
+    "staffelToegepast": " — angewendet",
+    "maatmatrix": "Größenmatrix",
+    "voorraadPerMaat": "Lagerbestand pro Größe",
+    "opVoorraad": "{stock} auf Lager",
+    "uitverkocht": "Ausverkauft",
+    "minderMaat": "Weniger Größe {size}",
+    "meerMaat": "Mehr Größe {size}",
+    "geselecteerd": "{count, plural, one {# Stück ausgewählt} other {# Stück ausgewählt}}",
+    "prijsVolgtOfferte": "Preis folgt im Angebot",
+    "toegevoegd": "Hinzugefügt",
+    "inWinkelwagen": "In den Warenkorb",
+    "offerteAanvragen": "Angebot anfordern",
+    "toegevoegdAanWinkelwagen": "Zum Warenkorb hinzugefügt.",
+    "bekijkWinkelwagen": "Warenkorb ansehen",
+    "productblad": "Produktblatt (PDF)",
+    "catalogus": "Katalog",
+    "tabs": {
+      "beschrijving": "Beschreibung",
+      "specificaties": "Spezifikationen",
+      "maatinformatie": "Größeninformation",
+      "levering": "Lieferung"
+    },
+    "desc": {
+      "p1": "Der {name} von {brand} verbindet eine bewährte kommerzielle Passform mit einer feinen Verarbeitung. Eine {fit}-Silhouette in {color}, gestaltet für geschäftliche wie zeremonielle Anlässe.",
+      "p2": "Teil der Suitconcern-Kernkollektion und damit durchgehend ab Lager lieferbar, mit einer umfangreichen Größenrange und kurzen Nachlieferzeiten — damit Sie Ihrem Kunden nie nein sagen müssen."
+    },
+    "spec": {
+      "merk": "Marke",
+      "artikelnummer": "Artikelnummer",
+      "kleur": "Farbe",
+      "pasvorm": "Passform",
+      "samenstelling": "Zusammensetzung",
+      "samenstellingValue": "55% Wolle, 43% Polyester, 2% Elasthan",
+      "voering": "Futter",
+      "voeringValue": "Vollständig gefüttert",
+      "onderhoud": "Pflege",
+      "onderhoudValue": "Reinigung",
+      "herkomst": "Herkunft",
+      "herkomstValue": "Gewebt in Europa"
+    },
+    "maatinfo": {
+      "p1": "Die Größen entsprechen den europäischen Standard-Konfektionsgrößen. Für Anzüge und Sakkos gilt das Brustweitenmaß, für Hemden die Kragenweite.",
+      "p2": "Unsicher bei der richtigen Größenverteilung für Ihren Einkauf? Unsere Account-Manager beraten Sie gern zu einer kommerziell abgestimmten Größenstaffel pro Modell."
+    },
+    "leveringInfo": {
+      "p1": "Lagerartikel werden in der Regel innerhalb von 1–3 Werktagen geliefert. Bestellungen, die vor dem täglichen Cut-off eingehen, gehen noch am selben Tag raus.",
+      "p2": "Die Lieferung erfolgt frei Haus ab dem mit Ihnen vereinbarten Bestellwert. Nachlieferungen und Rückstände werden automatisch aus dem Lagerprogramm aufgefüllt."
+    }
   }
 }

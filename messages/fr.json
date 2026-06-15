@@ -165,5 +165,83 @@
     "nogGeenAccount": "Pas encore de compte ?",
     "accountAanvragen": "Demander un compte B2B",
     "lockLine": "Les prix et le stock ne sont visibles que pour les comptes agréés."
+  },
+  "product": {
+    "artNr": "Réf.",
+    "crossSellEyebrow": "Complétez la tenue",
+    "crossSellTitle": "Assortiment coordonné",
+    "relatedEyebrow": "Plus de cette collection",
+    "relatedTitle": "Produits associés",
+    "nietGevonden": "Produit introuvable",
+    "metaDescription": "{name} ({color}, {fit}) de {brand}. {sku}. Connectez-vous pour voir les prix et le stock.",
+    "views": {
+      "voor": "Vue de face",
+      "achter": "Dos",
+      "detail": "Détail du tissu",
+      "model": "Sur mannequin"
+    },
+    "gate": {
+      "pendingTitle": "Compte en cours de traitement",
+      "lockedTitle": "Prix et stock masqués",
+      "pendingText": "Votre compte est en cours d'examen. Une fois approuvé, vous verrez les prix et le stock et pourrez commander.",
+      "lockedText": "Connectez-vous ou demandez un compte B2B pour voir les prix et le stock et passer commande.",
+      "beschikbareMaten": "Tailles disponibles",
+      "inloggenVoorPrijs": "Connectez-vous pour voir le prix",
+      "accountAanvragen": "Demander un compte",
+      "naarAccount": "Vers mon compte"
+    },
+    "perStuk": "par pièce",
+    "exclBtw": "HT",
+    "prijsOpAanvraag": "Prix sur demande",
+    "offerteHint": "Demandez un devis pour cet article.",
+    "staffel": "Prix dégressif : à partir de {from} pièces {price} par pièce",
+    "staffelToegepast": " — appliqué",
+    "maatmatrix": "Matrice des tailles",
+    "voorraadPerMaat": "Stock par taille",
+    "opVoorraad": "{stock} en stock",
+    "uitverkocht": "Épuisé",
+    "minderMaat": "Moins de taille {size}",
+    "meerMaat": "Plus de taille {size}",
+    "geselecteerd": "{count, plural, one {# pièce sélectionnée} other {# pièces sélectionnées}}",
+    "prijsVolgtOfferte": "Le prix figurera dans le devis",
+    "toegevoegd": "Ajouté",
+    "inWinkelwagen": "Ajouter au panier",
+    "offerteAanvragen": "Demander un devis",
+    "toegevoegdAanWinkelwagen": "Ajouté au panier.",
+    "bekijkWinkelwagen": "Voir le panier",
+    "productblad": "Fiche produit (PDF)",
+    "catalogus": "Catalogue",
+    "tabs": {
+      "beschrijving": "Description",
+      "specificaties": "Spécifications",
+      "maatinformatie": "Informations sur les tailles",
+      "levering": "Livraison"
+    },
+    "desc": {
+      "p1": "Le {name} de {brand} associe une coupe commerciale éprouvée à une finition raffinée. Une silhouette {fit} en {color}, conçue aussi bien pour les occasions professionnelles que cérémonielles.",
+      "p2": "Fait partie de la collection essentielle Suitconcern et donc disponible en stock en permanence, avec une large gamme de tailles et des délais de réapprovisionnement courts — pour ne jamais avoir à dire non à votre client."
+    },
+    "spec": {
+      "merk": "Marque",
+      "artikelnummer": "Numéro d'article",
+      "kleur": "Couleur",
+      "pasvorm": "Coupe",
+      "samenstelling": "Composition",
+      "samenstellingValue": "55% laine, 43% polyester, 2% élasthanne",
+      "voering": "Doublure",
+      "voeringValue": "Entièrement doublé",
+      "onderhoud": "Entretien",
+      "onderhoudValue": "Nettoyage à sec",
+      "herkomst": "Origine",
+      "herkomstValue": "Tissé en Europe"
+    },
+    "maatinfo": {
+      "p1": "Les tailles suivent les tailles de confection européennes standard. Pour les costumes et les vestes, le tour de poitrine s'applique ; pour les chemises, l'encolure.",
+      "p2": "Vous hésitez sur la bonne répartition des tailles pour votre achat ? Nos responsables de compte vous conseillent volontiers sur une répartition des tailles équilibrée commercialement par modèle."
+    },
+    "leveringInfo": {
+      "p1": "Les articles en stock sont généralement livrés sous 1 à 3 jours ouvrés. Les commandes passées avant le cut-off quotidien partent le jour même.",
+      "p2": "La livraison est franco de port à partir du montant de commande convenu avec vous. Les réassorts et les reliquats sont automatiquement complétés depuis le programme de stock."
+    }
   }
 }

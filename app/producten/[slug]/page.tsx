@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { Breadcrumb } from "@/components/shop/breadcrumb";
 import { ProductGallery } from "@/components/shop/product-gallery";
@@ -22,10 +23,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const product = await loadProduct(slug);
-  if (!product) return { title: "Product niet gevonden" };
+  const t = await getTranslations("product");
+  if (!product) return { title: t("nietGevonden") };
   return {
     title: `${product.name} — ${product.brand}`,
-    description: `${product.name} (${product.color}, ${product.fit}) van ${product.brand}. ${product.sku}. Inloggen voor prijzen en voorraad.`,
+    description: t("metaDescription", {
+      name: product.name,
+      color: product.color,
+      fit: product.fit,
+      brand: product.brand,
+      sku: product.sku,
+    }),
   };
 }
 
@@ -40,6 +48,9 @@ export default async function ProductPage({
 
   const collection = getCollection(product.collection);
   const all = await loadProducts();
+  const t = await getTranslations("product");
+  const tp = await getTranslations("pages");
+  const tcol = await getTranslations("home.collections");
 
   const related = all
     .filter((p) => p.collection === product.collection && p.slug !== product.slug)
@@ -58,9 +69,11 @@ export default async function ProductPage({
         <Container className="py-4">
           <Breadcrumb
             items={[
-              { label: "Home", href: "/" },
-              { label: "Collecties", href: "/collecties" },
-              ...(collection ? [{ label: collection.title, href: `/collecties/${collection.slug}` }] : []),
+              { label: tp("home"), href: "/" },
+              { label: tp("collecties"), href: "/collecties" },
+              ...(collection
+                ? [{ label: tcol(`${collection.slug}.title`), href: `/collecties/${collection.slug}` }]
+                : []),
               { label: product.name },
             ]}
           />
@@ -82,7 +95,7 @@ export default async function ProductPage({
               <p className="text-xs uppercase tracking-wider text-muted">{product.brand}</p>
               <h1 className="mt-2 font-serif text-3xl text-ink sm:text-4xl">{product.name}</h1>
               <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
-                <span>Art.nr {product.sku}</span>
+                <span>{t("artNr")} {product.sku}</span>
                 <span className="text-line">·</span>
                 <span>{product.color}</span>
                 <span className="text-line">·</span>
@@ -104,7 +117,7 @@ export default async function ProductPage({
       {crossSell.length > 0 ? (
         <section className="bg-paper py-16 lg:py-20">
           <Container>
-            <SectionHeading eyebrow="Maak het af" title="Bijpassend assortiment" />
+            <SectionHeading eyebrow={t("crossSellEyebrow")} title={t("crossSellTitle")} />
             <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3">
               {crossSell.map((p) => (
                 <ProductCard key={p.slug} product={p} />
@@ -118,8 +131,8 @@ export default async function ProductPage({
         <section className="bg-white py-16 lg:py-20">
           <Container>
             <SectionHeading
-              eyebrow="Meer uit deze collectie"
-              title={collection ? collection.title : "Gerelateerde producten"}
+              eyebrow={t("relatedEyebrow")}
+              title={collection ? tcol(`${collection.slug}.title`) : t("relatedTitle")}
             />
             <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
               {related.map((p) => (

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Check, Download, Lock, Minus, Plus, ShoppingBag } from "lucide-react";
 import { useSession } from "@/lib/session";
 import { useCart } from "@/lib/cart";
@@ -12,6 +13,7 @@ import type { Product } from "@/lib/data";
 export function ProductOrderPanel({ product }: { product: Product }) {
   const { isApproved, status, discountPct, group } = useSession();
   const { add } = useCart();
+  const t = useTranslations("product");
   const [qty, setQty] = useState<Record<string, number>>({});
   const [added, setAdded] = useState(false);
 
@@ -64,18 +66,16 @@ export function ProductOrderPanel({ product }: { product: Product }) {
           </span>
           <div>
             <h3 className="font-serif text-lg text-ink">
-              {status === "pending" ? "Account in behandeling" : "Prijzen en voorraad afgeschermd"}
+              {status === "pending" ? t("gate.pendingTitle") : t("gate.lockedTitle")}
             </h3>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">
-              {status === "pending"
-                ? "Uw account wordt beoordeeld. Zodra het is goedgekeurd, ziet u prijzen, voorraad en kunt u bestellen."
-                : "Log in of vraag een B2B-account aan om prijzen en voorraad te bekijken en te bestellen."}
+              {status === "pending" ? t("gate.pendingText") : t("gate.lockedText")}
             </p>
           </div>
         </div>
 
         <div className="mt-5">
-          <p className="text-xs uppercase tracking-wider text-muted">Beschikbare maten</p>
+          <p className="text-xs uppercase tracking-wider text-muted">{t("gate.beschikbareMaten")}</p>
           <div className="mt-2 flex flex-wrap gap-2">
             {product.variants.map((v) => (
               <span key={v.size} className="rounded-card border border-line bg-white px-3 py-1.5 text-sm text-ink/80">
@@ -88,15 +88,15 @@ export function ProductOrderPanel({ product }: { product: Product }) {
         {status !== "pending" ? (
           <div className="mt-6 flex flex-col gap-2 sm:flex-row">
             <Link href="/login" className={cn(buttonVariants({ variant: "primary", size: "md" }), "flex-1")}>
-              Inloggen voor prijs
+              {t("gate.inloggenVoorPrijs")}
             </Link>
             <Link href="/b2b-account-aanvragen" className={cn(buttonVariants({ variant: "outline", size: "md" }), "flex-1")}>
-              Account aanvragen
+              {t("gate.accountAanvragen")}
             </Link>
           </div>
         ) : (
           <Link href="/account" className={cn(buttonVariants({ variant: "outline", size: "md" }), "mt-6 w-full")}>
-            Naar mijn account
+            {t("gate.naarAccount")}
           </Link>
         )}
       </div>
@@ -116,12 +116,12 @@ export function ProductOrderPanel({ product }: { product: Product }) {
                   <span className="text-sm text-muted line-through">{formatPrice(baseUnit)}</span>
                 ) : null}
               </div>
-              <p className="mt-0.5 text-xs text-muted">per stuk · excl. btw</p>
+              <p className="mt-0.5 text-xs text-muted">{t("perStuk")} · {t("exclBtw")}</p>
             </>
           ) : (
             <>
-              <span className="font-serif text-2xl text-ink">Prijs op aanvraag</span>
-              <p className="mt-0.5 text-xs text-muted">Vraag een offerte aan voor dit artikel.</p>
+              <span className="font-serif text-2xl text-ink">{t("prijsOpAanvraag")}</span>
+              <p className="mt-0.5 text-xs text-muted">{t("offerteHint")}</p>
             </>
           )}
         </div>
@@ -134,16 +134,19 @@ export function ProductOrderPanel({ product }: { product: Product }) {
 
       {product.tierPrice ? (
         <p className="mt-3 rounded-card bg-paper px-3 py-2 text-xs text-muted">
-          Staffel: vanaf {product.tierPrice.from} stuks {formatPrice(product.tierPrice.priceExclVat)} per stuk
-          {totalUnits >= product.tierPrice.from ? " — toegepast" : ""}
+          {t("staffel", {
+            from: product.tierPrice.from,
+            price: formatPrice(product.tierPrice.priceExclVat),
+          })}
+          {totalUnits >= product.tierPrice.from ? t("staffelToegepast") : ""}
         </p>
       ) : null}
 
       {/* Maatmatrix */}
       <div className="mt-6">
         <div className="flex items-center justify-between">
-          <h3 className="font-serif text-base text-ink">Maatmatrix</h3>
-          <span className="text-xs text-muted">Voorraad per maat</span>
+          <h3 className="font-serif text-base text-ink">{t("maatmatrix")}</h3>
+          <span className="text-xs text-muted">{t("voorraadPerMaat")}</span>
         </div>
         <div className="mt-3 divide-y divide-line border-y border-line">
           {product.variants.map((v) => (
@@ -157,14 +160,14 @@ export function ProductOrderPanel({ product }: { product: Product }) {
                   )}
                 >
                   <span className="size-1.5 rounded-full bg-current" />
-                  {v.stock > 0 ? `${v.stock} op voorraad` : "Uitverkocht"}
+                  {v.stock > 0 ? t("opVoorraad", { stock: v.stock }) : t("uitverkocht")}
                 </span>
               </div>
               <div className="flex items-center rounded-card border border-line">
                 <button
                   onClick={() => setSize(v.size, (qty[v.size] ?? 0) - 1)}
                   disabled={!qty[v.size]}
-                  aria-label={`Minder maat ${v.size}`}
+                  aria-label={t("minderMaat", { size: v.size })}
                   className="inline-flex size-9 items-center justify-center text-ink disabled:opacity-30"
                 >
                   <Minus className="size-3.5" strokeWidth={2} />
@@ -180,7 +183,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
                 <button
                   onClick={() => setSize(v.size, Math.min(v.stock, (qty[v.size] ?? 0) + 1))}
                   disabled={(qty[v.size] ?? 0) >= v.stock}
-                  aria-label={`Meer maat ${v.size}`}
+                  aria-label={t("meerMaat", { size: v.size })}
                   className="inline-flex size-9 items-center justify-center text-ink disabled:opacity-30"
                 >
                   <Plus className="size-3.5" strokeWidth={2} />
@@ -194,33 +197,33 @@ export function ProductOrderPanel({ product }: { product: Product }) {
       {/* Totaal */}
       <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
         <div>
-          <p className="text-sm text-muted">{totalUnits} {totalUnits === 1 ? "stuk" : "stuks"} geselecteerd</p>
+          <p className="text-sm text-muted">{t("geselecteerd", { count: totalUnits })}</p>
           {hasPrice ? (
             <>
               <p className="font-serif text-2xl text-ink">{formatPrice(totalExcl)}</p>
-              <p className="text-xs text-muted">excl. btw</p>
+              <p className="text-xs text-muted">{t("exclBtw")}</p>
             </>
           ) : (
-            <p className="text-sm text-muted">Prijs volgt in de offerte</p>
+            <p className="text-sm text-muted">{t("prijsVolgtOfferte")}</p>
           )}
         </div>
         {hasPrice ? (
           <Button onClick={addToCart} disabled={totalUnits === 0} size="lg">
             {added ? <Check className="size-4" strokeWidth={2} /> : <ShoppingBag className="size-4" strokeWidth={1.75} />}
-            {added ? "Toegevoegd" : "In winkelwagen"}
+            {added ? t("toegevoegd") : t("inWinkelwagen")}
           </Button>
         ) : (
           <Link href="/contact" className={buttonVariants({ variant: "primary", size: "lg" })}>
-            Offerte aanvragen
+            {t("offerteAanvragen")}
           </Link>
         )}
       </div>
 
       {added ? (
         <p className="mt-3 text-xs text-emerald-700">
-          Toegevoegd aan winkelwagen.{" "}
+          {t("toegevoegdAanWinkelwagen")}{" "}
           <Link href="/winkelwagen" className="underline underline-offset-4">
-            Bekijk winkelwagen
+            {t("bekijkWinkelwagen")}
           </Link>
         </p>
       ) : null}
@@ -229,11 +232,11 @@ export function ProductOrderPanel({ product }: { product: Product }) {
       <div className="mt-6 flex flex-wrap gap-3 border-t border-line pt-5">
         <button className="inline-flex items-center gap-2 text-sm text-ink/80 underline-offset-4 hover:text-ink hover:underline">
           <Download className="size-4" strokeWidth={1.75} />
-          Productblad (PDF)
+          {t("productblad")}
         </button>
         <button className="inline-flex items-center gap-2 text-sm text-ink/80 underline-offset-4 hover:text-ink hover:underline">
           <Download className="size-4" strokeWidth={1.75} />
-          Catalogus
+          {t("catalogus")}
         </button>
       </div>
     </div>

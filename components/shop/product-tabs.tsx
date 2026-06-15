@@ -1,19 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/data";
 
-const TABS = ["Beschrijving", "Specificaties", "Maatinformatie", "Levering"] as const;
-type Tab = (typeof TABS)[number];
+const TAB_KEYS = ["beschrijving", "specificaties", "maatinformatie", "levering"] as const;
+type Tab = (typeof TAB_KEYS)[number];
 
 export function ProductTabs({ product }: { product: Product }) {
-  const [active, setActive] = useState<Tab>("Beschrijving");
+  const t = useTranslations("product");
+  const [active, setActive] = useState<Tab>("beschrijving");
 
   return (
     <div>
       <div className="flex flex-wrap gap-x-8 gap-y-2 border-b border-line">
-        {TABS.map((tab) => (
+        {TAB_KEYS.map((tab) => (
           <button
             key={tab}
             onClick={() => setActive(tab)}
@@ -22,38 +24,37 @@ export function ProductTabs({ product }: { product: Product }) {
               active === tab ? "border-ink text-ink" : "border-transparent text-muted hover:text-ink",
             )}
           >
-            {tab}
+            {t(`tabs.${tab}`)}
           </button>
         ))}
       </div>
 
       <div className="prose-sm mt-6 max-w-3xl text-sm leading-relaxed text-ink/80">
-        {active === "Beschrijving" ? (
+        {active === "beschrijving" ? (
           <div className="space-y-4">
             <p>
-              De {product.name} van {product.brand} combineert een bewezen commerciële pasvorm
-              met een verfijnde afwerking. Een {product.fit.toLowerCase()} silhouet in {product.color.toLowerCase()},
-              ontworpen voor zowel zakelijke als ceremoniële gelegenheden.
+              {t("desc.p1", {
+                name: product.name,
+                brand: product.brand,
+                fit: product.fit.toLowerCase(),
+                color: product.color.toLowerCase(),
+              })}
             </p>
-            <p>
-              Onderdeel van de Suitconcern-kerncollectie en daarmee doorlopend uit voorraad
-              leverbaar, met een ruime matenrange en korte naleveringstijden — zodat u nooit
-              nee hoeft te verkopen aan uw klant.
-            </p>
+            <p>{t("desc.p2")}</p>
           </div>
         ) : null}
 
-        {active === "Specificaties" ? (
+        {active === "specificaties" ? (
           <dl className="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
             {[
-              ["Merk", product.brand],
-              ["Artikelnummer", product.sku],
-              ["Kleur", product.color],
-              ["Pasvorm", product.fit],
-              ["Samenstelling", "55% wol, 43% polyester, 2% elastaan"],
-              ["Voering", "Volledig gevoerd"],
-              ["Onderhoud", "Stomen"],
-              ["Herkomst", "Geweven in Europa"],
+              [t("spec.merk"), product.brand],
+              [t("spec.artikelnummer"), product.sku],
+              [t("spec.kleur"), product.color],
+              [t("spec.pasvorm"), product.fit],
+              [t("spec.samenstelling"), t("spec.samenstellingValue")],
+              [t("spec.voering"), t("spec.voeringValue")],
+              [t("spec.onderhoud"), t("spec.onderhoudValue")],
+              [t("spec.herkomst"), t("spec.herkomstValue")],
             ].map(([label, value]) => (
               <div key={label} className="flex justify-between border-b border-line py-2">
                 <dt className="text-muted">{label}</dt>
@@ -63,29 +64,17 @@ export function ProductTabs({ product }: { product: Product }) {
           </dl>
         ) : null}
 
-        {active === "Maatinformatie" ? (
+        {active === "maatinformatie" ? (
           <div className="space-y-4">
-            <p>
-              De maten vallen volgens de standaard Europese confectiematen. Voor pakken en colberts
-              geldt de borstwijdte-maat; voor overhemden de kraagmaat.
-            </p>
-            <p>
-              Twijfelt u over de juiste maatverdeling voor uw inkoop? Onze accountmanagers
-              adviseren u graag over een commercieel afgestemde maatstaffel per model.
-            </p>
+            <p>{t("maatinfo.p1")}</p>
+            <p>{t("maatinfo.p2")}</p>
           </div>
         ) : null}
 
-        {active === "Levering" ? (
+        {active === "levering" ? (
           <div className="space-y-4">
-            <p>
-              Voorraadartikelen worden doorgaans binnen 1–3 werkdagen geleverd. Bestellingen die
-              vóór de dagelijkse cut-off worden geplaatst, gaan dezelfde dag de deur uit.
-            </p>
-            <p>
-              Levering verloopt franco huis vanaf het met u afgesproken orderbedrag. Naleveringen
-              en backorders worden automatisch aangevuld vanuit het voorraadprogramma.
-            </p>
+            <p>{t("leveringInfo.p1")}</p>
+            <p>{t("leveringInfo.p2")}</p>
           </div>
         ) : null}
       </div>

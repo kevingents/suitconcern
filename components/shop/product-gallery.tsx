@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ProductMedia } from "@/components/shop/product-media";
 import { cn } from "@/lib/utils";
-
-const VIEWS = ["Vooraanzicht", "Achterzijde", "Detail stof", "Op model"];
 
 export function ProductGallery({
   tone,
@@ -19,6 +18,8 @@ export function ProductGallery({
   detailImage?: string;
   category?: string;
 }) {
+  const t = useTranslations("product.views");
+  const VIEWS = [t("voor"), t("achter"), t("detail"), t("model")];
   const [active, setActive] = useState(0);
   // Eigen beeld per view: model = Vooraanzicht, detail = "Detail stof"; rest placeholder.
   const viewImages: (string | undefined)[] = [image, undefined, detailImage, undefined];

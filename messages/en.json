@@ -165,5 +165,83 @@
     "nogGeenAccount": "Don't have an account yet?",
     "accountAanvragen": "Request a B2B account",
     "lockLine": "Prices and stock are only visible to approved accounts."
+  },
+  "product": {
+    "artNr": "Art. no.",
+    "crossSellEyebrow": "Complete the look",
+    "crossSellTitle": "Matching range",
+    "relatedEyebrow": "More from this collection",
+    "relatedTitle": "Related products",
+    "nietGevonden": "Product not found",
+    "metaDescription": "{name} ({color}, {fit}) by {brand}. {sku}. Sign in for prices and stock.",
+    "views": {
+      "voor": "Front view",
+      "achter": "Back",
+      "detail": "Fabric detail",
+      "model": "On model"
+    },
+    "gate": {
+      "pendingTitle": "Account under review",
+      "lockedTitle": "Prices and stock are hidden",
+      "pendingText": "Your account is being reviewed. Once approved, you'll see prices and stock and be able to order.",
+      "lockedText": "Sign in or request a B2B account to view prices and stock and to order.",
+      "beschikbareMaten": "Available sizes",
+      "inloggenVoorPrijs": "Sign in for price",
+      "accountAanvragen": "Request an account",
+      "naarAccount": "Go to my account"
+    },
+    "perStuk": "per item",
+    "exclBtw": "excl. VAT",
+    "prijsOpAanvraag": "Price on request",
+    "offerteHint": "Request a quote for this item.",
+    "staffel": "Tiered price: from {from} items {price} per item",
+    "staffelToegepast": " — applied",
+    "maatmatrix": "Size matrix",
+    "voorraadPerMaat": "Stock per size",
+    "opVoorraad": "{stock} in stock",
+    "uitverkocht": "Sold out",
+    "minderMaat": "Less of size {size}",
+    "meerMaat": "More of size {size}",
+    "geselecteerd": "{count, plural, one {# item selected} other {# items selected}}",
+    "prijsVolgtOfferte": "Price follows in the quote",
+    "toegevoegd": "Added",
+    "inWinkelwagen": "Add to cart",
+    "offerteAanvragen": "Request a quote",
+    "toegevoegdAanWinkelwagen": "Added to cart.",
+    "bekijkWinkelwagen": "View cart",
+    "productblad": "Product sheet (PDF)",
+    "catalogus": "Catalogue",
+    "tabs": {
+      "beschrijving": "Description",
+      "specificaties": "Specifications",
+      "maatinformatie": "Size information",
+      "levering": "Delivery"
+    },
+    "desc": {
+      "p1": "The {name} by {brand} combines a proven commercial fit with a refined finish. A {fit} silhouette in {color}, designed for both business and ceremonial occasions.",
+      "p2": "Part of the Suitconcern core collection and therefore continuously available from stock, with a wide size range and short replenishment times — so you never have to say no to your customer."
+    },
+    "spec": {
+      "merk": "Brand",
+      "artikelnummer": "Article number",
+      "kleur": "Colour",
+      "pasvorm": "Fit",
+      "samenstelling": "Composition",
+      "samenstellingValue": "55% wool, 43% polyester, 2% elastane",
+      "voering": "Lining",
+      "voeringValue": "Fully lined",
+      "onderhoud": "Care",
+      "onderhoudValue": "Dry clean",
+      "herkomst": "Origin",
+      "herkomstValue": "Woven in Europe"
+    },
+    "maatinfo": {
+      "p1": "The sizes follow standard European garment sizing. For suits and jackets the chest measurement applies; for shirts the collar size.",
+      "p2": "Unsure about the right size distribution for your purchase? Our account managers are happy to advise you on a commercially balanced size breakdown per model."
+    },
+    "leveringInfo": {
+      "p1": "Stock items are typically delivered within 1–3 working days. Orders placed before the daily cut-off ship the same day.",
+      "p2": "Delivery is carriage paid from the order value agreed with you. Replenishments and backorders are automatically topped up from the stock programme."
+    }
   }
 }
