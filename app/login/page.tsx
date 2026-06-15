@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { signIn } from "next-auth/react";
 import { ArrowRight, Lock } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -19,6 +20,7 @@ const labelClass = "mb-1.5 block text-sm font-medium text-ink";
 export default function LoginPage() {
   const router = useRouter();
   const { setDemoStatus } = useSession();
+  const t = useTranslations("login");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -42,7 +44,7 @@ export default function LoginPage() {
     });
     setSubmitting(false);
     if (res?.error) {
-      setError("Onjuiste inloggegevens. Controleer e-mail en wachtwoord.");
+      setError(t("fout"));
       return;
     }
     router.push("/account");
@@ -54,11 +56,10 @@ export default function LoginPage() {
       <Container>
         <div className="mx-auto w-full max-w-md">
           <div className="text-center">
-            <p className="eyebrow text-accent-dark">B2B-portaal</p>
-            <h1 className="mt-3 text-4xl">Inloggen</h1>
+            <p className="eyebrow text-accent-dark">{t("eyebrow")}</p>
+            <h1 className="mt-3 text-4xl">{t("title")}</h1>
             <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Toegang is voorbehouden aan goedgekeurde dealers. Na het inloggen
-              worden prijzen en voorraad zichtbaar in de portal.
+              {t("subtitle")}
             </p>
           </div>
 
@@ -66,7 +67,7 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               <div>
                 <label htmlFor="email" className={labelClass}>
-                  E-mailadres
+                  {t("email")}
                 </label>
                 <input
                   id="email"
@@ -82,13 +83,13 @@ export default function LoginPage() {
               <div>
                 <div className="mb-1.5 flex items-baseline justify-between gap-3">
                   <label htmlFor="wachtwoord" className="text-sm font-medium text-ink">
-                    Wachtwoord
+                    {t("wachtwoord")}
                   </label>
                   <Link
                     href="/wachtwoord-vergeten"
                     className="text-xs font-medium text-accent-dark underline-offset-4 hover:underline"
                   >
-                    Wachtwoord vergeten?
+                    {t("wachtwoordVergeten")}
                   </Link>
                 </div>
                 <input
@@ -112,7 +113,7 @@ export default function LoginPage() {
                   type="checkbox"
                   className="size-4 shrink-0 rounded border-line text-ink accent-ink focus:outline-none focus:ring-1 focus:ring-ink"
                 />
-                Onthoud mij
+                {t("onthoudMij")}
               </label>
 
               {error ? (
@@ -126,21 +127,20 @@ export default function LoginPage() {
                 className="w-full"
                 disabled={submitting}
               >
-                {submitting ? "Bezig…" : "Inloggen"}
+                {submitting ? t("bezig") : t("inloggen")}
                 <ArrowRight className="size-4" strokeWidth={1.75} />
               </Button>
 
               {!AUTH_ENABLED ? (
                 <p className="text-xs leading-relaxed text-muted">
-                  Demo: login is nog niet gekoppeld — hiermee simuleer je een
-                  goedgekeurd account.
+                  {t("demo")}
                 </p>
               ) : null}
             </form>
           </div>
 
           <div className="mt-8 border-t border-line pt-8 text-center">
-            <p className="text-sm text-muted">Nog geen account?</p>
+            <p className="text-sm text-muted">{t("nogGeenAccount")}</p>
             <Link
               href="/b2b-account-aanvragen"
               className={buttonVariants({
@@ -149,14 +149,14 @@ export default function LoginPage() {
                 className: "mt-3 w-full sm:w-auto",
               })}
             >
-              B2B-account aanvragen
+              {t("accountAanvragen")}
               <ArrowRight className="size-4" strokeWidth={1.75} />
             </Link>
           </div>
 
           <p className="mt-8 flex items-center justify-center gap-2 text-center text-xs leading-relaxed text-muted">
             <Lock className="size-3.5 shrink-0 text-accent-dark" strokeWidth={1.75} />
-            Prijzen en voorraad zijn alleen zichtbaar voor goedgekeurde accounts.
+            {t("lockLine")}
           </p>
         </div>
       </Container>

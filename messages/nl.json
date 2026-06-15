@@ -123,5 +123,47 @@
     "korting": "korting",
     "artikelen": "artikelen",
     "artikel": "artikel"
+  },
+  "pages": {
+    "home": "Home",
+    "collecties": "Collecties",
+    "collectie": "Collectie",
+    "collectiesHeroEyebrow": "Assortiment",
+    "collectiesHeroTitle": "Collecties",
+    "collectiesHeroDescription": "Een slim afgestemd assortiment gala- en bedrijfskleding — altijd uit voorraad, in een ruime matenrange."
+  },
+  "listing": {
+    "filters": "Filters",
+    "wissen": "Wissen",
+    "merk": "Merk",
+    "pasvorm": "Pasvorm",
+    "maat": "Maat",
+    "kleur": "Kleur",
+    "voorraad": "Voorraad",
+    "alleenOpVoorraad": "Alleen op voorraad",
+    "sorteren": "Sorteren",
+    "sortPopulair": "Populair",
+    "sortNieuw": "Nieuw",
+    "sortPrijsOp": "Prijs oplopend",
+    "sortPrijsAf": "Prijs aflopend",
+    "geenResultaten": "Geen artikelen gevonden met deze filters.",
+    "filtersWissen": "Filters wissen",
+    "toonArtikelen": "Toon {count} artikelen"
+  },
+  "login": {
+    "eyebrow": "B2B-portaal",
+    "title": "Inloggen",
+    "subtitle": "Toegang is voorbehouden aan goedgekeurde dealers. Na het inloggen worden prijzen en voorraad zichtbaar in de portal.",
+    "email": "E-mailadres",
+    "wachtwoord": "Wachtwoord",
+    "wachtwoordVergeten": "Wachtwoord vergeten?",
+    "onthoudMij": "Onthoud mij",
+    "inloggen": "Inloggen",
+    "bezig": "Bezig…",
+    "fout": "Onjuiste inloggegevens. Controleer e-mail en wachtwoord.",
+    "demo": "Demo: login is nog niet gekoppeld — hiermee simuleer je een goedgekeurd account.",
+    "nogGeenAccount": "Nog geen account?",
+    "accountAanvragen": "B2B-account aanvragen",
+    "lockLine": "Prijzen en voorraad zijn alleen zichtbaar voor goedgekeurde accounts."
   }
 }

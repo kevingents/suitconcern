@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { SlidersHorizontal, X } from "lucide-react";
 import { useSession } from "@/lib/session";
 import { ProductCard } from "@/components/shop/product-card";
@@ -16,6 +17,8 @@ function unique<T>(values: T[]): T[] {
 
 export function CategoryListing({ products }: { products: Product[] }) {
   const { isApproved } = useSession();
+  const t = useTranslations("listing");
+  const ts = useTranslations("shop");
   const [brands, setBrands] = useState<string[]>([]);
   const [fits, setFits] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);
@@ -74,32 +77,32 @@ export function CategoryListing({ products }: { products: Product[] }) {
   const filters = (
     <div className="space-y-7">
       <FilterGroup
-        title="Merk"
+        title={t("merk")}
         options={options.brands}
         selected={brands}
         onToggle={(v) => toggle(brands, setBrands, v)}
       />
       <FilterGroup
-        title="Pasvorm"
+        title={t("pasvorm")}
         options={options.fits}
         selected={fits}
         onToggle={(v) => toggle(fits, setFits, v)}
       />
       <FilterGroup
-        title="Maat"
+        title={t("maat")}
         options={options.sizes}
         selected={sizes}
         onToggle={(v) => toggle(sizes, setSizes, v)}
         inline
       />
       <FilterGroup
-        title="Kleur"
+        title={t("kleur")}
         options={options.colors}
         selected={colors}
         onToggle={(v) => toggle(colors, setColors, v)}
       />
       <div>
-        <p className="mb-3 font-serif text-base text-ink">Voorraad</p>
+        <p className="mb-3 font-serif text-base text-ink">{t("voorraad")}</p>
         <label className="flex cursor-pointer items-center gap-2.5 text-sm text-ink/80">
           <input
             type="checkbox"
@@ -107,7 +110,7 @@ export function CategoryListing({ products }: { products: Product[] }) {
             onChange={(e) => setInStockOnly(e.target.checked)}
             className="size-4 rounded border-line accent-ink"
           />
-          Alleen op voorraad
+          {t("alleenOpVoorraad")}
         </label>
       </div>
     </div>
@@ -118,10 +121,10 @@ export function CategoryListing({ products }: { products: Product[] }) {
       {/* Desktop filters */}
       <aside className="hidden lg:block">
         <div className="flex items-center justify-between">
-          <h2 className="font-serif text-lg text-ink">Filters</h2>
+          <h2 className="font-serif text-lg text-ink">{t("filters")}</h2>
           {activeCount > 0 ? (
             <button onClick={reset} className="text-xs text-muted underline-offset-4 hover:text-ink hover:underline">
-              Wissen ({activeCount})
+              {t("wissen")} ({activeCount})
             </button>
           ) : null}
         </div>
@@ -133,7 +136,7 @@ export function CategoryListing({ products }: { products: Product[] }) {
         <div className="flex items-center justify-between gap-4 border-b border-line pb-4">
           <p className="text-sm text-muted">
             <span className="text-ink">{filtered.length}</span>{" "}
-            {filtered.length === 1 ? "artikel" : "artikelen"}
+            {filtered.length === 1 ? ts("artikel") : ts("artikelen")}
           </p>
           <div className="flex items-center gap-3">
             <button
@@ -141,19 +144,19 @@ export function CategoryListing({ products }: { products: Product[] }) {
               className={cn(buttonVariants({ variant: "outline", size: "sm" }), "lg:hidden")}
             >
               <SlidersHorizontal className="size-4" strokeWidth={1.75} />
-              Filters{activeCount ? ` (${activeCount})` : ""}
+              {t("filters")}{activeCount ? ` (${activeCount})` : ""}
             </button>
             <label className="flex items-center gap-2 text-sm text-muted">
-              <span className="hidden sm:inline">Sorteren</span>
+              <span className="hidden sm:inline">{t("sorteren")}</span>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SortKey)}
                 className="h-9 rounded-card border border-line bg-white px-3 text-sm text-ink focus:border-ink focus:outline-none"
               >
-                <option value="populair">Populair</option>
-                <option value="nieuw">Nieuw</option>
-                {isApproved ? <option value="prijs-op">Prijs oplopend</option> : null}
-                {isApproved ? <option value="prijs-af">Prijs aflopend</option> : null}
+                <option value="populair">{t("sortPopulair")}</option>
+                <option value="nieuw">{t("sortNieuw")}</option>
+                {isApproved ? <option value="prijs-op">{t("sortPrijsOp")}</option> : null}
+                {isApproved ? <option value="prijs-af">{t("sortPrijsAf")}</option> : null}
               </select>
             </label>
           </div>
@@ -168,9 +171,9 @@ export function CategoryListing({ products }: { products: Product[] }) {
           </div>
         ) : (
           <div className="mt-16 text-center">
-            <p className="text-muted">Geen artikelen gevonden met deze filters.</p>
+            <p className="text-muted">{t("geenResultaten")}</p>
             <button onClick={reset} className={cn(buttonVariants({ variant: "outline", size: "sm" }), "mt-4")}>
-              Filters wissen
+              {t("filtersWissen")}
             </button>
           </div>
         )}
@@ -182,7 +185,7 @@ export function CategoryListing({ products }: { products: Product[] }) {
           <div className="absolute inset-0 bg-ink/40 backdrop-blur-sm" onClick={() => setDrawerOpen(false)} aria-hidden />
           <div className="absolute left-0 top-0 flex h-full w-[86%] max-w-sm flex-col bg-white shadow-2xl">
             <div className="flex h-14 items-center justify-between border-b border-line px-5">
-              <h2 className="font-serif text-lg text-ink">Filters</h2>
+              <h2 className="font-serif text-lg text-ink">{t("filters")}</h2>
               <button
                 onClick={() => setDrawerOpen(false)}
                 aria-label="Filters sluiten"
@@ -194,10 +197,10 @@ export function CategoryListing({ products }: { products: Product[] }) {
             <div className="flex-1 overflow-y-auto p-5">{filters}</div>
             <div className="flex gap-2 border-t border-line p-4">
               <button onClick={reset} className={cn(buttonVariants({ variant: "outline", size: "md" }), "flex-1")}>
-                Wissen
+                {t("wissen")}
               </button>
               <button onClick={() => setDrawerOpen(false)} className={cn(buttonVariants({ variant: "primary", size: "md" }), "flex-1")}>
-                Toon {filtered.length} artikelen
+                {t("toonArtikelen", { count: filtered.length })}
               </button>
             </div>
           </div>

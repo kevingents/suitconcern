@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { PageHero } from "@/components/shop/page-hero";
 import { CategoryListing } from "@/components/shop/category-listing";
@@ -34,17 +35,19 @@ export default async function CollectionPage({
   if (!collection) notFound();
 
   const products = await loadProductsByCollection(slug);
+  const t = await getTranslations("pages");
+  const tcol = await getTranslations("home.collections");
 
   return (
     <>
       <PageHero
-        eyebrow="Collectie"
-        title={collection.title}
-        description={collection.description}
+        eyebrow={t("collectie")}
+        title={tcol(`${slug}.title`)}
+        description={tcol(`${slug}.description`)}
         crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Collecties", href: "/collecties" },
-          { label: collection.title },
+          { label: t("home"), href: "/" },
+          { label: t("collecties"), href: "/collecties" },
+          { label: tcol(`${slug}.title`) },
         ]}
       />
 

@@ -123,5 +123,47 @@
     "korting": "discount",
     "artikelen": "items",
     "artikel": "item"
+  },
+  "pages": {
+    "home": "Home",
+    "collecties": "Collections",
+    "collectie": "Collection",
+    "collectiesHeroEyebrow": "Range",
+    "collectiesHeroTitle": "Collections",
+    "collectiesHeroDescription": "A carefully curated range of formal and corporate wear — always from stock, in an extensive size range."
+  },
+  "listing": {
+    "filters": "Filters",
+    "wissen": "Clear",
+    "merk": "Brand",
+    "pasvorm": "Fit",
+    "maat": "Size",
+    "kleur": "Colour",
+    "voorraad": "Stock",
+    "alleenOpVoorraad": "In stock only",
+    "sorteren": "Sort",
+    "sortPopulair": "Popular",
+    "sortNieuw": "New",
+    "sortPrijsOp": "Price: low to high",
+    "sortPrijsAf": "Price: high to low",
+    "geenResultaten": "No items found with these filters.",
+    "filtersWissen": "Clear filters",
+    "toonArtikelen": "Show {count} items"
+  },
+  "login": {
+    "eyebrow": "B2B portal",
+    "title": "Sign in",
+    "subtitle": "Access is reserved for approved dealers. Once signed in, prices and stock become visible in the portal.",
+    "email": "Email address",
+    "wachtwoord": "Password",
+    "wachtwoordVergeten": "Forgot your password?",
+    "onthoudMij": "Remember me",
+    "inloggen": "Sign in",
+    "bezig": "Working…",
+    "fout": "Incorrect login details. Please check your email and password.",
+    "demo": "Demo: login is not yet connected — this simulates an approved account.",
+    "nogGeenAccount": "Don't have an account yet?",
+    "accountAanvragen": "Request a B2B account",
+    "lockLine": "Prices and stock are only visible to approved accounts."
   }
 }

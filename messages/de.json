@@ -1,7 +1,7 @@
 {
   "common": {
     "inloggen": "Anmelden",
-    "accountAanvragen": "Konto beantragen",
+    "accountAanvragen": "Konto anfragen",
     "contactOpnemen": "Kontakt aufnehmen",
     "bekijkCollecties": "Kollektionen ansehen",
     "b2bInloggen": "B2B-Anmeldung",
@@ -112,7 +112,7 @@
   },
   "shop": {
     "logInVoorPrijs": "Für Preis anmelden",
-    "accountAanvragen": "Konto beantragen",
+    "accountAanvragen": "Konto anfragen",
     "inloggenVoorPrijs": "Zur Preisanzeige anmelden",
     "exclBtw": "zzgl. MwSt.",
     "prijsOpAanvraag": "Preis auf Anfrage",
@@ -123,5 +123,47 @@
     "korting": "Rabatt",
     "artikelen": "Artikel",
     "artikel": "Artikel"
+  },
+  "pages": {
+    "home": "Home",
+    "collecties": "Kollektionen",
+    "collectie": "Kollektion",
+    "collectiesHeroEyebrow": "Sortiment",
+    "collectiesHeroTitle": "Kollektionen",
+    "collectiesHeroDescription": "Ein clever abgestimmtes Sortiment an Gala- und Geschäftskleidung — stets ab Lager, in einer umfangreichen Größenrange."
+  },
+  "listing": {
+    "filters": "Filter",
+    "wissen": "Löschen",
+    "merk": "Marke",
+    "pasvorm": "Passform",
+    "maat": "Größe",
+    "kleur": "Farbe",
+    "voorraad": "Lagerbestand",
+    "alleenOpVoorraad": "Nur auf Lager",
+    "sorteren": "Sortieren",
+    "sortPopulair": "Beliebt",
+    "sortNieuw": "Neu",
+    "sortPrijsOp": "Preis aufsteigend",
+    "sortPrijsAf": "Preis absteigend",
+    "geenResultaten": "Keine Artikel mit diesen Filtern gefunden.",
+    "filtersWissen": "Filter löschen",
+    "toonArtikelen": "{count} Artikel anzeigen"
+  },
+  "login": {
+    "eyebrow": "B2B-Portal",
+    "title": "Anmelden",
+    "subtitle": "Der Zugang ist freigegebenen Händlern vorbehalten. Nach der Anmeldung werden Preise und Lagerbestand im Portal sichtbar.",
+    "email": "E-Mail-Adresse",
+    "wachtwoord": "Passwort",
+    "wachtwoordVergeten": "Passwort vergessen?",
+    "onthoudMij": "Angemeldet bleiben",
+    "inloggen": "Anmelden",
+    "bezig": "Wird verarbeitet…",
+    "fout": "Ungültige Anmeldedaten. Bitte überprüfen Sie E-Mail und Passwort.",
+    "demo": "Demo: Die Anmeldung ist noch nicht angebunden — hiermit simulieren Sie ein freigegebenes Konto.",
+    "nogGeenAccount": "Noch kein Konto?",
+    "accountAanvragen": "B2B-Konto anfragen",
+    "lockLine": "Preise und Lagerbestand sind nur für freigegebene Konten sichtbar."
   }
 }

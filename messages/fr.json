@@ -123,5 +123,47 @@
     "korting": "remise",
     "artikelen": "articles",
     "artikel": "article"
+  },
+  "pages": {
+    "home": "Accueil",
+    "collecties": "Collections",
+    "collectie": "Collection",
+    "collectiesHeroEyebrow": "Assortiment",
+    "collectiesHeroTitle": "Collections",
+    "collectiesHeroDescription": "Un assortiment soigneusement composé de vêtements de cérémonie et de ville — toujours en stock, dans une large gamme de tailles."
+  },
+  "listing": {
+    "filters": "Filtres",
+    "wissen": "Effacer",
+    "merk": "Marque",
+    "pasvorm": "Coupe",
+    "maat": "Taille",
+    "kleur": "Couleur",
+    "voorraad": "Stock",
+    "alleenOpVoorraad": "Uniquement en stock",
+    "sorteren": "Trier",
+    "sortPopulair": "Populaire",
+    "sortNieuw": "Nouveau",
+    "sortPrijsOp": "Prix croissant",
+    "sortPrijsAf": "Prix décroissant",
+    "geenResultaten": "Aucun article trouvé avec ces filtres.",
+    "filtersWissen": "Effacer les filtres",
+    "toonArtikelen": "Afficher {count} articles"
+  },
+  "login": {
+    "eyebrow": "Portail B2B",
+    "title": "Se connecter",
+    "subtitle": "L'accès est réservé aux revendeurs agréés. Après connexion, les prix et le stock deviennent visibles dans le portail.",
+    "email": "Adresse e-mail",
+    "wachtwoord": "Mot de passe",
+    "wachtwoordVergeten": "Mot de passe oublié ?",
+    "onthoudMij": "Se souvenir de moi",
+    "inloggen": "Se connecter",
+    "bezig": "En cours…",
+    "fout": "Identifiants incorrects. Vérifiez votre e-mail et votre mot de passe.",
+    "demo": "Démo : la connexion n'est pas encore reliée — elle simule un compte agréé.",
+    "nogGeenAccount": "Pas encore de compte ?",
+    "accountAanvragen": "Demander un compte B2B",
+    "lockLine": "Les prix et le stock ne sont visibles que pour les comptes agréés."
   }
 }
