@@ -6,6 +6,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { MobileCta } from "@/components/layout/mobile-cta";
 import { SessionProvider } from "@/lib/session";
 import { CartProvider } from "@/lib/cart";
+import { FavoritesProvider } from "@/lib/favorites";
+import { OrganizationJsonLd } from "@/components/seo/json-ld";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -53,12 +55,15 @@ export default function RootLayout({
   return (
     <html lang="nl" className={`${inter.variable} ${playfair.variable}`}>
       <body className="flex min-h-screen flex-col bg-white text-ink antialiased">
+        <OrganizationJsonLd />
         <SessionProvider authEnabled={process.env.NEXT_PUBLIC_AUTH_ENABLED === "true"}>
           <CartProvider>
-            <SiteHeader />
-            <main className="flex-1 pb-20 lg:pb-0">{children}</main>
-            <SiteFooter />
-            <MobileCta />
+            <FavoritesProvider>
+              <SiteHeader />
+              <main className="flex-1 pb-20 lg:pb-0">{children}</main>
+              <SiteFooter />
+              <MobileCta />
+            </FavoritesProvider>
           </CartProvider>
         </SessionProvider>
       </body>

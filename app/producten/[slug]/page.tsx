@@ -7,6 +7,7 @@ import { ProductOrderPanel } from "@/components/shop/product-order-panel";
 import { ProductTabs } from "@/components/shop/product-tabs";
 import { ProductCard } from "@/components/shop/product-card";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { ProductJsonLd } from "@/components/seo/json-ld";
 import { getCollection } from "@/lib/data";
 import { loadProduct, loadProducts } from "@/lib/catalog";
 
@@ -52,6 +53,7 @@ export default async function ProductPage({
 
   return (
     <>
+      <ProductJsonLd product={product} />
       <div className="border-b border-line bg-white">
         <Container className="py-4">
           <Breadcrumb

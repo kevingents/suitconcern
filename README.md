@@ -190,6 +190,24 @@ draait alles in demo-modus.
   (geen persistentie/betaling), zodat de flow lokaal werkt. Live: zet `DATABASE_URL`,
   `MOLLIE_API_KEY` en `NEXT_PUBLIC_SITE_URL` (voor redirect/webhook-URL).
 
+## B2B-gemak & SEO
+
+- **Favorieten** — heart op elke productkaart ([`favorite-button.tsx`](components/shop/favorite-button.tsx)),
+  client-store ([`lib/favorites.tsx`](lib/favorites.tsx), localStorage), overzicht op
+  [`/account/favorieten`](app/account/favorieten/page.tsx).
+- **Snel bestellen** — [`/snel-bestellen`](app/snel-bestellen/page.tsx): SKU + maat + aantal
+  per regel → direct in de winkelwagen (case-insensitive lookup, melding bij onbekende SKU).
+- **Herhaalbestelling** — [`/account/bestellingen`](app/account/bestellingen/page.tsx) lijst
+  eerdere orders met "Opnieuw bestellen" (DB-gated; info-kaart zonder database).
+- **SEO** — [`sitemap.xml`](app/sitemap.ts) (statische routes + collecties + producten),
+  [`robots.txt`](app/robots.ts) (account/checkout/admin afgeschermd, catalogus indexeerbaar),
+  [`manifest.webmanifest`](app/manifest.ts), en JSON-LD ([`json-ld.tsx`](components/seo/json-ld.tsx)):
+  Organization site-breed + Product per PDP (zonder prijs — die is login-gated).
+
+> Dev-tip: deze repo staat in een **OneDrive-map**, wat de Next.js `.next`-devcache soms
+> corrumpeert (ENOENT op manifests). Bij rare build/dev-fouten: `.next` verwijderen, of
+> `.next` uitsluiten van OneDrive-sync / de repo buiten OneDrive plaatsen.
+
 ## Roadmap
 
 1. **Data & auth** — Prisma-schema + PostgreSQL (User, Company, CustomerGroup, Product,

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { useSession } from "@/lib/session";
 import { ProductMedia } from "@/components/shop/product-media";
+import { FavoriteButton } from "@/components/shop/favorite-button";
 import { PriceDisplay } from "@/components/shop/price-display";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -15,13 +16,15 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="group flex flex-col">
-      <Link href={`/producten/${product.slug}`} className="relative block overflow-hidden rounded-card">
-        <ProductMedia
-          image={product.image}
-          tone={product.tone}
-          label={product.name}
-          className="transition-transform duration-500 group-hover:scale-[1.03]"
-        />
+      <div className="relative overflow-hidden rounded-card">
+        <Link href={`/producten/${product.slug}`} className="block">
+          <ProductMedia
+            image={product.image}
+            tone={product.tone}
+            label={product.name}
+            className="transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        </Link>
         <div className="absolute left-3 top-3 flex gap-1.5">
           {product.isNew ? (
             <span className="rounded-full bg-white/90 px-2.5 py-1 text-[0.65rem] font-medium tracking-wide text-ink">
@@ -34,7 +37,8 @@ export function ProductCard({ product }: { product: Product }) {
             </span>
           ) : null}
         </div>
-      </Link>
+        <FavoriteButton sku={product.sku} className="absolute right-3 top-3" />
+      </div>
 
       <div className="mt-4 flex flex-1 flex-col">
         <p className="text-xs uppercase tracking-wider text-muted">{product.brand}</p>
