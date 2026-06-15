@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { navigation } from "@/lib/data";
 import { useSession } from "@/lib/session";
+import { useCart } from "@/lib/cart";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/layout/logo";
 import { DemoSessionSwitcher } from "@/components/layout/demo-session-switcher";
@@ -22,6 +23,7 @@ import { cn } from "@/lib/utils";
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { status, company } = useSession();
+  const { count } = useCart();
 
   return (
     <header className="sticky top-0 z-50 bg-white">
@@ -110,10 +112,15 @@ export function SiteHeader() {
                 <Link
                   href="/winkelwagen"
                   aria-label="Winkelwagen"
-                  className={buttonVariants({ variant: "primary", size: "sm" })}
+                  className={cn(buttonVariants({ variant: "primary", size: "sm" }), "relative")}
                 >
                   <ShoppingBag className="size-4" strokeWidth={1.75} />
                   <span className="hidden sm:inline">Winkelwagen</span>
+                  {count > 0 ? (
+                    <span className="absolute -right-1.5 -top-1.5 inline-flex min-w-5 items-center justify-center rounded-full bg-accent px-1.5 text-[0.65rem] font-semibold text-ink">
+                      {count}
+                    </span>
+                  ) : null}
                 </Link>
               </>
             ) : (

@@ -4,14 +4,36 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Check, Download, Lock, Minus, Plus, ShoppingBag } from "lucide-react";
 import { useSession } from "@/lib/session";
+import { useCart } from "@/lib/cart";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn, formatPrice } from "@/lib/utils";
 import type { Product } from "@/lib/data";
 
 export function ProductOrderPanel({ product }: { product: Product }) {
   const { isApproved, status, discountPct, group } = useSession();
+  const { add } = useCart();
   const [qty, setQty] = useState<Record<string, number>>({});
   const [added, setAdded] = useState(false);
+
+  function addToCart() {
+    if (totalUnits <= 0) return;
+    for (const [size, count] of Object.entries(qty)) {
+      if (count > 0) {
+        add({
+          sku: product.sku,
+          slug: product.slug,
+          name: product.name,
+          brand: product.brand,
+          size,
+          qty: count,
+          unitPriceExclVat: product.priceExclVat,
+          tone: product.tone,
+          image: product.image,
+        });
+      }
+    }
+    setAdded(true);
+  }
 
   const totalUnits = useMemo(
     () => Object.values(qty).reduce((sum, n) => sum + n, 0),
@@ -183,11 +205,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
           )}
         </div>
         {hasPrice ? (
-          <Button
-            onClick={() => totalUnits > 0 && setAdded(true)}
-            disabled={totalUnits === 0}
-            size="lg"
-          >
+          <Button onClick={addToCart} disabled={totalUnits === 0} size="lg">
             {added ? <Check className="size-4" strokeWidth={2} /> : <ShoppingBag className="size-4" strokeWidth={1.75} />}
             {added ? "Toegevoegd" : "In winkelwagen"}
           </Button>

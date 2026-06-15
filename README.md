@@ -171,6 +171,24 @@ draait alles in demo-modus.
 > Let op: een aangevraagd account heeft nog geen wachtwoord — inloggen kan pas na
 > goedkeuring + wachtwoord-uitnodiging (volgt, samen met de Resend-mails).
 
+## Bestellen & betalen
+
+- **Winkelwagen** — echte client-cart ([`lib/cart.tsx`](lib/cart.tsx), localStorage),
+  per SKU+maat met prijs-snapshot. "In winkelwagen" op de PDP vult 'm; teller in de
+  header. [`/winkelwagen`](app/winkelwagen/page.tsx) en
+  [`/checkout`](app/checkout/page.tsx) rekenen consistent: subtotaal → klantkorting →
+  btw 21% → totaal.
+- **Order plaatsen** — [`placeOrder`](app/checkout/actions.ts) (server action): vereist
+  een goedgekeurd account, herberekent prijzen **autoritair server-side**
+  ([`lib/orders.ts`](lib/orders.ts)), persisteert Order + OrderItems + Payment, en start
+  een **Mollie**-betaling ([`lib/mollie.ts`](lib/mollie.ts)) → redirect naar de hosted
+  checkout. "Op factuur" alleen als dat per bedrijf is geactiveerd.
+- **Webhook** — [`/api/webhooks/mollie`](app/api/webhooks/mollie/route.ts) werkt
+  Payment/Order-status bij; [`/bedankt`](app/bedankt/page.tsx) bevestigt en leegt de wagen.
+- **Mock-veilig** — zonder `DATABASE_URL`/`MOLLIE_API_KEY` rondt de checkout af als demo
+  (geen persistentie/betaling), zodat de flow lokaal werkt. Live: zet `DATABASE_URL`,
+  `MOLLIE_API_KEY` en `NEXT_PUBLIC_SITE_URL` (voor redirect/webhook-URL).
+
 ## Roadmap
 
 1. **Data & auth** — Prisma-schema + PostgreSQL (User, Company, CustomerGroup, Product,
