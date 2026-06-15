@@ -123,7 +123,8 @@ schakelt hij in productie vanzelf over op live data.
   ([`lib/pricing.ts`](lib/pricing.ts), blob `suitconcern/price-list.json` met
   `lib/data/price-list.json` als seed), niet uit SRS. Geseed met SRS `unitPrice` waar
   aanwezig; ontbreekt een prijs → "prijs op aanvraag". Klantgroep-korting komt er los
-  overheen. Een admin-UI om de lijst te beheren volgt.
+  overheen. Beheer zonder code via **[`/admin/prijzen`](app/admin/prijzen/page.tsx)**
+  (per SKU, schrijft de blob; vereist het blob-token).
 - **Afbeeldingen (fashn.ai)** — eigen Suitconcern-modelbeeld via FASHN.ai
   ("product-to-model"): [`lib/fashn.ts`](lib/fashn.ts) +
   [`scripts/generate-images.ts`](scripts/generate-images.ts). Vul

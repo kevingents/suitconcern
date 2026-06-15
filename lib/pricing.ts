@@ -1,5 +1,5 @@
 import "server-only";
-import { list } from "@vercel/blob";
+import { list, put } from "@vercel/blob";
 import priceListSeed from "@/lib/data/price-list.json";
 
 /**
@@ -77,4 +77,38 @@ export async function loadPriceList(): Promise<PriceList> {
 export function priceForSku(list: PriceList, sku: string): number | undefined {
   const v = list[String(sku || "").trim()];
   return Number.isFinite(v) && v > 0 ? v : undefined;
+}
+
+/** Of de prijslijst beheerd (geschreven) kan worden — vereist een blob-token. */
+export function priceListWritable(): boolean {
+  return Boolean(blobToken());
+}
+
+/**
+ * Slaat de groothandel-prijslijst op in de blob (`suitconcern/price-list.json`).
+ * Bron van waarheid voor de admin-UI; leegt de proces-cache zodat de nieuwe
+ * prijzen direct meetellen.
+ */
+export async function savePriceList(prices: PriceList): Promise<boolean> {
+  const token = blobToken();
+  if (!token) return false;
+  const clean: PriceList = {};
+  for (const [sku, value] of Object.entries(prices)) {
+    const n = Number(value);
+    if (sku && Number.isFinite(n) && n > 0) clean[sku.trim()] = Math.round(n * 100) / 100;
+  }
+  try {
+    await put(BLOB_PATH, JSON.stringify({ prices: clean }, null, 2), {
+      access: "public",
+      token,
+      contentType: "application/json",
+      addRandomSuffix: false,
+      allowOverwrite: true,
+    });
+    _cache = { at: Date.now(), data: { ...seedPrices(), ...clean } };
+    return true;
+  } catch (e) {
+    console.error("[pricing] opslaan faalde:", e instanceof Error ? e.message : e);
+    return false;
+  }
 }

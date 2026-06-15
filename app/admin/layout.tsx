@@ -47,6 +47,10 @@ export default async function AdminLayout({
             </Link>
             <span className="text-muted">·</span>
             <span className="text-sm text-muted">Beheer</span>
+            <nav className="ml-4 flex items-center gap-4 text-sm">
+              <Link href="/admin" className="text-ink/80 hover:text-ink">Aanvragen</Link>
+              <Link href="/admin/prijzen" className="text-ink/80 hover:text-ink">Prijzen</Link>
+            </nav>
           </div>
           <span className="text-xs text-muted">{session.user.email}</span>
         </Container>
