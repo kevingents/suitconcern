@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Repeat } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
@@ -21,6 +22,7 @@ export interface ReorderItem {
 export function ReorderButton({ items }: { items: ReorderItem[] }) {
   const router = useRouter();
   const { add } = useCart();
+  const t = useTranslations("account.orders");
 
   function handleReorder() {
     for (const item of items) {
@@ -42,7 +44,7 @@ export function ReorderButton({ items }: { items: ReorderItem[] }) {
   return (
     <Button type="button" variant="outline" size="sm" onClick={handleReorder}>
       <Repeat className="size-4" strokeWidth={1.75} />
-      Opnieuw bestellen
+      {t("opnieuwBestellen")}
     </Button>
   );
 }

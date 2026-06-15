@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { requestAccount } from "./actions";
 import {
   ArrowRight,
@@ -21,55 +22,19 @@ import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 
 const benefits = [
-  {
-    icon: Tag,
-    title: "Prijzen & voorraad zichtbaar",
-    description: "Netto inkoopprijzen en actuele voorraad per maat en kleur.",
-  },
-  {
-    icon: ShoppingCart,
-    title: "Online bestellen",
-    description: "Plaats orders direct in de portal, 24/7 en zonder tussenkomst.",
-  },
-  {
-    icon: Repeat,
-    title: "Herhaalbestellingen",
-    description: "Eerdere orders in één klik opnieuw plaatsen of aanvullen.",
-  },
-  {
-    icon: Layers,
-    title: "Staffelkorting",
-    description: "Oplopende korting op basis van uw klantgroep en volume.",
-  },
-  {
-    icon: FileText,
-    title: "Catalogus-download",
-    description: "Volledige collectie met specificaties en beeldmateriaal.",
-  },
-  {
-    icon: Boxes,
-    title: "Voorraadprogramma",
-    description: "Kerncollectie die het hele jaar door direct leverbaar is.",
-  },
-];
+  { icon: Tag, key: "Prijzen" },
+  { icon: ShoppingCart, key: "Bestellen" },
+  { icon: Repeat, key: "Herhaal" },
+  { icon: Layers, key: "Staffel" },
+  { icon: FileText, key: "Catalogus" },
+  { icon: Boxes, key: "Voorraad" },
+] as const;
 
 const steps = [
-  {
-    icon: ClipboardList,
-    title: "Aanvraag indienen",
-    description: "Vul het formulier in met uw bedrijfs- en contactgegevens.",
-  },
-  {
-    icon: Search,
-    title: "Wij beoordelen",
-    description: "Wij toetsen uw aanvraag handmatig, doorgaans binnen één werkdag.",
-  },
-  {
-    icon: KeyRound,
-    title: "Goedkeuring & toegang",
-    description: "Na akkoord ontvangt u inloggegevens en ziet u prijzen en voorraad.",
-  },
-];
+  { icon: ClipboardList, key: "Indienen" },
+  { icon: Search, key: "Beoordelen" },
+  { icon: KeyRound, key: "Toegang" },
+] as const;
 
 const inputClass =
   "h-11 w-full rounded-card border border-line bg-white px-4 text-sm text-ink placeholder:text-muted focus:border-ink focus:outline-none focus:ring-1 focus:ring-ink";
@@ -89,6 +54,7 @@ function Required() {
 
 export default function B2bAccountAanvragenPage() {
   const [state, formAction, pending] = useActionState(requestAccount, null);
+  const t = useTranslations("aanvraag");
   const submitted = state?.ok === true;
 
   useEffect(() => {
@@ -101,14 +67,12 @@ export default function B2bAccountAanvragenPage() {
     <section className="bg-paper py-16 lg:py-24">
       <Container>
         <div className="max-w-3xl">
-          <p className="eyebrow mb-3 text-accent-dark">Word dealer</p>
-          <h1 className="text-4xl sm:text-5xl">B2B-account aanvragen</h1>
+          <p className="eyebrow mb-3 text-accent-dark">{t("eyebrow")}</p>
+          <h1 className="text-4xl sm:text-5xl">{t("title")}</h1>
           <p className="mt-5 text-base leading-relaxed text-muted">
-            Suitconcern is een besloten groothandel. Prijzen, voorraad en de
-            mogelijkheid om te bestellen worden pas zichtbaar na een persoonlijke
-            beoordeling. Na het indienen krijgt uw aanvraag de status{" "}
-            <span className="font-medium text-ink">In behandeling</span>; zodra wij
-            uw account goedkeuren ontvangt u toegang tot de volledige portal.
+            {t.rich("intro", {
+              b: (chunks) => <span className="font-medium text-ink">{chunks}</span>,
+            })}
           </p>
         </div>
 
@@ -120,26 +84,24 @@ export default function B2bAccountAanvragenPage() {
                 <span className="mx-auto inline-flex size-16 items-center justify-center rounded-full bg-accent/20 text-accent-dark">
                   <Check className="size-8" strokeWidth={1.75} />
                 </span>
-                <h2 className="mt-6 text-2xl sm:text-3xl">Bedankt voor uw aanvraag</h2>
+                <h2 className="mt-6 text-2xl sm:text-3xl">{t("succesTitle")}</h2>
                 <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted">
-                  Uw aanvraag heeft nu de status{" "}
-                  <span className="font-medium text-ink">In behandeling</span>. Ons
-                  team beoordeelt uw gegevens en neemt doorgaans binnen één werkdag
-                  contact met u op. U ontvangt een bevestigingsmail op het opgegeven
-                  e-mailadres.
+                  {t.rich("succesText", {
+                    b: (chunks) => <span className="font-medium text-ink">{chunks}</span>,
+                  })}
                 </p>
                 <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
                   <Link
                     href="/"
                     className={buttonVariants({ variant: "primary", size: "md" })}
                   >
-                    Terug naar home
+                    {t("terugHome")}
                   </Link>
                   <Link
                     href="/login"
                     className={buttonVariants({ variant: "outline", size: "md" })}
                   >
-                    Naar inloggen
+                    {t("naarInloggen")}
                   </Link>
                 </div>
               </div>
@@ -148,11 +110,11 @@ export default function B2bAccountAanvragenPage() {
                 <form action={formAction} className="space-y-10" noValidate>
                   {/* Bedrijfsgegevens */}
                   <fieldset className="space-y-5">
-                    <FieldsetHeading>Bedrijfsgegevens</FieldsetHeading>
+                    <FieldsetHeading>{t("bedrijfsgegevens")}</FieldsetHeading>
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div>
                         <label htmlFor="bedrijfsnaam" className={labelClass}>
-                          Bedrijfsnaam
+                          {t("bedrijfsnaam")}
                           <Required />
                         </label>
                         <input
@@ -161,13 +123,13 @@ export default function B2bAccountAanvragenPage() {
                           type="text"
                           required
                           autoComplete="organization"
-                          placeholder="Modehuis Berends"
+                          placeholder={t("bedrijfsnaamPlaceholder")}
                           className={inputClass}
                         />
                       </div>
                       <div>
                         <label htmlFor="kvk" className={labelClass}>
-                          KvK-nummer
+                          {t("kvk")}
                           <Required />
                         </label>
                         <input
@@ -176,25 +138,25 @@ export default function B2bAccountAanvragenPage() {
                           type="text"
                           required
                           inputMode="numeric"
-                          placeholder="12345678"
+                          placeholder={t("kvkPlaceholder")}
                           className={inputClass}
                         />
                       </div>
                       <div>
                         <label htmlFor="btw" className={labelClass}>
-                          Btw-nummer
+                          {t("btw")}
                         </label>
                         <input
                           id="btw"
                           name="btw"
                           type="text"
-                          placeholder="NL000000000B00"
+                          placeholder={t("btwPlaceholder")}
                           className={inputClass}
                         />
                       </div>
                       <div>
                         <label htmlFor="typeBedrijf" className={labelClass}>
-                          Type bedrijf
+                          {t("typeBedrijf")}
                         </label>
                         <select
                           id="typeBedrijf"
@@ -202,30 +164,26 @@ export default function B2bAccountAanvragenPage() {
                           defaultValue="Herenmodezaak"
                           className={inputClass}
                         >
-                          <option value="Herenmodezaak">Herenmodezaak</option>
-                          <option value="Bruidszaak/trouwmode">
-                            Bruidszaak / trouwmode
-                          </option>
-                          <option value="Kostuumverhuur">Kostuumverhuur</option>
+                          <option value="Herenmodezaak">{t("typeHerenmode")}</option>
+                          <option value="Bruidszaak/trouwmode">{t("typeBruid")}</option>
+                          <option value="Kostuumverhuur">{t("typeVerhuur")}</option>
                           <option value="Bedrijfskleding-specialist">
-                            Bedrijfskleding-specialist
+                            {t("typeBedrijfskleding")}
                           </option>
-                          <option value="Retailer/warenhuis">
-                            Retailer / warenhuis
-                          </option>
-                          <option value="Anders">Anders</option>
+                          <option value="Retailer/warenhuis">{t("typeRetail")}</option>
+                          <option value="Anders">{t("typeAnders")}</option>
                         </select>
                       </div>
                       <div className="sm:col-span-2">
                         <label htmlFor="website" className={labelClass}>
-                          Website
+                          {t("website")}
                         </label>
                         <input
                           id="website"
                           name="website"
                           type="url"
                           autoComplete="url"
-                          placeholder="https://www.uwbedrijf.nl"
+                          placeholder={t("websitePlaceholder")}
                           className={inputClass}
                         />
                       </div>
@@ -234,11 +192,11 @@ export default function B2bAccountAanvragenPage() {
 
                   {/* Contactpersoon */}
                   <fieldset className="space-y-5">
-                    <FieldsetHeading>Contactpersoon</FieldsetHeading>
+                    <FieldsetHeading>{t("contactpersoonHeading")}</FieldsetHeading>
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div className="sm:col-span-2">
                         <label htmlFor="contactpersoon" className={labelClass}>
-                          Contactpersoon
+                          {t("contactpersoon")}
                           <Required />
                         </label>
                         <input
@@ -247,13 +205,13 @@ export default function B2bAccountAanvragenPage() {
                           type="text"
                           required
                           autoComplete="name"
-                          placeholder="Voor- en achternaam"
+                          placeholder={t("contactpersoonPlaceholder")}
                           className={inputClass}
                         />
                       </div>
                       <div>
                         <label htmlFor="email" className={labelClass}>
-                          E-mailadres
+                          {t("email")}
                           <Required />
                         </label>
                         <input
@@ -262,13 +220,13 @@ export default function B2bAccountAanvragenPage() {
                           type="email"
                           required
                           autoComplete="email"
-                          placeholder="naam@bedrijf.nl"
+                          placeholder={t("emailPlaceholder")}
                           className={inputClass}
                         />
                       </div>
                       <div>
                         <label htmlFor="telefoon" className={labelClass}>
-                          Telefoonnummer
+                          {t("telefoon")}
                           <Required />
                         </label>
                         <input
@@ -277,7 +235,7 @@ export default function B2bAccountAanvragenPage() {
                           type="tel"
                           required
                           autoComplete="tel"
-                          placeholder="+31 6 12 34 56 78"
+                          placeholder={t("telefoonPlaceholder")}
                           className={inputClass}
                         />
                       </div>
@@ -286,11 +244,11 @@ export default function B2bAccountAanvragenPage() {
 
                   {/* Adres */}
                   <fieldset className="space-y-5">
-                    <FieldsetHeading>Adres</FieldsetHeading>
+                    <FieldsetHeading>{t("adresHeading")}</FieldsetHeading>
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div className="sm:col-span-2">
                         <label htmlFor="adres" className={labelClass}>
-                          Adres
+                          {t("adres")}
                           <Required />
                         </label>
                         <input
@@ -299,13 +257,13 @@ export default function B2bAccountAanvragenPage() {
                           type="text"
                           required
                           autoComplete="street-address"
-                          placeholder="Straatnaam en huisnummer"
+                          placeholder={t("adresPlaceholder")}
                           className={inputClass}
                         />
                       </div>
                       <div>
                         <label htmlFor="postcode" className={labelClass}>
-                          Postcode
+                          {t("postcode")}
                           <Required />
                         </label>
                         <input
@@ -314,13 +272,13 @@ export default function B2bAccountAanvragenPage() {
                           type="text"
                           required
                           autoComplete="postal-code"
-                          placeholder="1234 AB"
+                          placeholder={t("postcodePlaceholder")}
                           className={inputClass}
                         />
                       </div>
                       <div>
                         <label htmlFor="plaats" className={labelClass}>
-                          Plaats
+                          {t("plaats")}
                           <Required />
                         </label>
                         <input
@@ -329,13 +287,13 @@ export default function B2bAccountAanvragenPage() {
                           type="text"
                           required
                           autoComplete="address-level2"
-                          placeholder="Plaatsnaam"
+                          placeholder={t("plaatsPlaceholder")}
                           className={inputClass}
                         />
                       </div>
                       <div className="sm:col-span-2">
                         <label htmlFor="land" className={labelClass}>
-                          Land
+                          {t("land")}
                         </label>
                         <select
                           id="land"
@@ -343,9 +301,9 @@ export default function B2bAccountAanvragenPage() {
                           defaultValue="Nederland"
                           className={inputClass}
                         >
-                          <option value="Nederland">Nederland</option>
-                          <option value="België">België</option>
-                          <option value="Duitsland">Duitsland</option>
+                          <option value="Nederland">{t("landNl")}</option>
+                          <option value="België">{t("landBe")}</option>
+                          <option value="Duitsland">{t("landDe")}</option>
                         </select>
                       </div>
                     </div>
@@ -353,11 +311,11 @@ export default function B2bAccountAanvragenPage() {
 
                   {/* Aanvullend */}
                   <fieldset className="space-y-5">
-                    <FieldsetHeading>Aanvullend</FieldsetHeading>
+                    <FieldsetHeading>{t("aanvullend")}</FieldsetHeading>
                     <div className="space-y-5">
                       <div>
                         <label htmlFor="ordervolume" className={labelClass}>
-                          Verwacht ordervolume
+                          {t("ordervolume")}
                         </label>
                         <select
                           id="ordervolume"
@@ -365,21 +323,21 @@ export default function B2bAccountAanvragenPage() {
                           defaultValue="€10k–€50k"
                           className={inputClass}
                         >
-                          <option value="< €10k">Minder dan €10k per jaar</option>
-                          <option value="€10k–€50k">€10k – €50k per jaar</option>
-                          <option value="€50k–€100k">€50k – €100k per jaar</option>
-                          <option value="> €100k">Meer dan €100k per jaar</option>
+                          <option value="< €10k">{t("ordervolumeKlein")}</option>
+                          <option value="€10k–€50k">{t("ordervolumeMiddel")}</option>
+                          <option value="€50k–€100k">{t("ordervolumeGroot")}</option>
+                          <option value="> €100k">{t("ordervolumeXl")}</option>
                         </select>
                       </div>
                       <div>
                         <label htmlFor="bericht" className={labelClass}>
-                          Bericht / opmerking
+                          {t("bericht")}
                         </label>
                         <textarea
                           id="bericht"
                           name="bericht"
                           rows={4}
-                          placeholder="Vertel ons kort iets over uw onderneming of specifieke wensen."
+                          placeholder={t("berichtPlaceholder")}
                           className="w-full rounded-card border border-line bg-white px-4 py-3 text-sm text-ink placeholder:text-muted focus:border-ink focus:outline-none focus:ring-1 focus:ring-ink"
                         />
                       </div>
@@ -400,12 +358,12 @@ export default function B2bAccountAanvragenPage() {
                         className="mt-0.5 size-4 shrink-0 rounded border-line text-ink accent-ink focus:outline-none focus:ring-1 focus:ring-ink"
                       />
                       <span>
-                        Ik ga akkoord met de{" "}
+                        {t("akkoordPre")}
                         <Link
                           href="/algemene-voorwaarden"
                           className="font-medium text-ink underline underline-offset-4 hover:text-accent-dark"
                         >
-                          algemene voorwaarden
+                          {t("akkoordLink")}
                         </Link>
                         .<Required />
                       </span>
@@ -425,13 +383,10 @@ export default function B2bAccountAanvragenPage() {
                       className="w-full sm:w-auto"
                       disabled={pending}
                     >
-                      {pending ? "Bezig…" : "Aanvraag versturen"}
+                      {pending ? t("bezig") : t("versturen")}
                       <ArrowRight className="size-4" strokeWidth={1.75} />
                     </Button>
-                    <p className="text-xs leading-relaxed text-muted">
-                      Na het indienen krijgt uw aanvraag de status &ldquo;In behandeling&rdquo;.
-                      E-mailbevestiging volgt zodra de mailkoppeling live is.
-                    </p>
+                    <p className="text-xs leading-relaxed text-muted">{t("mailNote")}</p>
                   </div>
                 </form>
               </div>
@@ -441,22 +396,22 @@ export default function B2bAccountAanvragenPage() {
           {/* Reassurance / benefits */}
           <aside className="order-1 space-y-6 lg:order-2 lg:sticky lg:top-28">
             <div className="rounded-card border border-line bg-white p-6 sm:p-8">
-              <p className="eyebrow text-accent-dark">Na goedkeuring</p>
-              <h2 className="mt-3 font-serif text-2xl">Wat u krijgt</h2>
+              <p className="eyebrow text-accent-dark">{t("naGoedkeuring")}</p>
+              <h2 className="mt-3 font-serif text-2xl">{t("watUKrijgt")}</h2>
               <ul className="mt-6 space-y-5">
                 {benefits.map((benefit) => {
                   const Icon = benefit.icon;
                   return (
-                    <li key={benefit.title} className="flex gap-4">
+                    <li key={benefit.key} className="flex gap-4">
                       <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-card bg-paper text-accent-dark">
                         <Icon className="size-5" strokeWidth={1.5} />
                       </span>
                       <div>
                         <p className="text-sm font-medium text-ink">
-                          {benefit.title}
+                          {t(`benefit${benefit.key}Title`)}
                         </p>
                         <p className="mt-0.5 text-sm leading-relaxed text-muted">
-                          {benefit.description}
+                          {t(`benefit${benefit.key}Desc`)}
                         </p>
                       </div>
                     </li>
@@ -466,12 +421,12 @@ export default function B2bAccountAanvragenPage() {
             </div>
 
             <div className="rounded-card bg-ink p-6 text-white sm:p-8">
-              <p className="eyebrow text-accent">Zo werkt het</p>
+              <p className="eyebrow text-accent">{t("zoWerktHet")}</p>
               <ol className="mt-6 space-y-6">
                 {steps.map((step, index) => {
                   const Icon = step.icon;
                   return (
-                    <li key={step.title} className="flex gap-4">
+                    <li key={step.key} className="flex gap-4">
                       <span className="relative inline-flex size-10 shrink-0 items-center justify-center rounded-card bg-white/10 text-accent">
                         <Icon className="size-5" strokeWidth={1.5} />
                         <span className="absolute -right-1.5 -top-1.5 inline-flex size-5 items-center justify-center rounded-full bg-accent text-[11px] font-semibold text-ink">
@@ -480,10 +435,10 @@ export default function B2bAccountAanvragenPage() {
                       </span>
                       <div>
                         <p className="text-sm font-medium text-white">
-                          {step.title}
+                          {t(`step${step.key}Title`)}
                         </p>
                         <p className="mt-0.5 text-sm leading-relaxed text-white/70">
-                          {step.description}
+                          {t(`step${step.key}Desc`)}
                         </p>
                       </div>
                     </li>

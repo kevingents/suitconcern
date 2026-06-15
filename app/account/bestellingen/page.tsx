@@ -1,6 +1,7 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowRight, Lock, PackageOpen } from "lucide-react";
-import { OrderStatus } from "@prisma/client";
 import { Container } from "@/components/ui/container";
 import { buttonVariants } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
@@ -10,29 +11,28 @@ import { ReorderButton } from "./reorder-button";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "Bestellingen",
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("account.orders");
+  return { title: t("metaTitle") };
+}
+
+const LOCALE_TAGS: Record<string, string> = {
+  nl: "nl-NL",
+  en: "en-GB",
+  de: "de-DE",
+  fr: "fr-FR",
 };
 
-const STATUS_LABELS: Record<OrderStatus, string> = {
-  CART: "Winkelwagen",
-  PENDING: "In behandeling",
-  PAID: "Betaald",
-  PROCESSING: "In verwerking",
-  SHIPPED: "Verzonden",
-  COMPLETED: "Afgerond",
-  CANCELLED: "Geannuleerd",
-};
-
-function dateLabel(date: Date) {
-  return new Intl.DateTimeFormat("nl-NL", {
+function dateLabel(date: Date, locale: string) {
+  return new Intl.DateTimeFormat(LOCALE_TAGS[locale] ?? "nl-NL", {
     day: "numeric",
     month: "long",
     year: "numeric",
   }).format(date);
 }
 
-function InfoState({ title, body }: { title: string; body: string }) {
+async function InfoState({ title, body }: { title: string; body: string }) {
+  const t = await getTranslations("account.orders");
   return (
     <section className="bg-paper py-24 lg:py-32">
       <Container>
@@ -44,13 +44,13 @@ function InfoState({ title, body }: { title: string; body: string }) {
           <p className="mt-3 text-sm leading-relaxed text-muted">{body}</p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link href="/login" className={cn(buttonVariants({ variant: "primary" }))}>
-              Inloggen
+              {t("inloggen")}
             </Link>
             <Link
               href="/b2b-account-aanvragen"
               className={cn(buttonVariants({ variant: "outline" }))}
             >
-              Account aanvragen
+              {t("accountAanvragen")}
             </Link>
           </div>
         </div>
@@ -60,6 +60,10 @@ function InfoState({ title, body }: { title: string; body: string }) {
 }
 
 export default async function BestellingenPage() {
+  const t = await getTranslations("account.orders");
+  const ta = await getTranslations("account");
+  const locale = await getLocale();
+
   if (!dbConfigured()) {
     return (
       <section className="bg-paper py-24 lg:py-32">
@@ -68,10 +72,8 @@ export default async function BestellingenPage() {
             <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-paper">
               <PackageOpen className="size-5 text-ink" strokeWidth={1.75} />
             </span>
-            <h1 className="mt-6 font-serif text-2xl text-ink">Bestelgeschiedenis</h1>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
-              Bestelgeschiedenis is beschikbaar zodra de database gekoppeld is.
-            </p>
+            <h1 className="mt-6 font-serif text-2xl text-ink">{t("dbTitle")}</h1>
+            <p className="mt-3 text-sm leading-relaxed text-muted">{t("dbText")}</p>
           </div>
         </Container>
       </section>
@@ -83,12 +85,7 @@ export default async function BestellingenPage() {
   const approved = user?.status === "approved" || user?.role === "ADMIN";
 
   if (!user || !approved || !user.companyId) {
-    return (
-      <InfoState
-        title="Log in voor uw bestellingen"
-        body="Uw bestelgeschiedenis is beschikbaar voor goedgekeurde B2B-accounts. Log in of vraag een account aan."
-      />
-    );
+    return <InfoState title={t("gateTitle")} body={t("gateText")} />;
   }
 
   const orders = await db.order.findMany({
@@ -102,11 +99,9 @@ export default async function BestellingenPage() {
     <section className="bg-paper py-16 lg:py-20">
       <Container>
         <div className="max-w-2xl">
-          <p className="eyebrow mb-3 text-accent-dark">Mijn account</p>
-          <h1 className="text-3xl sm:text-4xl">Bestellingen</h1>
-          <p className="mt-4 text-base leading-relaxed text-muted">
-            Bekijk uw eerdere bestellingen en plaats ze met één klik opnieuw.
-          </p>
+          <p className="eyebrow mb-3 text-accent-dark">{ta("eyebrow")}</p>
+          <h1 className="text-3xl sm:text-4xl">{t("title")}</h1>
+          <p className="mt-4 text-base leading-relaxed text-muted">{t("intro")}</p>
         </div>
 
         {orders.length === 0 ? (
@@ -114,15 +109,13 @@ export default async function BestellingenPage() {
             <span className="flex size-12 items-center justify-center rounded-full bg-paper">
               <PackageOpen className="size-5 text-ink" strokeWidth={1.75} />
             </span>
-            <h2 className="mt-6 font-serif text-xl text-ink">Nog geen bestellingen</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
-              Zodra u een bestelling plaatst, vindt u die hier terug.
-            </p>
+            <h2 className="mt-6 font-serif text-xl text-ink">{t("leegTitle")}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted">{t("leegText")}</p>
             <Link
               href="/collecties"
               className={cn(buttonVariants({ variant: "primary" }), "mt-8")}
             >
-              Naar de collecties
+              {t("naarCollecties")}
               <ArrowRight className="size-4" strokeWidth={1.75} />
             </Link>
           </div>
@@ -133,19 +126,19 @@ export default async function BestellingenPage() {
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                     <div>
-                      <p className="text-xs uppercase tracking-wider text-muted">Ordernummer</p>
+                      <p className="text-xs uppercase tracking-wider text-muted">{t("ordernummer")}</p>
                       <p className="mt-0.5 font-serif text-lg text-ink">{order.number}</p>
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-wider text-muted">Datum</p>
-                      <p className="mt-0.5 text-sm text-ink">{dateLabel(order.createdAt)}</p>
+                      <p className="text-xs uppercase tracking-wider text-muted">{t("datum")}</p>
+                      <p className="mt-0.5 text-sm text-ink">{dateLabel(order.createdAt, locale)}</p>
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-wider text-muted">Status</p>
-                      <p className="mt-0.5 text-sm text-ink">{STATUS_LABELS[order.status]}</p>
+                      <p className="text-xs uppercase tracking-wider text-muted">{t("status")}</p>
+                      <p className="mt-0.5 text-sm text-ink">{t(`statusLabels.${order.status}`)}</p>
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-wider text-muted">Totaal</p>
+                      <p className="text-xs uppercase tracking-wider text-muted">{t("totaal")}</p>
                       <p className="mt-0.5 text-sm font-medium tabular-nums text-ink">
                         {formatPrice(order.totalCents / 100)}
                       </p>
@@ -166,7 +159,7 @@ export default async function BestellingenPage() {
                 </div>
 
                 <p className="mt-4 border-t border-line pt-4 text-xs text-muted">
-                  {order.items.length} {order.items.length === 1 ? "artikel" : "artikelen"}
+                  {t("artikelen", { count: order.items.length })}
                 </p>
               </li>
             ))}

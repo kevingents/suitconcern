@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { signOut } from "next-auth/react";
 import {
   ArrowRight,
@@ -22,52 +23,18 @@ import { cn } from "@/lib/utils";
 import { useSession } from "@/lib/session";
 
 const dashboardCards = [
-  {
-    icon: ClipboardList,
-    title: "Openstaande orders",
-    description: "Volg de status van uw lopende bestellingen en leveringen.",
-    href: "#",
-  },
-  {
-    icon: History,
-    title: "Bestelhistorie",
-    description: "Bekijk en herhaal eerder geplaatste bestellingen.",
-    href: "#",
-  },
-  {
-    icon: FileText,
-    title: "Facturen",
-    description: "Download uw facturen en pakbonnen per order.",
-    href: "#",
-  },
-  {
-    icon: Download,
-    title: "Downloads",
-    description: "Actuele catalogus, prijslijsten en productdata.",
-    href: "#",
-  },
-  {
-    icon: Heart,
-    title: "Favorieten",
-    description: "Uw opgeslagen artikelen voor een snelle herbestelling.",
-    href: "#",
-  },
-  {
-    icon: Zap,
-    title: "Snel bestellen",
-    description: "Voeg artikelen toe op SKU en bestel in enkele klikken.",
-    href: "#",
-  },
-  {
-    icon: Repeat,
-    title: "Herhaalbestellingen",
-    description: "Stel terugkerende orders in voor uw vaste assortiment.",
-    href: "#",
-  },
-];
+  { icon: ClipboardList, key: "orders", href: "#" },
+  { icon: History, key: "historie", href: "#" },
+  { icon: FileText, key: "facturen", href: "#" },
+  { icon: Download, key: "downloads", href: "#" },
+  { icon: Heart, key: "favorieten", href: "/account/favorieten" },
+  { icon: Zap, key: "snel", href: "/snel-bestellen" },
+  { icon: Repeat, key: "herhaal", href: "#" },
+] as const;
 
 export default function AccountPage() {
   const { status, company, group, discountPct, isAdmin, demo } = useSession();
+  const t = useTranslations("account");
 
   if (status === "guest") {
     return (
@@ -78,26 +45,22 @@ export default function AccountPage() {
               <LogIn className="size-6" strokeWidth={1.5} />
             </span>
             <h1 className="mt-6 font-serif text-3xl text-ink">
-              Log in op uw account
+              {t("guest.title")}
             </h1>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
-              Prijzen, voorraad en bestellen zijn beschikbaar voor goedgekeurde
-              B2B-accounts. Log in om uw dashboard te openen, of vraag een
-              account aan.
-            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted">{t("guest.text")}</p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link
                 href="/login"
                 className={buttonVariants({ variant: "primary", size: "lg" })}
               >
-                Inloggen
+                {t("guest.inloggen")}
                 <ArrowRight className="size-4" strokeWidth={1.75} />
               </Link>
               <Link
                 href="/b2b-account-aanvragen"
                 className={buttonVariants({ variant: "outline", size: "lg" })}
               >
-                Account aanvragen
+                {t("guest.accountAanvragen")}
               </Link>
             </div>
           </div>
@@ -115,24 +78,20 @@ export default function AccountPage() {
               <Clock className="size-6" strokeWidth={1.5} />
             </span>
             <h1 className="mt-6 font-serif text-3xl text-ink">
-              Uw account wordt beoordeeld
+              {t("pending.title")}
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              Bedankt voor uw aanvraag{company ? ` namens ${company}` : ""}. Uw
-              account is in behandeling — zodra het is goedgekeurd, krijgt u
-              toegang tot prijzen, voorraad en het volledige bestelgemak.
-              Bestellen is nog niet beschikbaar.
+              {t("pending.text", {
+                namens: company ? t("pending.namens", { company }) : "",
+              })}
             </p>
-            <p className="mt-4 text-sm leading-relaxed text-muted">
-              Goedkeuring volgt persoonlijk en doorgaans binnen één werkdag. Bij
-              vragen kunt u altijd contact met ons opnemen.
-            </p>
+            <p className="mt-4 text-sm leading-relaxed text-muted">{t("pending.text2")}</p>
             <div className="mt-8 flex justify-center">
               <Link
                 href="/contact"
                 className={buttonVariants({ variant: "outline", size: "lg" })}
               >
-                Contact opnemen
+                {t("pending.contact")}
               </Link>
             </div>
           </div>
@@ -145,21 +104,21 @@ export default function AccountPage() {
     <>
       <section className="bg-ink text-white">
         <Container className="py-14 lg:py-16">
-          <p className="eyebrow text-accent">Mijn account</p>
+          <p className="eyebrow text-accent">{t("eyebrow")}</p>
           <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <h1 className="font-serif text-4xl sm:text-5xl">Welkom terug</h1>
+              <h1 className="font-serif text-4xl sm:text-5xl">{t("welkom")}</h1>
               {company ? (
                 <p className="mt-3 text-lg text-white/80">{company}</p>
               ) : null}
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-card border border-white/20 px-4 py-2 text-sm text-white/80">
-                Klantgroep
+                {t("klantgroep")}
                 <span className="font-medium text-accent">{group}</span>
               </span>
               <span className="inline-flex items-center gap-2 rounded-card border border-white/20 px-4 py-2 text-sm text-white/80">
-                Korting
+                {t("korting")}
                 <span className="font-medium text-accent">{discountPct}%</span>
               </span>
               {isAdmin ? (
@@ -168,7 +127,7 @@ export default function AccountPage() {
                   className={cn(buttonVariants({ variant: "light", size: "sm" }))}
                 >
                   <Settings className="size-4" strokeWidth={1.75} />
-                  Beheer
+                  {t("beheer")}
                 </Link>
               ) : null}
               {!demo ? (
@@ -178,7 +137,7 @@ export default function AccountPage() {
                   className={cn(buttonVariants({ variant: "light-outline", size: "sm" }))}
                 >
                   <LogOut className="size-4" strokeWidth={1.75} />
-                  Uitloggen
+                  {t("uitloggen")}
                 </button>
               ) : null}
             </div>
@@ -193,7 +152,7 @@ export default function AccountPage() {
               const Icon = card.icon;
               return (
                 <Link
-                  key={card.title}
+                  key={card.key}
                   href={card.href}
                   className="group flex flex-col rounded-card border border-line bg-white p-7 transition-colors hover:border-ink"
                 >
@@ -201,13 +160,13 @@ export default function AccountPage() {
                     <Icon className="size-6" strokeWidth={1.5} />
                   </span>
                   <h2 className="mt-5 font-serif text-lg text-ink">
-                    {card.title}
+                    {t(`cards.${card.key}Title`)}
                   </h2>
                   <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {card.description}
+                    {t(`cards.${card.key}Desc`)}
                   </p>
                   <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink transition-colors group-hover:text-accent-dark">
-                    Openen
+                    {t("openen")}
                     <ArrowRight className="size-4" strokeWidth={1.75} />
                   </span>
                 </Link>
