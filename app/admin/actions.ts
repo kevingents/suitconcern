@@ -4,7 +4,11 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { generateToken, tokenExpiry } from "@/lib/tokens";
+import { sendApprovalInvite } from "@/lib/mail";
 import { CompanyStatus, UserRole } from "@prisma/client";
+
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 /** Werpt de gebruiker terug naar /login als er geen ADMIN-sessie is. */
 async function requireAdmin(): Promise<void> {
@@ -34,7 +38,7 @@ export async function approveCompany(formData: FormData): Promise<void> {
 
   const allowInvoicePayment = formData.get("allowInvoicePayment") != null;
 
-  await db.company.update({
+  const company = await db.company.update({
     where: { id: companyId },
     data: {
       status: CompanyStatus.APPROVED,
@@ -42,7 +46,20 @@ export async function approveCompany(formData: FormData): Promise<void> {
       customDiscountPct,
       allowInvoicePayment,
     },
+    include: { users: true },
   });
+
+  // Per contact: een wachtwoord-uitnodiging klaarzetten + mailen (best-effort).
+  await Promise.allSettled(
+    company.users.map(async (u) => {
+      const token = generateToken();
+      await db.user.update({
+        where: { id: u.id },
+        data: { passwordSetToken: token, passwordSetTokenExpiry: tokenExpiry() },
+      });
+      return sendApprovalInvite(u.email, company.name, `${SITE}/wachtwoord-instellen?token=${token}`);
+    }),
+  );
 
   revalidatePath("/admin");
 }

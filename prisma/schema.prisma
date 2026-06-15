@@ -110,6 +110,9 @@ model User {
   orders       Order[]
   carts        Cart[]
   lastLoginAt  DateTime?
+  // Wachtwoord-uitnodiging (na goedkeuring) én reset — één token-mechanisme.
+  passwordSetToken       String?   @unique
+  passwordSetTokenExpiry DateTime?
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 

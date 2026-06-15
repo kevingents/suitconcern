@@ -148,6 +148,13 @@ schakelt hij in productie vanzelf over op live data.
   ([`actions.ts`](app/b2b-account-aanvragen/actions.ts)); `/login` doet `signIn`;
   `/admin` (guarded op rol ADMIN) keurt aanvragen goed met klantgroep + korting +
   achteraf-betalen ([`app/admin`](app/admin/page.tsx)).
+- **Onboarding-lus** — transactionele mails via Resend ([`lib/mail.ts`](lib/mail.ts),
+  degradeert zonder `RESEND_API_KEY`): aanvraag-bevestiging + admin-notificatie. Bij
+  goedkeuring krijgt elk contact een **wachtwoord-uitnodiging** (token, 72u) →
+  [`/wachtwoord-instellen`](app/wachtwoord-instellen/page.tsx). Ook
+  [`/wachtwoord-vergeten`](app/wachtwoord-vergeten/page.tsx) (reset, geen
+  account-enumeratie). Pas ná het instellen van een wachtwoord kan een goedgekeurde
+  klant inloggen.
 
 ### Live zetten (lokaal of Vercel)
 

@@ -2,6 +2,7 @@
 
 import { db, dbConfigured } from "@/lib/db";
 import { accountRequestSchema } from "@/lib/validation";
+import { sendAccountReceived, sendAdminNewRequest } from "@/lib/mail";
 import { CompanyStatus, UserRole } from "@prisma/client";
 
 export type RequestState = { ok: boolean; error?: string } | null;
@@ -76,7 +77,11 @@ export async function requestAccount(
       },
     });
 
-    // TODO: Resend — bevestiging naar klant + notificatie naar admin.
+    // Best-effort mails (falen mag de aanvraag niet blokkeren).
+    await Promise.allSettled([
+      sendAccountReceived(email, v.companyName),
+      sendAdminNewRequest(v.companyName, v.contactName, email),
+    ]);
     return { ok: true };
   } catch (e) {
     console.error("[account-request] faalde:", e instanceof Error ? e.message : e);
