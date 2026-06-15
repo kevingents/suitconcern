@@ -22,6 +22,7 @@ export function ProductCard({ product }: { product: Product }) {
             image={product.image}
             tone={product.tone}
             label={product.name}
+            category={product.collection}
             className="transition-transform duration-500 group-hover:scale-[1.03]"
           />
         </Link>

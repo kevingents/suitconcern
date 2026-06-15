@@ -15,6 +15,7 @@ export function ProductMedia({
   className,
   sizes = "(max-width: 768px) 50vw, 25vw",
   priority = false,
+  category,
 }: {
   image?: string;
   tone: string;
@@ -23,9 +24,12 @@ export function ProductMedia({
   className?: string;
   sizes?: string;
   priority?: boolean;
+  category?: string;
 }) {
   if (!image) {
-    return <PlaceholderImage tone={tone} label={label} ratio={ratio} className={className} />;
+    return (
+      <PlaceholderImage tone={tone} label={label} ratio={ratio} className={className} category={category} />
+    );
   }
   return (
     <div className={cn("relative overflow-hidden bg-paper", ratio, className)}>

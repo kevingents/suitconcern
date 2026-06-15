@@ -33,6 +33,7 @@ export default function CollectiesPage() {
               >
                 <PlaceholderImage
                   tone={c.tone}
+                  category={c.slug}
                   ratio="aspect-[4/3]"
                   className="transition-transform duration-500 group-hover:scale-[1.04]"
                 />

@@ -11,11 +11,13 @@ export function ProductGallery({
   name,
   image,
   detailImage,
+  category,
 }: {
   tone: string;
   name: string;
   image?: string;
   detailImage?: string;
+  category?: string;
 }) {
   const [active, setActive] = useState(0);
   // Eigen beeld per view: model = Vooraanzicht, detail = "Detail stof"; rest placeholder.
@@ -27,6 +29,7 @@ export function ProductGallery({
         image={viewImages[active]}
         tone={tone}
         label={`${name} — ${VIEWS[active]}`}
+        category={category}
         className="rounded-card"
         sizes="(max-width: 1024px) 100vw, 50vw"
         priority
@@ -42,7 +45,7 @@ export function ProductGallery({
               active === i ? "ring-2 ring-ink" : "ring-line hover:ring-ink/40",
             )}
           >
-            <ProductMedia image={viewImages[i]} tone={tone} ratio="aspect-square" sizes="120px" />
+            <ProductMedia image={viewImages[i]} tone={tone} category={category} ratio="aspect-square" sizes="120px" />
           </button>
         ))}
       </div>

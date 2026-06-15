@@ -37,6 +37,7 @@ export function CollectionsGrid() {
             >
               <PlaceholderImage
                 tone={c.tone}
+                category={c.slug}
                 ratio={i === 0 ? "aspect-[4/5] lg:aspect-auto lg:h-full lg:min-h-[420px]" : "aspect-[4/5]"}
                 className="transition-transform duration-500 group-hover:scale-[1.04]"
               />

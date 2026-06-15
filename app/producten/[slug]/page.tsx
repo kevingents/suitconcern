@@ -75,6 +75,7 @@ export default async function ProductPage({
               name={product.name}
               image={product.image}
               detailImage={product.detailImage}
+              category={product.collection}
             />
 
             <div>
