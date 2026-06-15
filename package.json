@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
-    "prebuild": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
+    "postinstall": "prisma generate",
+    "prebuild": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\" && prisma generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
