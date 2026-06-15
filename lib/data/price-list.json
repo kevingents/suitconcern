@@ -1,0 +1,4 @@
+{
+  "_comment": "Suitconcern groothandel-prijslijst — sku -> basisprijs EXCL. btw (euro). Beheerd in de tool; admin-UI volgt. Een blob-override (suitconcern/price-list.json) wint over dit bestand. Lege lijst = prijzen worden geseed uit SRS unitPrice waar beschikbaar, anders 'prijs op aanvraag'.",
+  "prices": {}
+}

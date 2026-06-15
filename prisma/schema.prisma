@@ -1,0 +1,330 @@
+// Suitconcern — B2B wholesale datamodel
+// PostgreSQL + Prisma. Producten/voorraad komen primair uit SRS (branch 702/704);
+// de Product-tabel hier dient voor eigen overrides (beeld, zichtbaarheid, B2B-prijs)
+// en voor favorieten/orderregels. Content (pagina's, banners) gaat via Payload CMS.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Enums ────────────────────────────────────────────────────────────────────
+enum CompanyStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  CART
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  OPEN
+  PAID
+  FAILED
+  EXPIRED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  IDEAL
+  BANCONTACT
+  CREDITCARD
+  APPLEPAY
+  KLARNA
+  BANKTRANSFER
+  INVOICE
+}
+
+// ── Klanten & accounts ─────────────────────────────────────────────────────────
+model CustomerGroup {
+  id          String    @id @default(cuid())
+  slug        String    @unique // bronze | silver | gold | platinum
+  name        String
+  discountPct Int       @default(0) // standaardkorting voor de groep
+  minOrderCents Int     @default(0)
+  sortOrder   Int       @default(0)
+  companies   Company[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Company {
+  id            String        @id @default(cuid())
+  name          String
+  kvk           String?
+  vatNumber     String?
+  website       String?
+  businessType  String?
+  expectedVolume String?
+  // adres
+  street        String?
+  postalCode    String?
+  city          String?
+  country       String        @default("NL")
+  // B2B-instellingen (admin-beheerd)
+  status        CompanyStatus @default(PENDING)
+  customerGroup CustomerGroup? @relation(fields: [customerGroupId], references: [id])
+  customerGroupId String?
+  customDiscountPct Int?        // overschrijft groepskorting indien gezet
+  allowInvoicePayment Boolean   @default(false) // achteraf op factuur
+  minOrderCents Int?
+  internalNotes String?        @db.Text
+  srsCustomerId String?
+  users         User[]
+  orders        Order[]
+  discounts     CustomerDiscount[]
+  carts         Cart[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([status])
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  name         String?
+  phone        String?
+  role         UserRole   @default(CUSTOMER)
+  company      Company?   @relation(fields: [companyId], references: [id])
+  companyId    String?
+  favorites    Favorite[]
+  orders       Order[]
+  carts        Cart[]
+  lastLoginAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([companyId])
+}
+
+// ── Catalogus (eigen overrides bovenop SRS) ──────────────────────────────────
+model Brand {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  name      String
+  note      String?
+  logoUrl   String?
+  sortOrder Int       @default(0)
+  products  Product[]
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  description String?
+  sortOrder   Int        @default(0)
+  parentId    String?
+  parent      Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children    Category[] @relation("CategoryTree")
+  products    Product[]
+}
+
+model Product {
+  id         String           @id @default(cuid())
+  sku        String           @unique
+  slug       String           @unique
+  name       String
+  brand      Brand?           @relation(fields: [brandId], references: [id])
+  brandId    String?
+  category   Category?        @relation(fields: [categoryId], references: [id])
+  categoryId String?
+  color      String?
+  fit        String?
+  imageUrl   String? // eigen Suitconcern-beeld (fashn.ai), nooit SRS
+  active     Boolean          @default(true)
+  variants   ProductVariant[]
+  prices     PriceListItem[]
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+}
+
+model ProductVariant {
+  id        String  @id @default(cuid())
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  sku       String
+  barcode   String?
+  size      String
+  // voorraad spiegelt SRS; mag leeg blijven als SRS leidend is
+  stock     Int     @default(0)
+
+  @@unique([productId, size])
+}
+
+// ── Prijzen & kortingen ──────────────────────────────────────────────────────
+model PriceList {
+  id        String          @id @default(cuid())
+  name      String
+  currency  String          @default("EUR")
+  isDefault Boolean         @default(false)
+  items     PriceListItem[]
+  createdAt DateTime        @default(now())
+}
+
+model PriceListItem {
+  id              String    @id @default(cuid())
+  priceList       PriceList @relation(fields: [priceListId], references: [id], onDelete: Cascade)
+  priceListId     String
+  sku             String
+  product         Product?  @relation(fields: [productId], references: [id])
+  productId       String?
+  priceExclVatCents Int
+
+  @@unique([priceListId, sku])
+}
+
+model CustomerDiscount {
+  id          String  @id @default(cuid())
+  company     Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId   String
+  sku         String? // null = geldt voor hele assortiment of categorie
+  categorySlug String?
+  discountPct Int
+
+  @@index([companyId])
+}
+
+// ── Winkelwagen & orders ─────────────────────────────────────────────────────
+model Cart {
+  id        String     @id @default(cuid())
+  company   Company?   @relation(fields: [companyId], references: [id])
+  companyId String?
+  user      User?      @relation(fields: [userId], references: [id])
+  userId    String?
+  items     CartItem[]
+  updatedAt DateTime   @updatedAt
+  createdAt DateTime   @default(now())
+}
+
+model CartItem {
+  id            String @id @default(cuid())
+  cart          Cart   @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId        String
+  sku           String
+  size          String
+  quantity      Int    @default(1)
+  unitPriceCents Int
+  title         String?
+
+  @@index([cartId])
+}
+
+model Order {
+  id            String        @id @default(cuid())
+  number        String        @unique
+  company       Company       @relation(fields: [companyId], references: [id])
+  companyId     String
+  user          User?         @relation(fields: [userId], references: [id])
+  userId        String?
+  status        OrderStatus   @default(PENDING)
+  // bedragen in centen, excl/incl btw
+  subtotalCents Int           @default(0)
+  discountCents Int           @default(0)
+  vatCents      Int           @default(0)
+  totalCents    Int           @default(0)
+  paymentMethod PaymentMethod?
+  // afleveradres-snapshot
+  shipName      String?
+  shipStreet    String?
+  shipPostalCode String?
+  shipCity      String?
+  shipCountry   String?
+  items         OrderItem[]
+  payments      Payment[]
+  srsPushStatus String? // pushed | partial | planned | failed
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([companyId])
+  @@index([status])
+}
+
+model OrderItem {
+  id            String @id @default(cuid())
+  order         Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId       String
+  sku           String
+  size          String
+  quantity      Int
+  unitPriceCents Int
+  title         String?
+
+  @@index([orderId])
+}
+
+model Payment {
+  id         String        @id @default(cuid())
+  order      Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId    String
+  molliePaymentId String?  @unique
+  status     PaymentStatus @default(OPEN)
+  method     PaymentMethod?
+  amountCents Int
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([orderId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  sku       String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, sku])
+}
+
+// ── Content (minimaal; Payload CMS wordt leidend) ────────────────────────────
+model CMSPage {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  body            String?  @db.Text
+  metaTitle       String?
+  metaDescription String?
+  published       Boolean  @default(false)
+  updatedAt       DateTime @updatedAt
+}
+
+model Banner {
+  id        String   @id @default(cuid())
+  title     String
+  subtitle  String?
+  imageUrl  String?
+  linkUrl   String?
+  position  String   @default("home-hero")
+  active    Boolean  @default(true)
+  sortOrder Int      @default(0)
+}
+
+model Download {
+  id        String   @id @default(cuid())
+  title     String
+  fileUrl   String
+  category  String?
+  // alleen voor goedgekeurde klanten?
+  gated     Boolean  @default(true)
+  createdAt DateTime @default(now())
+}

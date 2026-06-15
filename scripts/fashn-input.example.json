@@ -1,0 +1,15 @@
+[
+  {
+    "_comment": "Kopieer dit bestand naar scripts/fashn-input.json en vul je eigen rijen in. Elke rij: sku (uniek, wordt de bestandsnaam suitconcern/products/<sku>.png), sourceImageUrl (publieke URL van de BRON-kledingfoto), category (één van: Pakken, Smokings, Colberts, Gilets, Overhemden, Accessoires)."
+  },
+  {
+    "sku": "pak-navy-001",
+    "sourceImageUrl": "https://example.com/bron/navy-pak.jpg",
+    "category": "Pakken"
+  },
+  {
+    "sku": "smoking-zwart-001",
+    "sourceImageUrl": "https://example.com/bron/zwarte-smoking.jpg",
+    "category": "Smokings"
+  }
+]

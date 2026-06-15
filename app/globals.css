@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+/* ───────────────────────────────────────────────────────────
+   Suitconcern design system — premium, zakelijk, tijdloos
+   Palet:  ink #111111 · ink-soft #1C1C1C · paper #F7F7F5
+           white #FFFFFF · accent (champagne) #C8B28A
+   Type:   Playfair Display (serif, titels) · Inter (body)
+   Radius: 12px
+   ─────────────────────────────────────────────────────────── */
+@theme {
+  /* Kleur */
+  --color-ink: #111111;
+  --color-ink-soft: #1c1c1c;
+  --color-paper: #f7f7f5;
+  --color-white: #ffffff;
+  --color-accent: #c8b28a;
+  --color-accent-dark: #b39a6d;
+  --color-muted: #6f6f6b;
+  --color-line: #e6e4df;
+  --color-line-dark: #2a2a2a;
+
+  /* Typografie */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, "Times New Roman", serif;
+
+  /* Radius */
+  --radius-card: 12px;
+
+  /* Container */
+  --spacing-shell: 1.5rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  /* Bovenliggende label / eyebrow boven secties */
+  .eyebrow {
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Dunne champagne-streep onder een sectietitel */
+  .rule-accent::after {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    margin-top: 1rem;
+    background-color: var(--color-accent);
+  }
+}
