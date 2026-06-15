@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -6,20 +7,22 @@ import { ProductCard } from "@/components/shop/product-card";
 import type { Product } from "@/lib/data";
 
 export function Bestsellers({ products }: { products: Product[] }) {
+  const t = useTranslations("home.bestsellers");
+  const tc = useTranslations("common");
   return (
     <section className="bg-paper py-20 lg:py-24">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="Topverkopers"
-            title="Veel verkocht"
-            description="De kerncollectie die onze dealers het hele jaar door bestellen."
+            eyebrow={t("eyebrow")}
+            title={t("title")}
+            description={t("description")}
           />
           <Link
             href="/collecties"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-ink underline-offset-4 hover:underline"
           >
-            Volledig assortiment
+            {tc("volledigAssortiment")}
             <ArrowUpRight className="size-4" strokeWidth={1.75} />
           </Link>
         </div>

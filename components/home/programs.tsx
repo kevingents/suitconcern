@@ -1,31 +1,32 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Boxes, Scissors } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
-const programs = [
-  {
-    icon: Boxes,
-    eyebrow: "Voorraadprogramma",
-    title: "Never out of stock",
-    description:
-      "Een vaste kerncollectie die altijd uit voorraad leverbaar is. Directe naleveringen, geen seizoensrisico en altijd dezelfde betrouwbare pasvorm.",
-    href: "/voorraadprogramma",
-    cta: "Bekijk het programma",
-    tone: "from-neutral-800 to-black",
-  },
-  {
-    icon: Scissors,
-    eyebrow: "Private Label",
-    title: "Uw eigen merk",
-    description:
-      "Maatwerk en eigen labels met uw branding. Van labelontwerp tot afwerking — wij produceren onder uw naam met behoud van premium kwaliteit.",
-    href: "/private-label",
-    cta: "Ontdek de mogelijkheden",
-    tone: "from-stone-700 to-neutral-900",
-  },
-];
-
 export function Programs() {
+  const t = useTranslations("home.programs");
+  const programs = [
+    {
+      icon: Boxes,
+      key: "voorraad",
+      eyebrow: t("voorraad.eyebrow"),
+      title: t("voorraad.title"),
+      description: t("voorraad.description"),
+      href: "/voorraadprogramma",
+      cta: t("voorraad.cta"),
+      tone: "from-neutral-800 to-black",
+    },
+    {
+      icon: Scissors,
+      key: "private",
+      eyebrow: t("private.eyebrow"),
+      title: t("private.title"),
+      description: t("private.description"),
+      href: "/private-label",
+      cta: t("private.cta"),
+      tone: "from-stone-700 to-neutral-900",
+    },
+  ];
   return (
     <section className="bg-paper py-20 lg:py-24">
       <Container className="grid gap-6 lg:grid-cols-2">
@@ -33,7 +34,7 @@ export function Programs() {
           const Icon = p.icon;
           return (
             <div
-              key={p.eyebrow}
+              key={p.key}
               className="relative isolate flex flex-col justify-between overflow-hidden rounded-card bg-gradient-to-br p-8 text-white lg:p-10"
             >
               <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${p.tone}`} />

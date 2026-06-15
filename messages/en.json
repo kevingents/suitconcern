@@ -1,0 +1,127 @@
+{
+  "common": {
+    "inloggen": "Sign in",
+    "accountAanvragen": "Request an account",
+    "contactOpnemen": "Get in touch",
+    "bekijkCollecties": "View collections",
+    "b2bInloggen": "B2B sign in",
+    "meer": "More",
+    "verderWinkelen": "Continue shopping",
+    "bekijkAlleProducten": "View all products",
+    "volledigAssortiment": "Full range"
+  },
+  "topbar": {
+    "tagline": "Dealer in formal and corporate wear",
+    "klantenservice": "Customer service",
+    "inloggenB2B": "Sign in B2B"
+  },
+  "nav": {
+    "collecties": "Collections",
+    "merken": "Brands",
+    "voorraadprogramma": "Stock programme",
+    "privateLabel": "Private Label",
+    "overOns": "About us",
+    "contact": "Contact",
+    "mijnAccount": "My account",
+    "winkelwagen": "Cart"
+  },
+  "footer": {
+    "intro": "Suitconcern is the B2B wholesaler in formal and corporate wear for retailers, menswear stores, bridal boutiques and corporate clients.",
+    "nieuwsbrief": "Newsletter",
+    "nieuwsbriefPlaceholder": "Business email address",
+    "aanmelden": "Subscribe",
+    "colCollecties": "Collections",
+    "colInformatie": "Information",
+    "colService": "Service",
+    "rechten": "All rights reserved.",
+    "voorwaarden": "Terms and conditions",
+    "privacy": "Privacy statement",
+    "contact": "Contact",
+    "showroom": "Showroom",
+    "catalogus": "Request catalogue",
+    "faq": "FAQ",
+    "overSuitconcern": "About Suitconcern",
+    "b2bAccountAanvragen": "Request B2B account"
+  },
+  "home": {
+    "hero": {
+      "label": "Formal and corporate wear",
+      "title": "Stylish.\nProfessional.\nReliable.",
+      "subtitle": "Suits, tuxedos and accessories for retailers and businesses. Fast delivery, competitive pricing and personal service — your reliable partner for formal and corporate wear."
+    },
+    "usps": {
+      "warehouse": { "title": "Wholesale specialist", "description": "The trusted partner for formal and corporate wear for years." },
+      "tag": { "title": "Extensive range", "description": "Suits, tuxedos, jackets, waistcoats and accessories from stock." },
+      "truck": { "title": "Fast delivery", "description": "Never-out-of-stock core collection — ordered today, delivered fast." },
+      "ruler": { "title": "Wide size range", "description": "From slim fit to extra-long sizes — the right fit for every customer." }
+    },
+    "collectionsSection": {
+      "eyebrow": "Range",
+      "title": "Our collections",
+      "description": "A carefully curated range for every occasion — from business to ceremony."
+    },
+    "collections": {
+      "pakken": { "title": "Suits", "description": "Business and formal suits in a broad size range." },
+      "smokings": { "title": "Tuxedos", "description": "Classic and contemporary tuxedos for gala and ceremony." },
+      "colberts": { "title": "Jackets", "description": "Separate jackets and blazers for a versatile look." },
+      "gilets": { "title": "Waistcoats", "description": "Matching and separate waistcoats to complete any ensemble." },
+      "overhemden": { "title": "Shirts", "description": "Business and ceremony shirts in every collar and size." },
+      "accessoires": { "title": "Accessories", "description": "Ties, bow ties, pocket squares, braces and cufflinks." }
+    },
+    "bestsellers": {
+      "eyebrow": "Bestsellers",
+      "title": "Top sellers",
+      "description": "The core collection our dealers order all year round."
+    },
+    "about": {
+      "eyebrow": "About Suitconcern",
+      "title": "A partner who thinks alongside you",
+      "description": "We deliver more than just clothing — a considered purchasing programme tailored to what your customers ask for, backed by the assurance of stock and service.",
+      "imageLabel": "Showroom & stock",
+      "cta": "More about us",
+      "points": [
+        "Carefully curated range",
+        "Proven commercial fit",
+        "Exceptionally wide size range",
+        "Never-out-of-stock principle",
+        "Outstanding value for money"
+      ]
+    },
+    "programs": {
+      "voorraad": {
+        "eyebrow": "Stock programme",
+        "title": "Never out of stock",
+        "description": "A fixed core collection always available from stock. Immediate replenishment, no seasonal risk and consistently the same reliable fit.",
+        "cta": "View the programme"
+      },
+      "private": {
+        "eyebrow": "Private Label",
+        "title": "Your own brand",
+        "description": "Bespoke garments and own labels with your branding. From label design to finishing — we produce under your name while preserving premium quality.",
+        "cta": "Discover the possibilities"
+      }
+    },
+    "brands": {
+      "eyebrow": "Leading brands in our range"
+    },
+    "b2bCta": {
+      "eyebrow": "Become a dealer",
+      "title": "Ready to work together?",
+      "description": "Request a B2B account and gain access to pricing, stock and complete ordering convenience. Approval is handled personally and promptly."
+    }
+  },
+  "shop": {
+    "logInVoorPrijs": "Sign in for price",
+    "accountAanvragen": "Request an account",
+    "inloggenVoorPrijs": "Sign in for price",
+    "exclBtw": "excl. VAT",
+    "prijsOpAanvraag": "Price on request",
+    "offerteAanvragen": "Request a quote",
+    "veelVerkocht": "Top seller",
+    "nieuw": "New",
+    "maten": "Sizes",
+    "korting": "discount",
+    "artikelen": "items",
+    "artikel": "item"
+  }
+}

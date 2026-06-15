@@ -1,0 +1,127 @@
+{
+  "common": {
+    "inloggen": "Se connecter",
+    "accountAanvragen": "Demander un compte",
+    "contactOpnemen": "Nous contacter",
+    "bekijkCollecties": "Voir les collections",
+    "b2bInloggen": "Connexion B2B",
+    "meer": "Plus",
+    "verderWinkelen": "Continuer mes achats",
+    "bekijkAlleProducten": "Voir tous les produits",
+    "volledigAssortiment": "Assortiment complet"
+  },
+  "topbar": {
+    "tagline": "Distributeur de vêtements de cérémonie et de ville",
+    "klantenservice": "Service client",
+    "inloggenB2B": "Connexion B2B"
+  },
+  "nav": {
+    "collecties": "Collections",
+    "merken": "Marques",
+    "voorraadprogramma": "Programme de stock",
+    "privateLabel": "Private Label",
+    "overOns": "À propos",
+    "contact": "Contact",
+    "mijnAccount": "Mon compte",
+    "winkelwagen": "Panier"
+  },
+  "footer": {
+    "intro": "Suitconcern est le grossiste B2B de vêtements de cérémonie et de ville pour les détaillants, les boutiques de mode masculine, les maisons de mariage et les acheteurs professionnels.",
+    "nieuwsbrief": "Newsletter",
+    "nieuwsbriefPlaceholder": "Adresse e-mail professionnelle",
+    "aanmelden": "S'inscrire",
+    "colCollecties": "Collections",
+    "colInformatie": "Informations",
+    "colService": "Service",
+    "rechten": "Tous droits réservés.",
+    "voorwaarden": "Conditions générales",
+    "privacy": "Politique de confidentialité",
+    "contact": "Contact",
+    "showroom": "Showroom",
+    "catalogus": "Demander le catalogue",
+    "faq": "Questions fréquentes",
+    "overSuitconcern": "À propos de Suitconcern",
+    "b2bAccountAanvragen": "Demander un compte B2B"
+  },
+  "home": {
+    "hero": {
+      "label": "Vêtements de cérémonie et de ville",
+      "title": "Élégant.\nProfessionnel.\nFiable.",
+      "subtitle": "Costumes, smokings et accessoires pour les détaillants et les entreprises. Livraison rapide, prix compétitifs et service personnalisé — le partenaire fiable pour vos vêtements de cérémonie et de ville."
+    },
+    "usps": {
+      "warehouse": { "title": "Spécialiste grossiste", "description": "Depuis des années, le partenaire de référence pour les vêtements de cérémonie et de ville." },
+      "tag": { "title": "Large assortiment", "description": "Costumes, smokings, vestes, gilets et accessoires disponibles en stock." },
+      "truck": { "title": "Livraison rapide", "description": "Collection essentielle Never-out-of-stock, commandée aujourd'hui, livrée rapidement." },
+      "ruler": { "title": "Large gamme de tailles", "description": "Du slim-fit aux longueurs supplémentaires — une taille adaptée à chaque client." }
+    },
+    "collectionsSection": {
+      "eyebrow": "Assortiment",
+      "title": "Nos collections",
+      "description": "Un assortiment soigneusement composé pour chaque occasion — du professionnel à la cérémonie."
+    },
+    "collections": {
+      "pakken": { "title": "Costumes", "description": "Costumes professionnels et de fête dans une large gamme de tailles." },
+      "smokings": { "title": "Smokings", "description": "Smokings classiques et modernes pour le gala et la cérémonie." },
+      "colberts": { "title": "Vestes", "description": "Vestes et blazers dépareillés pour un look polyvalent." },
+      "gilets": { "title": "Gilets", "description": "Gilets assortis et dépareillés pour parfaire chaque ensemble." },
+      "overhemden": { "title": "Chemises", "description": "Chemises business et de cérémonie dans tous les cols et toutes les tailles." },
+      "accessoires": { "title": "Accessoires", "description": "Cravates, nœuds papillon, pochettes, bretelles et boutons de manchette." }
+    },
+    "bestsellers": {
+      "eyebrow": "Meilleures ventes",
+      "title": "Très vendus",
+      "description": "La collection essentielle que nos revendeurs commandent toute l'année."
+    },
+    "about": {
+      "eyebrow": "À propos de Suitconcern",
+      "title": "Un partenaire qui réfléchit avec vous",
+      "description": "Nous ne livrons pas seulement des vêtements, mais un programme d'achat réfléchi qui répond aux attentes de vos clients — avec la garantie du stock et du service.",
+      "imageLabel": "Showroom & stock",
+      "cta": "En savoir plus sur nous",
+      "points": [
+        "Assortiment soigneusement composé",
+        "Coupe commerciale éprouvée",
+        "Très large gamme de tailles",
+        "Principe Never-out-of-stock",
+        "Excellent rapport qualité-prix"
+      ]
+    },
+    "programs": {
+      "voorraad": {
+        "eyebrow": "Programme de stock",
+        "title": "Never out of stock",
+        "description": "Une collection essentielle permanente, toujours disponible en stock. Réapprovisionnements immédiats, aucun risque saisonnier et toujours la même coupe fiable.",
+        "cta": "Voir le programme"
+      },
+      "private": {
+        "eyebrow": "Private Label",
+        "title": "Votre propre marque",
+        "description": "Sur-mesure et marques propres à votre image. De la conception de l'étiquette aux finitions — nous produisons sous votre nom en préservant une qualité premium.",
+        "cta": "Découvrir les possibilités"
+      }
+    },
+    "brands": {
+      "eyebrow": "Marques de premier plan dans notre assortiment"
+    },
+    "b2bCta": {
+      "eyebrow": "Devenez revendeur",
+      "title": "Prêt à collaborer ?",
+      "description": "Demandez un compte B2B et accédez aux prix, au stock et à toute la simplicité de commande. L'approbation se fait personnellement et rapidement."
+    }
+  },
+  "shop": {
+    "logInVoorPrijs": "Connectez-vous pour voir le prix",
+    "accountAanvragen": "Demander un compte",
+    "inloggenVoorPrijs": "Connectez-vous pour voir le prix",
+    "exclBtw": "HT",
+    "prijsOpAanvraag": "Prix sur demande",
+    "offerteAanvragen": "Demander un devis",
+    "veelVerkocht": "Très vendu",
+    "nieuw": "Nouveau",
+    "maten": "Tailles",
+    "korting": "remise",
+    "artikelen": "articles",
+    "artikel": "article"
+  }
+}

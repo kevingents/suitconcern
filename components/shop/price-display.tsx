@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Lock } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useSession } from "@/lib/session";
 import { formatPrice } from "@/lib/utils";
 import { cn } from "@/lib/utils";
@@ -20,13 +21,14 @@ export function PriceDisplay({
   size?: "sm" | "md" | "lg";
 }) {
   const { isApproved, discountPct, group } = useSession();
+  const t = useTranslations("shop");
 
   if (!isApproved) {
     return (
       <div className="flex items-center gap-2 text-sm text-muted">
         <Lock className="size-3.5 shrink-0" strokeWidth={1.75} />
         <Link href="/login" className="font-medium text-ink underline-offset-4 hover:underline">
-          Log in voor prijs
+          {t("logInVoorPrijs")}
         </Link>
       </div>
     );
@@ -35,12 +37,12 @@ export function PriceDisplay({
   if (!product.priceExclVat || product.priceExclVat <= 0) {
     return (
       <div className="text-sm">
-        <span className="font-medium text-ink">Prijs op aanvraag</span>
+        <span className="font-medium text-ink">{t("prijsOpAanvraag")}</span>
         <Link
           href="/contact"
           className="ml-2 text-xs text-muted underline-offset-4 hover:text-ink hover:underline"
         >
-          Offerte aanvragen
+          {t("offerteAanvragen")}
         </Link>
       </div>
     );
@@ -65,11 +67,11 @@ export function PriceDisplay({
             {formatPrice(product.priceExclVat)}
           </span>
         ) : null}
-        <span className="text-xs text-muted">excl. btw</span>
+        <span className="text-xs text-muted">{t("exclBtw")}</span>
       </div>
       {hasDiscount ? (
         <p className="mt-0.5 text-xs text-accent-dark">
-          {group}-korting · {discountPct}%
+          {group} · {discountPct}% {t("korting")}
         </p>
       ) : null}
       {product.tierPrice ? (

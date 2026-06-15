@@ -11,43 +11,68 @@ import {
   UserCheck,
   X,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { navigation } from "@/lib/data";
 import { useSession } from "@/lib/session";
 import { useCart } from "@/lib/cart";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/layout/logo";
 import { DemoSessionSwitcher } from "@/components/layout/demo-session-switcher";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+const NAV_KEY: Record<string, string> = {
+  "/collecties": "collecties",
+  "/merken": "merken",
+  "/voorraadprogramma": "voorraadprogramma",
+  "/private-label": "privateLabel",
+  "/over-ons": "overOns",
+  "/contact": "contact",
+};
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { status, company } = useSession();
   const { count } = useCart();
+  const t = useTranslations("topbar");
+  const tNav = useTranslations("nav");
+  const tCol = useTranslations("home.collections");
+  const tCommon = useTranslations("common");
+
+  const navLabel = (href: string, fallback: string) =>
+    NAV_KEY[href] ? tNav(NAV_KEY[href]) : fallback;
+  const childLabel = (href: string, fallback: string) => {
+    const slug = href.split("/").pop() ?? "";
+    try {
+      return tCol(`${slug}.title`);
+    } catch {
+      return fallback;
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white">
       {/* Topbar */}
       <div className="bg-ink text-white">
         <Container className="flex h-9 items-center justify-between text-[0.7rem]">
-          <p className="tracking-wide text-white/70">
-            Dealer in gala- en bedrijfskleding
-          </p>
+          <p className="tracking-wide text-white/70">{t("tagline")}</p>
           <div className="flex items-center gap-4">
+            <LanguageSwitcher tone="light" />
             <DemoSessionSwitcher tone="light" />
             <Link
               href="/contact"
               className="hidden items-center gap-1.5 text-white/70 transition-colors hover:text-white sm:inline-flex"
             >
               <Headset className="size-3.5" strokeWidth={1.75} />
-              Klantenservice
+              {t("klantenservice")}
             </Link>
             <Link
               href="/login"
               className="inline-flex items-center gap-1.5 text-white/70 transition-colors hover:text-white"
             >
               <LogIn className="size-3.5" strokeWidth={1.75} />
-              Inloggen B2B
+              {t("inloggenB2B")}
             </Link>
           </div>
         </Container>
@@ -66,7 +91,7 @@ export function SiteHeader() {
                     href={item.href}
                     className="inline-flex items-center gap-1 text-sm text-ink/80 transition-colors hover:text-ink"
                   >
-                    {item.label}
+                    {navLabel(item.href, item.label)}
                     <ChevronDown
                       className="size-3.5 transition-transform group-hover:rotate-180"
                       strokeWidth={1.75}
@@ -80,7 +105,7 @@ export function SiteHeader() {
                           href={child.href}
                           className="block rounded-[9px] px-3 py-2 text-sm text-ink/80 transition-colors hover:bg-paper hover:text-ink"
                         >
-                          {child.label}
+                          {childLabel(child.href, child.label)}
                         </Link>
                       ))}
                     </div>
@@ -92,7 +117,7 @@ export function SiteHeader() {
                   href={item.href}
                   className="text-sm text-ink/80 transition-colors hover:text-ink"
                 >
-                  {item.label}
+                  {navLabel(item.href, item.label)}
                 </Link>
               ),
             )}
@@ -107,7 +132,7 @@ export function SiteHeader() {
                   title={company ?? undefined}
                 >
                   <UserCheck className="size-4" strokeWidth={1.75} />
-                  Mijn account
+                  {tNav("mijnAccount")}
                 </Link>
                 <Link
                   href="/winkelwagen"
@@ -115,7 +140,7 @@ export function SiteHeader() {
                   className={cn(buttonVariants({ variant: "primary", size: "sm" }), "relative")}
                 >
                   <ShoppingBag className="size-4" strokeWidth={1.75} />
-                  <span className="hidden sm:inline">Winkelwagen</span>
+                  <span className="hidden sm:inline">{tNav("winkelwagen")}</span>
                   {count > 0 ? (
                     <span className="absolute -right-1.5 -top-1.5 inline-flex min-w-5 items-center justify-center rounded-full bg-accent px-1.5 text-[0.65rem] font-semibold text-ink">
                       {count}
@@ -129,13 +154,13 @@ export function SiteHeader() {
                   href="/login"
                   className={cn(buttonVariants({ variant: "outline", size: "sm" }), "hidden sm:inline-flex")}
                 >
-                  Inloggen
+                  {tCommon("inloggen")}
                 </Link>
                 <Link
                   href="/b2b-account-aanvragen"
                   className={cn(buttonVariants({ variant: "primary", size: "sm" }), "hidden sm:inline-flex")}
                 >
-                  Account aanvragen
+                  {tCommon("accountAanvragen")}
                 </Link>
               </>
             )}
@@ -180,7 +205,7 @@ export function SiteHeader() {
                     onClick={() => setMobileOpen(false)}
                     className="block rounded-card px-3 py-2.5 text-base text-ink hover:bg-paper"
                   >
-                    {item.label}
+                    {navLabel(item.href, item.label)}
                   </Link>
                   {item.children ? (
                     <div className="ml-3 border-l border-line pl-3">
@@ -191,7 +216,7 @@ export function SiteHeader() {
                           onClick={() => setMobileOpen(false)}
                           className="block rounded-card px-3 py-2 text-sm text-muted hover:bg-paper hover:text-ink"
                         >
-                          {child.label}
+                          {childLabel(child.href, child.label)}
                         </Link>
                       ))}
                     </div>

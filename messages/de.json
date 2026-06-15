@@ -1,0 +1,127 @@
+{
+  "common": {
+    "inloggen": "Anmelden",
+    "accountAanvragen": "Konto beantragen",
+    "contactOpnemen": "Kontakt aufnehmen",
+    "bekijkCollecties": "Kollektionen ansehen",
+    "b2bInloggen": "B2B-Anmeldung",
+    "meer": "Mehr",
+    "verderWinkelen": "Weiter einkaufen",
+    "bekijkAlleProducten": "Alle Produkte ansehen",
+    "volledigAssortiment": "Gesamtes Sortiment"
+  },
+  "topbar": {
+    "tagline": "Händler für Gala- und Geschäftskleidung",
+    "klantenservice": "Kundenservice",
+    "inloggenB2B": "B2B-Anmeldung"
+  },
+  "nav": {
+    "collecties": "Kollektionen",
+    "merken": "Marken",
+    "voorraadprogramma": "Lagerprogramm",
+    "privateLabel": "Private Label",
+    "overOns": "Über uns",
+    "contact": "Kontakt",
+    "mijnAccount": "Mein Konto",
+    "winkelwagen": "Warenkorb"
+  },
+  "footer": {
+    "intro": "Suitconcern ist der B2B-Großhandel für Gala- und Geschäftskleidung für Einzelhändler, Herrenmodegeschäfte, Brautmodegeschäfte und Geschäftskunden.",
+    "nieuwsbrief": "Newsletter",
+    "nieuwsbriefPlaceholder": "Geschäftliche E-Mail-Adresse",
+    "aanmelden": "Anmelden",
+    "colCollecties": "Kollektionen",
+    "colInformatie": "Informationen",
+    "colService": "Service",
+    "rechten": "Alle Rechte vorbehalten.",
+    "voorwaarden": "Allgemeine Geschäftsbedingungen",
+    "privacy": "Datenschutzerklärung",
+    "contact": "Kontakt",
+    "showroom": "Showroom",
+    "catalogus": "Katalog anfordern",
+    "faq": "Häufige Fragen",
+    "overSuitconcern": "Über Suitconcern",
+    "b2bAccountAanvragen": "B2B-Konto anfragen"
+  },
+  "home": {
+    "hero": {
+      "label": "Gala- und Geschäftskleidung",
+      "title": "Stilvoll.\nProfessionell.\nZuverlässig.",
+      "subtitle": "Anzüge, Smokings und Accessoires für Einzelhändler und Unternehmen. Schnelle Lieferung, attraktive Preise und persönlicher Service — der zuverlässige Partner für Gala- und Geschäftskleidung."
+    },
+    "usps": {
+      "warehouse": { "title": "Großhandelsspezialist", "description": "Seit Jahren der feste Partner für Gala- und Geschäftskleidung." },
+      "tag": { "title": "Umfangreiches Sortiment", "description": "Anzüge, Smokings, Sakkos, Westen und Accessoires ab Lager." },
+      "truck": { "title": "Schnelle Lieferung", "description": "Never-out-of-Stock-Kernkollektion, heute bestellt, schnell geliefert." },
+      "ruler": { "title": "Große Größenrange", "description": "Von Slim-Fit bis Extra-Langgrößen — die passende Größe für jeden Kunden." }
+    },
+    "collectionsSection": {
+      "eyebrow": "Sortiment",
+      "title": "Unsere Kollektionen",
+      "description": "Ein clever abgestimmtes Sortiment für jeden Anlass — von geschäftlich bis Zeremonie."
+    },
+    "collections": {
+      "pakken": { "title": "Anzüge", "description": "Geschäftliche und festliche Anzüge in einer breiten Größenrange." },
+      "smokings": { "title": "Smokings", "description": "Klassische und moderne Smokings für Gala und Zeremonie." },
+      "colberts": { "title": "Sakkos", "description": "Einzelne Sakkos und Blazer für einen vielseitigen Look." },
+      "gilets": { "title": "Westen", "description": "Passende und einzelne Westen, um jedes Set abzurunden." },
+      "overhemden": { "title": "Hemden", "description": "Business- und Zeremonie-Hemden in allen Kragen und Größen." },
+      "accessoires": { "title": "Accessoires", "description": "Krawatten, Fliegen, Einstecktücher, Hosenträger und Manschettenknöpfe." }
+    },
+    "bestsellers": {
+      "eyebrow": "Topseller",
+      "title": "Beliebte Artikel",
+      "description": "Die Kernkollektion, die unsere Händler das ganze Jahr über bestellen."
+    },
+    "about": {
+      "eyebrow": "Über Suitconcern",
+      "title": "Ein Partner, der mit Ihnen mitdenkt",
+      "description": "Wir liefern nicht nur Kleidung, sondern ein durchdachtes Einkaufsprogramm, das auf die Wünsche Ihrer Kunden abgestimmt ist — mit der Sicherheit von Lagerbestand und Service.",
+      "imageLabel": "Showroom & Lager",
+      "cta": "Mehr über uns",
+      "points": [
+        "Clever abgestimmtes Sortiment",
+        "Bewährte kommerzielle Passform",
+        "Sehr große Größenrange",
+        "Never-out-of-Stock-Prinzip",
+        "Hervorragendes Preis-Leistungs-Verhältnis"
+      ]
+    },
+    "programs": {
+      "voorraad": {
+        "eyebrow": "Lagerprogramm",
+        "title": "Never out of stock",
+        "description": "Eine feste Kernkollektion, die stets ab Lager lieferbar ist. Direkte Nachlieferungen, kein Saisonrisiko und immer dieselbe zuverlässige Passform.",
+        "cta": "Programm ansehen"
+      },
+      "private": {
+        "eyebrow": "Private Label",
+        "title": "Ihre eigene Marke",
+        "description": "Maßanfertigung und eigene Labels mit Ihrem Branding. Vom Labeldesign bis zur Verarbeitung — wir produzieren unter Ihrem Namen bei gleichbleibend hochwertiger Qualität.",
+        "cta": "Möglichkeiten entdecken"
+      }
+    },
+    "brands": {
+      "eyebrow": "Führende Marken in unserem Sortiment"
+    },
+    "b2bCta": {
+      "eyebrow": "Händler werden",
+      "title": "Bereit für eine Zusammenarbeit?",
+      "description": "Beantragen Sie ein B2B-Konto und erhalten Sie Zugang zu Preisen, Lagerbestand und dem gesamten Bestellkomfort. Die Freigabe erfolgt persönlich und schnell."
+    }
+  },
+  "shop": {
+    "logInVoorPrijs": "Für Preis anmelden",
+    "accountAanvragen": "Konto beantragen",
+    "inloggenVoorPrijs": "Zur Preisanzeige anmelden",
+    "exclBtw": "zzgl. MwSt.",
+    "prijsOpAanvraag": "Preis auf Anfrage",
+    "offerteAanvragen": "Angebot anfordern",
+    "veelVerkocht": "Beliebte Artikel",
+    "nieuw": "Neu",
+    "maten": "Größen",
+    "korting": "Rabatt",
+    "artikelen": "Artikel",
+    "artikel": "Artikel"
+  }
+}

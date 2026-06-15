@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useSession } from "@/lib/session";
 import { ProductMedia } from "@/components/shop/product-media";
 import { FavoriteButton } from "@/components/shop/favorite-button";
@@ -12,6 +13,7 @@ import type { Product } from "@/lib/data";
 
 export function ProductCard({ product }: { product: Product }) {
   const { isApproved } = useSession();
+  const t = useTranslations("shop");
   const sizes = product.variants.map((v) => v.size).join(" · ");
 
   return (
@@ -29,12 +31,12 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="absolute left-3 top-3 flex gap-1.5">
           {product.isNew ? (
             <span className="rounded-full bg-white/90 px-2.5 py-1 text-[0.65rem] font-medium tracking-wide text-ink">
-              Nieuw
+              {t("nieuw")}
             </span>
           ) : null}
           {product.bestseller ? (
             <span className="rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-medium tracking-wide text-ink">
-              Veel verkocht
+              {t("veelVerkocht")}
             </span>
           ) : null}
         </div>
@@ -54,7 +56,7 @@ export function ProductCard({ product }: { product: Product }) {
 
         {isApproved ? (
           <p className="mt-2 text-xs text-muted">
-            <span className="text-ink/70">{product.sku}</span> · Maten {sizes}
+            <span className="text-ink/70">{product.sku}</span> · {t("maten")} {sizes}
           </p>
         ) : null}
 
@@ -73,7 +75,7 @@ export function ProductCard({ product }: { product: Product }) {
               href="/b2b-account-aanvragen"
               className="text-xs font-medium text-ink underline-offset-4 hover:underline"
             >
-              Account aanvragen
+              {t("accountAanvragen")}
             </Link>
           )}
         </div>

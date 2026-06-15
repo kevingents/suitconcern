@@ -1,0 +1,127 @@
+{
+  "common": {
+    "inloggen": "Inloggen",
+    "accountAanvragen": "Account aanvragen",
+    "contactOpnemen": "Contact opnemen",
+    "bekijkCollecties": "Bekijk collecties",
+    "b2bInloggen": "B2B inloggen",
+    "meer": "Meer",
+    "verderWinkelen": "Verder winkelen",
+    "bekijkAlleProducten": "Bekijk alle producten",
+    "volledigAssortiment": "Volledig assortiment"
+  },
+  "topbar": {
+    "tagline": "Dealer in gala- en bedrijfskleding",
+    "klantenservice": "Klantenservice",
+    "inloggenB2B": "Inloggen B2B"
+  },
+  "nav": {
+    "collecties": "Collecties",
+    "merken": "Merken",
+    "voorraadprogramma": "Voorraadprogramma",
+    "privateLabel": "Private Label",
+    "overOns": "Over ons",
+    "contact": "Contact",
+    "mijnAccount": "Mijn account",
+    "winkelwagen": "Winkelwagen"
+  },
+  "footer": {
+    "intro": "Suitconcern is de B2B-groothandel in gala- en bedrijfskleding voor retailers, herenmodezaken, bruidszaken en zakelijke afnemers.",
+    "nieuwsbrief": "Nieuwsbrief",
+    "nieuwsbriefPlaceholder": "Zakelijk e-mailadres",
+    "aanmelden": "Aanmelden",
+    "colCollecties": "Collecties",
+    "colInformatie": "Informatie",
+    "colService": "Service",
+    "rechten": "Alle rechten voorbehouden.",
+    "voorwaarden": "Algemene voorwaarden",
+    "privacy": "Privacyverklaring",
+    "contact": "Contact",
+    "showroom": "Showroom",
+    "catalogus": "Catalogus aanvragen",
+    "faq": "Veelgestelde vragen",
+    "overSuitconcern": "Over Suitconcern",
+    "b2bAccountAanvragen": "B2B-account aanvragen"
+  },
+  "home": {
+    "hero": {
+      "label": "Gala- en bedrijfskleding",
+      "title": "Stijlvol.\nProfessioneel.\nBetrouwbaar.",
+      "subtitle": "Suits, smokings en accessoires voor retailers en bedrijven. Snelle levering, scherpe prijzen en persoonlijke service — de betrouwbare partner voor gala- en bedrijfskleding."
+    },
+    "usps": {
+      "warehouse": { "title": "Groothandel specialist", "description": "Al jaren de vaste partner voor gala- en bedrijfskleding." },
+      "tag": { "title": "Ruim assortiment", "description": "Pakken, smokings, colberts, gilets en accessoires uit voorraad." },
+      "truck": { "title": "Snelle levering", "description": "Never-out-of-stock kerncollectie, vandaag besteld, snel geleverd." },
+      "ruler": { "title": "Grote matenrange", "description": "Van slim-fit tot extra lengtematen — een passende maat voor elke klant." }
+    },
+    "collectionsSection": {
+      "eyebrow": "Assortiment",
+      "title": "Onze collecties",
+      "description": "Een slim afgestemd assortiment voor elke gelegenheid — van zakelijk tot ceremonie."
+    },
+    "collections": {
+      "pakken": { "title": "Pakken", "description": "Zakelijke en feestelijke kostuums in een brede matenrange." },
+      "smokings": { "title": "Smokings", "description": "Klassieke en moderne smokings voor gala en ceremonie." },
+      "colberts": { "title": "Colberts", "description": "Losse colberts en blazers voor een veelzijdige look." },
+      "gilets": { "title": "Gilets", "description": "Bijpassende en losse gilets om elke set af te maken." },
+      "overhemden": { "title": "Overhemden", "description": "Business- en ceremonie-overhemden in alle kragen en maten." },
+      "accessoires": { "title": "Accessoires", "description": "Dassen, strikken, pochets, bretels en manchetknopen." }
+    },
+    "bestsellers": {
+      "eyebrow": "Topverkopers",
+      "title": "Veel verkocht",
+      "description": "De kerncollectie die onze dealers het hele jaar door bestellen."
+    },
+    "about": {
+      "eyebrow": "Over Suitconcern",
+      "title": "Een partner die met u meedenkt",
+      "description": "Wij leveren niet alleen kleding, maar een doordacht inkoopprogramma dat aansluit op wat uw klanten vragen — met de zekerheid van voorraad en service.",
+      "imageLabel": "Showroom & voorraad",
+      "cta": "Meer over ons",
+      "points": [
+        "Slim afgestemd assortiment",
+        "Bewezen commerciële pasvorm",
+        "Zeer grote matenrange",
+        "Never-out-of-stock principe",
+        "Uitstekende prijs-kwaliteitverhouding"
+      ]
+    },
+    "programs": {
+      "voorraad": {
+        "eyebrow": "Voorraadprogramma",
+        "title": "Never out of stock",
+        "description": "Een vaste kerncollectie die altijd uit voorraad leverbaar is. Directe naleveringen, geen seizoensrisico en altijd dezelfde betrouwbare pasvorm.",
+        "cta": "Bekijk het programma"
+      },
+      "private": {
+        "eyebrow": "Private Label",
+        "title": "Uw eigen merk",
+        "description": "Maatwerk en eigen labels met uw branding. Van labelontwerp tot afwerking — wij produceren onder uw naam met behoud van premium kwaliteit.",
+        "cta": "Ontdek de mogelijkheden"
+      }
+    },
+    "brands": {
+      "eyebrow": "Toonaangevende merken in ons assortiment"
+    },
+    "b2bCta": {
+      "eyebrow": "Word dealer",
+      "title": "Klaar om samen te werken?",
+      "description": "Vraag een B2B-account aan en krijg toegang tot prijzen, voorraad en het volledige bestelgemak. Goedkeuring volgt persoonlijk en snel."
+    }
+  },
+  "shop": {
+    "logInVoorPrijs": "Log in voor prijs",
+    "accountAanvragen": "Account aanvragen",
+    "inloggenVoorPrijs": "Inloggen voor prijs",
+    "exclBtw": "excl. btw",
+    "prijsOpAanvraag": "Prijs op aanvraag",
+    "offerteAanvragen": "Offerte aanvragen",
+    "veelVerkocht": "Veel verkocht",
+    "nieuw": "Nieuw",
+    "maten": "Maten",
+    "korting": "korting",
+    "artikelen": "artikelen",
+    "artikel": "artikel"
+  }
+}

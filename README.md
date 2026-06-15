@@ -215,6 +215,21 @@ draait alles in demo-modus.
 > corrumpeert (ENOENT op manifests). Bij rare build/dev-fouten: `.next` verwijderen, of
 > `.next` uitsluiten van OneDrive-sync / de repo buiten OneDrive plaatsen.
 
+## Meertaligheid (NL / EN / DE / FR)
+
+- **next-intl**, cookie-gebaseerd (geen URL-herstructurering): de locale komt uit de
+  `NEXT_LOCALE`-cookie ([`i18n/request.ts`](i18n/request.ts)), default NL. Berichten per taal
+  in [`messages/`](messages/) (`nl/en/de/fr.json`, identieke key-structuur).
+- **Taalwisselaar** in de topbar ([`language-switcher.tsx`](components/layout/language-switcher.tsx))
+  zet de cookie en herlaadt; `<html lang>` volgt de taal.
+- **Vertaald (fase 1)**: de hele shell (topbar, navigatie, header, footer, mobiele CTA) +
+  de complete homepage + de gedeelde shop-labels (prijs/voorraad/badges). Geverifieerd in alle
+  4 talen.
+- **Nog te vertalen (fase 2)**: de diepere pagina's (collectie-/productpagina-koppen, formulieren,
+  account, admin, e-mails). Strings toevoegen = key in `messages/*.json` + `t()` in de component.
+- **SEO**: per-taal URL-routing (`/en`, `/de`, `/fr`) + hreflang is een aparte vervolgstap
+  (structurele wijziging); cookie-modus levert nu één URL per taal.
+
 ## Roadmap
 
 1. **Data & auth** — Prisma-schema + PostgreSQL (User, Company, CustomerGroup, Product,

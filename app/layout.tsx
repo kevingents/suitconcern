@@ -8,6 +8,8 @@ import { SessionProvider } from "@/lib/session";
 import { CartProvider } from "@/lib/cart";
 import { FavoritesProvider } from "@/lib/favorites";
 import { OrganizationJsonLd } from "@/components/seo/json-ld";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,23 +51,28 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="nl" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
       <body className="flex min-h-screen flex-col bg-white text-ink antialiased">
         <OrganizationJsonLd />
-        <SessionProvider authEnabled={process.env.NEXT_PUBLIC_AUTH_ENABLED === "true"}>
-          <CartProvider>
-            <FavoritesProvider>
-              <SiteHeader />
-              <main className="flex-1 pb-20 lg:pb-0">{children}</main>
-              <SiteFooter />
-              <MobileCta />
-            </FavoritesProvider>
-          </CartProvider>
-        </SessionProvider>
+        <NextIntlClientProvider messages={messages}>
+          <SessionProvider authEnabled={process.env.NEXT_PUBLIC_AUTH_ENABLED === "true"}>
+            <CartProvider>
+              <FavoritesProvider>
+                <SiteHeader />
+                <main className="flex-1 pb-20 lg:pb-0">{children}</main>
+                <SiteFooter />
+                <MobileCta />
+              </FavoritesProvider>
+            </CartProvider>
+          </SessionProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

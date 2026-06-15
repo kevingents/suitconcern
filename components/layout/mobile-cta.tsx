@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useSession } from "@/lib/session";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -8,6 +9,7 @@ import { cn } from "@/lib/utils";
 /** Sticky onderbalk op mobiel — directe B2B-conversie (aanvragen / inloggen). */
 export function MobileCta() {
   const { status } = useSession();
+  const t = useTranslations("common");
   if (status === "approved") return null;
 
   return (
@@ -17,13 +19,13 @@ export function MobileCta() {
           href="/login"
           className={cn(buttonVariants({ variant: "outline", size: "md" }), "flex-1")}
         >
-          Inloggen
+          {t("inloggen")}
         </Link>
         <Link
           href="/b2b-account-aanvragen"
           className={cn(buttonVariants({ variant: "primary", size: "md" }), "flex-1")}
         >
-          Account aanvragen
+          {t("accountAanvragen")}
         </Link>
       </div>
     </div>

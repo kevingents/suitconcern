@@ -1,10 +1,13 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { ArrowRight, LogIn } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
+  const t = useTranslations("home.hero");
+  const tc = useTranslations("common");
   return (
     <section className="relative isolate overflow-hidden bg-ink text-white">
       {/* Achtergrond — placeholder voor full-width hero fotografie */}
@@ -14,25 +17,19 @@ export function Hero() {
 
       <Container className="flex min-h-[78vh] max-w-[1280px] flex-col justify-center py-24 lg:py-32">
         <div className="max-w-2xl">
-          <p className="eyebrow text-accent">Gala- en bedrijfskleding</p>
-          <h1 className="mt-5 font-serif text-4xl leading-[1.05] sm:text-6xl lg:text-7xl">
-            Stijlvol.
-            <br />
-            Professioneel.
-            <br />
-            Betrouwbaar.
+          <p className="eyebrow text-accent">{t("label")}</p>
+          <h1 className="mt-5 whitespace-pre-line font-serif text-4xl leading-[1.05] sm:text-6xl lg:text-7xl">
+            {t("title")}
           </h1>
           <p className="mt-7 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
-            Suits, smokings en accessoires voor retailers en bedrijven. Snelle
-            levering, scherpe prijzen en persoonlijke service — de betrouwbare
-            partner voor gala- en bedrijfskleding.
+            {t("subtitle")}
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/collecties"
               className={cn(buttonVariants({ variant: "light", size: "lg" }))}
             >
-              Bekijk collecties
+              {tc("bekijkCollecties")}
               <ArrowRight className="size-4" strokeWidth={1.75} />
             </Link>
             <Link
@@ -40,7 +37,7 @@ export function Hero() {
               className={cn(buttonVariants({ variant: "light-outline", size: "lg" }))}
             >
               <LogIn className="size-4" strokeWidth={1.75} />
-              B2B inloggen
+              {tc("b2bInloggen")}
             </Link>
           </div>
         </div>
