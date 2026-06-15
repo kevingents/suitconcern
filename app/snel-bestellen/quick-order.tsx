@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Check, Lock, Plus, Trash2 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -34,6 +35,7 @@ function newRow(): Row {
 }
 
 function GatedState() {
+  const t = useTranslations("quickOrder");
   return (
     <section className="bg-paper py-24 lg:py-32">
       <Container>
@@ -41,20 +43,17 @@ function GatedState() {
           <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-paper">
             <Lock className="size-5 text-ink" strokeWidth={1.75} />
           </span>
-          <h1 className="mt-6 font-serif text-2xl text-ink">Log in om snel te bestellen</h1>
-          <p className="mt-3 text-sm leading-relaxed text-muted">
-            Snel bestellen op artikelnummer is beschikbaar voor goedgekeurde
-            B2B-accounts. Log in of vraag een account aan.
-          </p>
+          <h1 className="mt-6 font-serif text-2xl text-ink">{t("gateTitle")}</h1>
+          <p className="mt-3 text-sm leading-relaxed text-muted">{t("gateText")}</p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link href="/login" className={cn(buttonVariants({ variant: "primary" }))}>
-              Inloggen
+              {t("inloggen")}
             </Link>
             <Link
               href="/b2b-account-aanvragen"
               className={cn(buttonVariants({ variant: "outline" }))}
             >
-              Account aanvragen
+              {t("accountAanvragen")}
             </Link>
           </div>
         </div>
@@ -66,6 +65,7 @@ function GatedState() {
 export function QuickOrder({ catalog }: { catalog: QuickOrderProduct[] }) {
   const { isApproved } = useSession();
   const { add } = useCart();
+  const t = useTranslations("quickOrder");
   const [rows, setRows] = useState<Row[]>(() => [newRow(), newRow(), newRow()]);
   const [addedCount, setAddedCount] = useState<number | null>(null);
 
@@ -141,22 +141,19 @@ export function QuickOrder({ catalog }: { catalog: QuickOrderProduct[] }) {
     <section className="bg-paper py-16 lg:py-20">
       <Container>
         <div className="max-w-2xl">
-          <p className="eyebrow mb-3 text-accent-dark">Bestellen</p>
-          <h1 className="text-3xl sm:text-4xl">Snel bestellen</h1>
-          <p className="mt-4 text-base leading-relaxed text-muted">
-            Ken u de artikelnummers? Vul ze hieronder in, kies een maat en aantal,
-            en voeg alles in één keer toe aan uw winkelwagen.
-          </p>
+          <p className="eyebrow mb-3 text-accent-dark">{t("eyebrow")}</p>
+          <h1 className="text-3xl sm:text-4xl">{t("title")}</h1>
+          <p className="mt-4 text-base leading-relaxed text-muted">{t("intro")}</p>
         </div>
 
         <div className="mt-12 overflow-hidden rounded-card border border-line bg-white">
           {/* Kop (desktop) */}
           <div className="hidden grid-cols-[1fr_1fr_120px_96px_44px] gap-4 border-b border-line bg-paper/60 px-6 py-3 text-xs uppercase tracking-wider text-muted sm:grid">
-            <span>Artikelnummer</span>
-            <span>Artikel</span>
-            <span>Maat</span>
-            <span>Aantal</span>
-            <span className="sr-only">Verwijderen</span>
+            <span>{t("colArtikelnummer")}</span>
+            <span>{t("colArtikel")}</span>
+            <span>{t("colMaat")}</span>
+            <span>{t("colAantal")}</span>
+            <span className="sr-only">{t("colVerwijderen")}</span>
           </div>
 
           <ul className="divide-y divide-line">
@@ -171,14 +168,14 @@ export function QuickOrder({ catalog }: { catalog: QuickOrderProduct[] }) {
                   {/* SKU */}
                   <div>
                     <label className="mb-1 block text-xs uppercase tracking-wider text-muted sm:hidden">
-                      Artikelnummer
+                      {t("colArtikelnummer")}
                     </label>
                     <input
                       type="text"
                       inputMode="text"
                       value={row.sku}
                       onChange={(e) => updateRow(row.id, { sku: e.target.value })}
-                      placeholder="bijv. SC-PAK-1001"
+                      placeholder={t("skuPlaceholder")}
                       className={cn(
                         "h-11 w-full rounded-card border bg-white px-3 text-sm text-ink placeholder:text-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
                         unknown ? "border-red-300" : "border-line focus-visible:border-ink",
@@ -192,20 +189,20 @@ export function QuickOrder({ catalog }: { catalog: QuickOrderProduct[] }) {
                       <div className="min-w-0">
                         <p className="truncate font-medium text-ink">{product.name}</p>
                         <p className="truncate text-xs text-muted">
-                          {product.brand} · {formatPrice(product.priceExclVat)} excl. btw
+                          {product.brand} · {formatPrice(product.priceExclVat)} {t("exclBtw")}
                         </p>
                       </div>
                     ) : unknown ? (
-                      <p className="text-xs text-red-600">Artikelnummer niet gevonden</p>
+                      <p className="text-xs text-red-600">{t("nietGevonden")}</p>
                     ) : (
-                      <p className="text-xs text-muted/70">Vul een artikelnummer in</p>
+                      <p className="text-xs text-muted/70">{t("vulSku")}</p>
                     )}
                   </div>
 
                   {/* Maat */}
                   <div>
                     <label className="mb-1 block text-xs uppercase tracking-wider text-muted sm:hidden">
-                      Maat
+                      {t("colMaat")}
                     </label>
                     <select
                       value={row.size}
@@ -213,7 +210,7 @@ export function QuickOrder({ catalog }: { catalog: QuickOrderProduct[] }) {
                       onChange={(e) => updateRow(row.id, { size: e.target.value })}
                       className="h-11 w-full rounded-card border border-line bg-white px-3 text-sm text-ink focus-visible:border-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      <option value="">Maat</option>
+                      <option value="">{t("colMaat")}</option>
                       {product?.sizes.map((s) => (
                         <option key={s} value={s}>
                           {s}
@@ -225,7 +222,7 @@ export function QuickOrder({ catalog }: { catalog: QuickOrderProduct[] }) {
                   {/* Aantal */}
                   <div>
                     <label className="mb-1 block text-xs uppercase tracking-wider text-muted sm:hidden">
-                      Aantal
+                      {t("colAantal")}
                     </label>
                     <input
                       type="number"
@@ -244,7 +241,7 @@ export function QuickOrder({ catalog }: { catalog: QuickOrderProduct[] }) {
                       type="button"
                       onClick={() => removeRow(row.id)}
                       disabled={rows.length <= 1}
-                      aria-label="Regel verwijderen"
+                      aria-label={t("regelVerwijderen")}
                       className="flex size-9 items-center justify-center rounded-card text-muted transition-colors hover:bg-paper hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
                     >
                       <Trash2 className="size-4" strokeWidth={1.75} />
@@ -262,11 +259,11 @@ export function QuickOrder({ catalog }: { catalog: QuickOrderProduct[] }) {
               className="inline-flex items-center gap-2 text-sm font-medium text-ink underline-offset-4 hover:underline"
             >
               <Plus className="size-4" strokeWidth={1.75} />
-              Regel toevoegen
+              {t("regelToevoegen")}
             </button>
 
             <Button type="button" onClick={handleAddToCart} disabled={!canSubmit}>
-              Toevoegen aan winkelwagen
+              {t("toevoegenAanWinkelwagen")}
             </Button>
           </div>
         </div>
@@ -276,20 +273,18 @@ export function QuickOrder({ catalog }: { catalog: QuickOrderProduct[] }) {
             <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-card border border-line bg-white px-6 py-4 text-sm">
               <span className="inline-flex items-center gap-2 font-medium text-ink">
                 <Check className="size-4 text-accent-dark" strokeWidth={2} />
-                {addedCount} {addedCount === 1 ? "regel" : "regels"} toegevoegd aan uw winkelwagen.
+                {t("regelsToegevoegd", { count: addedCount })}
               </span>
               <Link
                 href="/winkelwagen"
                 className="inline-flex items-center gap-1.5 font-medium text-ink underline-offset-4 hover:underline"
               >
-                Naar de winkelwagen
+                {t("naarWinkelwagen")}
                 <ArrowRight className="size-4" strokeWidth={1.75} />
               </Link>
             </div>
           ) : (
-            <p className="mt-6 text-sm text-muted">
-              Geen geldige regels gevonden. Controleer de artikelnummers en maten.
-            </p>
+            <p className="mt-6 text-sm text-muted">{t("geenGeldigeRegels")}</p>
           )
         ) : null}
       </Container>

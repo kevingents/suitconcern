@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   ArrowLeft,
   ArrowRight,
@@ -26,46 +27,30 @@ import { cn, formatPrice } from "@/lib/utils";
 
 const BTW_RATE = 0.21;
 
-const STEPS = ["Gegevens", "Verzending", "Betaling", "Controle"] as const;
+const STEP_KEYS = ["gegevens", "verzending", "betaling", "controle"] as const;
 
 const SHIPPING_OPTIONS = [
-  {
-    id: "standaard",
-    label: "Standaard levering",
-    note: "1–3 werkdagen · op factuur- of afleveradres",
-  },
-  {
-    id: "express",
-    label: "Express levering",
-    note: "Volgende werkdag · toeslag wordt bij afrekenen berekend",
-  },
-  {
-    id: "afhalen",
-    label: "Afhalen showroom",
-    note: "Gratis · op afspraak in de showroom",
-  },
+  { id: "standaard", labelKey: "standaardLabel", noteKey: "standaardNote" },
+  { id: "express", labelKey: "expressLabel", noteKey: "expressNote" },
+  { id: "afhalen", labelKey: "afhalenLabel", noteKey: "afhalenNote" },
 ] as const;
 
 interface PaymentOption {
   id: string;
-  label: string;
+  brand?: string;
+  labelKey?: string;
+  noteKey?: string;
   icon: LucideIcon;
-  note?: string;
 }
 
 const PAYMENT_OPTIONS: PaymentOption[] = [
-  { id: "IDEAL", label: "iDEAL", icon: Landmark },
-  { id: "BANCONTACT", label: "Bancontact", icon: CreditCard },
-  { id: "CREDITCARD", label: "Creditcard", icon: CreditCard },
-  { id: "APPLEPAY", label: "Apple Pay", icon: Smartphone },
-  { id: "KLARNA", label: "Klarna Zakelijk", icon: Wallet },
-  { id: "BANKTRANSFER", label: "Vooraf bankoverschrijving", icon: Banknote },
-  {
-    id: "INVOICE",
-    label: "Op factuur (achteraf)",
-    icon: Building2,
-    note: "Alleen indien geactiveerd voor uw account.",
-  },
+  { id: "IDEAL", brand: "iDEAL", icon: Landmark },
+  { id: "BANCONTACT", brand: "Bancontact", icon: CreditCard },
+  { id: "CREDITCARD", labelKey: "creditcard", icon: CreditCard },
+  { id: "APPLEPAY", brand: "Apple Pay", icon: Smartphone },
+  { id: "KLARNA", labelKey: "klarna", icon: Wallet },
+  { id: "BANKTRANSFER", labelKey: "banktransfer", icon: Banknote },
+  { id: "INVOICE", labelKey: "invoice", noteKey: "invoiceNote", icon: Building2 },
 ];
 
 interface ShippingForm {
@@ -77,6 +62,7 @@ interface ShippingForm {
 }
 
 function GatedState({ empty }: { empty: boolean }) {
+  const t = useTranslations("checkout");
   return (
     <section className="bg-paper py-24 lg:py-32">
       <Container>
@@ -86,36 +72,30 @@ function GatedState({ empty }: { empty: boolean }) {
           </span>
           {empty ? (
             <>
-              <h1 className="mt-6 text-2xl text-ink">Uw winkelwagen is leeg</h1>
-              <p className="mt-3 text-sm leading-relaxed text-muted">
-                Voeg eerst artikelen toe aan uw winkelwagen voordat u afrekent.
-              </p>
+              <h1 className="mt-6 text-2xl text-ink">{t("leegTitle")}</h1>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{t("leegText")}</p>
               <div className="mt-8 flex justify-center">
                 <Link
                   href="/collecties"
                   className={cn(buttonVariants({ variant: "primary" }))}
                 >
-                  Naar de collecties
+                  {t("naarCollecties")}
                 </Link>
               </div>
             </>
           ) : (
             <>
-              <h1 className="mt-6 text-2xl text-ink">Log in om te bestellen</h1>
-              <p className="mt-3 text-sm leading-relaxed text-muted">
-                Afrekenen en prijzen zijn uitsluitend beschikbaar voor een
-                ingelogd én goedgekeurd B2B-account. Vraag een account aan of
-                log in om uw bestelling af te ronden.
-              </p>
+              <h1 className="mt-6 text-2xl text-ink">{t("gateTitle")}</h1>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{t("gateText")}</p>
               <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
                 <Link href="/login" className={cn(buttonVariants({ variant: "primary" }))}>
-                  Inloggen
+                  {t("inloggen")}
                 </Link>
                 <Link
                   href="/b2b-account-aanvragen"
                   className={cn(buttonVariants({ variant: "outline" }))}
                 >
-                  Account aanvragen
+                  {t("accountAanvragen")}
                 </Link>
               </div>
             </>
@@ -127,14 +107,15 @@ function GatedState({ empty }: { empty: boolean }) {
 }
 
 function StepIndicator({ current }: { current: number }) {
+  const t = useTranslations("checkout");
   return (
     <ol className="flex flex-wrap items-center gap-x-2 gap-y-3">
-      {STEPS.map((label, index) => {
+      {STEP_KEYS.map((key, index) => {
         const stepNo = index + 1;
         const isDone = stepNo < current;
         const isActive = stepNo === current;
         return (
-          <li key={label} className="flex items-center gap-2">
+          <li key={key} className="flex items-center gap-2">
             <span
               className={cn(
                 "flex size-7 shrink-0 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors",
@@ -151,9 +132,9 @@ function StepIndicator({ current }: { current: number }) {
                 isActive ? "font-medium text-ink" : "text-muted",
               )}
             >
-              {label}
+              {t(`steps.${key}`)}
             </span>
-            {stepNo < STEPS.length ? (
+            {stepNo < STEP_KEYS.length ? (
               <span className="mx-1 hidden h-px w-6 bg-line sm:block" aria-hidden />
             ) : null}
           </li>
@@ -169,19 +150,20 @@ const labelClass = "mb-1.5 block text-xs font-medium text-ink";
 
 export default function CheckoutPage() {
   const router = useRouter();
+  const t = useTranslations("checkout");
   const { isApproved, discountPct, group, company } = useSession();
   const { items, subtotalExclVat } = useCart();
 
   const [step, setStep] = useState(1);
   const [shipmentMethod, setShipmentMethod] = useState<string>(SHIPPING_OPTIONS[0].id);
   const [paymentMethod, setPaymentMethod] = useState<string>(PAYMENT_OPTIONS[0].id);
-  const [shipping, setShipping] = useState<ShippingForm>({
+  const [shipping, setShipping] = useState<ShippingForm>(() => ({
     name: company ?? "",
     street: "",
     postalCode: "",
     city: "",
-    country: "Nederland",
-  });
+    country: t("landDefault"),
+  }));
   const [placing, setPlacing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -198,14 +180,14 @@ export default function CheckoutPage() {
   if (items.length === 0) return <GatedState empty />;
 
   const hasDiscount = discountPct > 0;
-  const isLastStep = step === STEPS.length;
+  const isLastStep = step === STEP_KEYS.length;
 
   function updateShipping<K extends keyof ShippingForm>(key: K, value: string) {
     setShipping((prev) => ({ ...prev, [key]: value }));
   }
 
   function next() {
-    setStep((s) => Math.min(STEPS.length, s + 1));
+    setStep((s) => Math.min(STEP_KEYS.length, s + 1));
   }
   function prev() {
     setStep((s) => Math.max(1, s - 1));
@@ -229,10 +211,10 @@ export default function CheckoutPage() {
         router.push(`/bedankt?order=${res.orderNumber ?? ""}`);
         return;
       }
-      setError(res.error ?? "Er ging iets mis bij het plaatsen van de bestelling.");
+      setError(res.error ?? t("errorGeneric"));
       setPlacing(false);
     } catch {
-      setError("Er ging iets mis bij het plaatsen van de bestelling. Probeer het opnieuw.");
+      setError(t("errorRetry"));
       setPlacing(false);
     }
   }
@@ -241,8 +223,8 @@ export default function CheckoutPage() {
     <section className="bg-paper py-16 lg:py-20">
       <Container>
         <div className="max-w-2xl">
-          <p className="eyebrow mb-3 text-accent-dark">Afrekenen</p>
-          <h1 className="text-3xl sm:text-4xl">Bestelling afronden</h1>
+          <p className="eyebrow mb-3 text-accent-dark">{t("eyebrow")}</p>
+          <h1 className="text-3xl sm:text-4xl">{t("title")}</h1>
         </div>
 
         <div className="mt-10 overflow-x-auto rounded-card border border-line bg-white px-5 py-4">
@@ -255,74 +237,72 @@ export default function CheckoutPage() {
             <div className="rounded-card border border-line bg-white p-6 sm:p-8">
               {step === 1 ? (
                 <div>
-                  <h2 className="font-serif text-xl text-ink">Gegevens</h2>
-                  <p className="mt-1 text-sm text-muted">
-                    Vul uw bedrijfs- en afleveradres in.
-                  </p>
+                  <h2 className="font-serif text-xl text-ink">{t("steps.gegevens")}</h2>
+                  <p className="mt-1 text-sm text-muted">{t("gegevensSub")}</p>
 
                   <div className="mt-6 grid gap-4 sm:grid-cols-2">
                     <div className="sm:col-span-2">
                       <label htmlFor="name" className={labelClass}>
-                        Bedrijfsnaam
+                        {t("bedrijfsnaam")}
                       </label>
                       <input
                         id="name"
                         type="text"
                         value={shipping.name}
                         onChange={(e) => updateShipping("name", e.target.value)}
-                        placeholder="Uw bedrijfsnaam"
+                        placeholder={t("bedrijfsnaamPlaceholder")}
                         className={inputClass}
                       />
                     </div>
                     <div className="sm:col-span-2">
                       <label htmlFor="street" className={labelClass}>
-                        Straat en huisnummer
+                        {t("straat")}
                       </label>
                       <input
                         id="street"
                         type="text"
                         value={shipping.street}
                         onChange={(e) => updateShipping("street", e.target.value)}
-                        placeholder="Voorbeeldstraat 12"
+                        placeholder={t("straatPlaceholder")}
                         className={inputClass}
                       />
                     </div>
                     <div>
                       <label htmlFor="postalCode" className={labelClass}>
-                        Postcode
+                        {t("postcode")}
                       </label>
                       <input
                         id="postalCode"
                         type="text"
                         value={shipping.postalCode}
                         onChange={(e) => updateShipping("postalCode", e.target.value)}
-                        placeholder="1234 AB"
+                        placeholder={t("postcodePlaceholder")}
                         className={inputClass}
                       />
                     </div>
                     <div>
                       <label htmlFor="city" className={labelClass}>
-                        Plaats
+                        {t("plaats")}
                       </label>
                       <input
                         id="city"
                         type="text"
                         value={shipping.city}
                         onChange={(e) => updateShipping("city", e.target.value)}
-                        placeholder="Plaatsnaam"
+                        placeholder={t("plaatsPlaceholder")}
                         className={inputClass}
                       />
                     </div>
                     <div className="sm:col-span-2">
                       <label htmlFor="country" className={labelClass}>
-                        Land
+                        {t("land")}
                       </label>
                       <input
                         id="country"
                         type="text"
                         value={shipping.country}
                         onChange={(e) => updateShipping("country", e.target.value)}
-                        placeholder="Nederland"
+                        placeholder={t("landPlaceholder")}
                         className={inputClass}
                       />
                     </div>
@@ -332,8 +312,8 @@ export default function CheckoutPage() {
 
               {step === 2 ? (
                 <div>
-                  <h2 className="font-serif text-xl text-ink">Verzending</h2>
-                  <p className="mt-1 text-sm text-muted">Kies een leveroptie.</p>
+                  <h2 className="font-serif text-xl text-ink">{t("steps.verzending")}</h2>
+                  <p className="mt-1 text-sm text-muted">{t("verzendingSub")}</p>
                   <div className="mt-6 space-y-3">
                     {SHIPPING_OPTIONS.map((option) => {
                       const selected = shipmentMethod === option.id;
@@ -357,10 +337,10 @@ export default function CheckoutPage() {
                             <Truck className="mt-0.5 size-4 shrink-0 text-muted" strokeWidth={1.75} />
                             <span>
                               <span className="block text-sm font-medium text-ink">
-                                {option.label}
+                                {t(`shipping.${option.labelKey}`)}
                               </span>
                               <span className="mt-0.5 block text-xs text-muted">
-                                {option.note}
+                                {t(`shipping.${option.noteKey}`)}
                               </span>
                             </span>
                           </span>
@@ -373,8 +353,8 @@ export default function CheckoutPage() {
 
               {step === 3 ? (
                 <div>
-                  <h2 className="font-serif text-xl text-ink">Betaling</h2>
-                  <p className="mt-1 text-sm text-muted">Kies een betaalmethode.</p>
+                  <h2 className="font-serif text-xl text-ink">{t("steps.betaling")}</h2>
+                  <p className="mt-1 text-sm text-muted">{t("betalingSub")}</p>
                   <div className="mt-6 space-y-3">
                     {PAYMENT_OPTIONS.map((option) => {
                       const Icon = option.icon;
@@ -399,11 +379,11 @@ export default function CheckoutPage() {
                             <Icon className="mt-0.5 size-4 shrink-0 text-muted" strokeWidth={1.75} />
                             <span>
                               <span className="block text-sm font-medium text-ink">
-                                {option.label}
+                                {option.brand ?? t(`payment.${option.labelKey}`)}
                               </span>
-                              {option.note ? (
+                              {option.noteKey ? (
                                 <span className="mt-0.5 block text-xs text-muted">
-                                  {option.note}
+                                  {t(`payment.${option.noteKey}`)}
                                 </span>
                               ) : null}
                             </span>
@@ -417,10 +397,8 @@ export default function CheckoutPage() {
 
               {step === 4 ? (
                 <div>
-                  <h2 className="font-serif text-xl text-ink">Controle</h2>
-                  <p className="mt-1 text-sm text-muted">
-                    Controleer uw bestelling voordat u deze plaatst.
-                  </p>
+                  <h2 className="font-serif text-xl text-ink">{t("steps.controle")}</h2>
+                  <p className="mt-1 text-sm text-muted">{t("controleSub")}</p>
 
                   <ul className="mt-6 divide-y divide-line border-y border-line">
                     {items.map((item) => {
@@ -435,8 +413,8 @@ export default function CheckoutPage() {
                               {item.name}
                             </p>
                             <p className="text-xs text-muted">
-                              {item.brand} · {item.sku} · Maat {item.size} · {item.qty}{" "}
-                              {item.qty === 1 ? "stuk" : "stuks"}
+                              {item.brand} · {item.sku} · {t("maat")} {item.size} ·{" "}
+                              {t("stuk", { count: item.qty })}
                             </p>
                           </div>
                           <span className="shrink-0 text-sm tabular-nums text-ink">
@@ -449,7 +427,7 @@ export default function CheckoutPage() {
 
                   <dl className="mt-5 space-y-2.5 text-sm">
                     <div className="flex justify-between">
-                      <dt className="text-muted">Aflevering aan</dt>
+                      <dt className="text-muted">{t("afleveringAan")}</dt>
                       <dd className="text-right text-ink">
                         {shipping.name || "—"}
                         {shipping.city ? (
@@ -474,7 +452,7 @@ export default function CheckoutPage() {
                 {step > 1 ? (
                   <Button variant="outline" onClick={prev} disabled={placing}>
                     <ArrowLeft className="size-4" strokeWidth={1.75} />
-                    Vorige
+                    {t("vorige")}
                   </Button>
                 ) : (
                   <Link
@@ -482,33 +460,31 @@ export default function CheckoutPage() {
                     className={cn(buttonVariants({ variant: "outline" }))}
                   >
                     <ArrowLeft className="size-4" strokeWidth={1.75} />
-                    Winkelwagen
+                    {t("winkelwagen")}
                   </Link>
                 )}
 
                 {isLastStep ? (
                   <Button onClick={handlePlaceOrder} disabled={placing}>
-                    {placing ? "Bezig…" : "Bestelling plaatsen"}
+                    {placing ? t("bezig") : t("bestellingPlaatsen")}
                     {placing ? null : <Check className="size-4" strokeWidth={2} />}
                   </Button>
                 ) : (
                   <Button onClick={next}>
-                    Volgende
+                    {t("volgende")}
                     <ArrowRight className="size-4" strokeWidth={1.75} />
                   </Button>
                 )}
               </div>
             </div>
 
-            <p className="mt-6 text-xs text-muted">
-              Prijzen zijn excl. btw; klantkorting is al verwerkt.
-            </p>
+            <p className="mt-6 text-xs text-muted">{t("prijsExclNote")}</p>
           </div>
 
           {/* Compact besteloverzicht */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-card border border-line bg-white p-6">
-              <h2 className="font-serif text-xl text-ink">Uw bestelling</h2>
+              <h2 className="font-serif text-xl text-ink">{t("uwBestelling")}</h2>
 
               <ul className="mt-5 space-y-2.5 border-b border-line pb-5 text-sm">
                 {items.map((item) => {
@@ -532,13 +508,13 @@ export default function CheckoutPage() {
 
               <dl className="mt-5 space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-muted">Subtotaal (excl. btw)</dt>
+                  <dt className="text-muted">{t("subtotaal")}</dt>
                   <dd className="tabular-nums text-ink">{formatPrice(totals.subtotal)}</dd>
                 </div>
                 {hasDiscount ? (
                   <div className="flex justify-between">
                     <dt className="text-muted">
-                      Klantkorting · {group} · {discountPct}%
+                      {t("klantkorting", { group: group ?? "", pct: discountPct })}
                     </dt>
                     <dd className="tabular-nums text-accent-dark">
                       − {formatPrice(totals.discount)}
@@ -546,11 +522,11 @@ export default function CheckoutPage() {
                   </div>
                 ) : null}
                 <div className="flex justify-between">
-                  <dt className="text-muted">Btw 21%</dt>
+                  <dt className="text-muted">{t("btw")}</dt>
                   <dd className="tabular-nums text-ink">{formatPrice(totals.vat)}</dd>
                 </div>
                 <div className="flex justify-between border-t border-line pt-3 text-base">
-                  <dt className="font-medium text-ink">Totaal (incl. btw)</dt>
+                  <dt className="font-medium text-ink">{t("totaal")}</dt>
                   <dd className="font-medium tabular-nums text-ink">
                     {formatPrice(totals.total)}
                   </dd>

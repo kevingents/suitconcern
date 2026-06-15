@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { loadProducts } from "@/lib/catalog";
 import { QuickOrder, type QuickOrderProduct } from "./quick-order";
 
-export const metadata = {
-  title: "Snel bestellen",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("quickOrder");
+  return { title: t("title") };
+}
 
 export default async function SnelBestellenPage() {
   const products = await loadProducts();

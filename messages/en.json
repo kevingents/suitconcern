@@ -50,10 +50,22 @@
       "subtitle": "Suits, tuxedos and accessories for retailers and businesses. Fast delivery, competitive pricing and personal service — your reliable partner for formal and corporate wear."
     },
     "usps": {
-      "warehouse": { "title": "Wholesale specialist", "description": "The trusted partner for formal and corporate wear for years." },
-      "tag": { "title": "Extensive range", "description": "Suits, tuxedos, jackets, waistcoats and accessories from stock." },
-      "truck": { "title": "Fast delivery", "description": "Never-out-of-stock core collection — ordered today, delivered fast." },
-      "ruler": { "title": "Wide size range", "description": "From slim fit to extra-long sizes — the right fit for every customer." }
+      "warehouse": {
+        "title": "Wholesale specialist",
+        "description": "The trusted partner for formal and corporate wear for years."
+      },
+      "tag": {
+        "title": "Extensive range",
+        "description": "Suits, tuxedos, jackets, waistcoats and accessories from stock."
+      },
+      "truck": {
+        "title": "Fast delivery",
+        "description": "Never-out-of-stock core collection — ordered today, delivered fast."
+      },
+      "ruler": {
+        "title": "Wide size range",
+        "description": "From slim fit to extra-long sizes — the right fit for every customer."
+      }
     },
     "collectionsSection": {
       "eyebrow": "Range",
@@ -61,12 +73,30 @@
       "description": "A carefully curated range for every occasion — from business to ceremony."
     },
     "collections": {
-      "pakken": { "title": "Suits", "description": "Business and formal suits in a broad size range." },
-      "smokings": { "title": "Tuxedos", "description": "Classic and contemporary tuxedos for gala and ceremony." },
-      "colberts": { "title": "Jackets", "description": "Separate jackets and blazers for a versatile look." },
-      "gilets": { "title": "Waistcoats", "description": "Matching and separate waistcoats to complete any ensemble." },
-      "overhemden": { "title": "Shirts", "description": "Business and ceremony shirts in every collar and size." },
-      "accessoires": { "title": "Accessories", "description": "Ties, bow ties, pocket squares, braces and cufflinks." }
+      "pakken": {
+        "title": "Suits",
+        "description": "Business and formal suits in a broad size range."
+      },
+      "smokings": {
+        "title": "Tuxedos",
+        "description": "Classic and contemporary tuxedos for gala and ceremony."
+      },
+      "colberts": {
+        "title": "Jackets",
+        "description": "Separate jackets and blazers for a versatile look."
+      },
+      "gilets": {
+        "title": "Waistcoats",
+        "description": "Matching and separate waistcoats to complete any ensemble."
+      },
+      "overhemden": {
+        "title": "Shirts",
+        "description": "Business and ceremony shirts in every collar and size."
+      },
+      "accessoires": {
+        "title": "Accessories",
+        "description": "Ties, bow ties, pocket squares, braces and cufflinks."
+      }
     },
     "bestsellers": {
       "eyebrow": "Bestsellers",
@@ -243,5 +273,125 @@
       "p1": "Stock items are typically delivered within 1–3 working days. Orders placed before the daily cut-off ship the same day.",
       "p2": "Delivery is carriage paid from the order value agreed with you. Replenishments and backorders are automatically topped up from the stock programme."
     }
+  },
+  "cart": {
+    "eyebrow": "Order",
+    "title": "Basket",
+    "intro": "Please review your selection and adjust the quantities before proceeding to checkout.",
+    "gateTitle": "Log in to order",
+    "gateText": "Ordering and prices are available exclusively to a logged-in and approved B2B account. Please request an account or log in to view your basket.",
+    "inloggen": "Log in",
+    "accountAanvragen": "Request an account",
+    "leegTitle": "Your basket is empty",
+    "leegText": "Browse the collections and add items to start an order.",
+    "naarCollecties": "Go to the collections",
+    "maat": "Size",
+    "verwijderen": "Remove {name}",
+    "aantalVerlagen": "Decrease quantity",
+    "aantalVerhogen": "Increase quantity",
+    "prijsExclNote": "Prices are excl. VAT; your customer discount has already been applied.",
+    "overzicht": "Summary",
+    "subtotaal": "Subtotal (excl. VAT)",
+    "klantkorting": "Customer discount · {group} · {pct}%",
+    "btw": "VAT 21%",
+    "totaal": "Total (incl. VAT)",
+    "naarAfrekenen": "Proceed to checkout",
+    "verderWinkelen": "Continue shopping"
+  },
+  "checkout": {
+    "eyebrow": "Checkout",
+    "title": "Complete your order",
+    "leegTitle": "Your basket is empty",
+    "leegText": "Please add items to your basket before checking out.",
+    "naarCollecties": "Go to the collections",
+    "gateTitle": "Log in to order",
+    "gateText": "Checkout and prices are available exclusively to a logged-in and approved B2B account. Please request an account or log in to complete your order.",
+    "inloggen": "Log in",
+    "accountAanvragen": "Request an account",
+    "steps": {
+      "gegevens": "Details",
+      "verzending": "Delivery",
+      "betaling": "Payment",
+      "controle": "Review"
+    },
+    "shipping": {
+      "standaardLabel": "Standard delivery",
+      "standaardNote": "1–3 working days · to billing or delivery address",
+      "expressLabel": "Express delivery",
+      "expressNote": "Next working day · surcharge calculated at checkout",
+      "afhalenLabel": "Collect from showroom",
+      "afhalenNote": "Free · by appointment at the showroom"
+    },
+    "payment": {
+      "creditcard": "Credit card",
+      "klarna": "Klarna Business",
+      "banktransfer": "Bank transfer in advance",
+      "invoice": "On account (afterwards)",
+      "invoiceNote": "Only if activated for your account."
+    },
+    "gegevensSub": "Please enter your company and delivery address.",
+    "bedrijfsnaam": "Company name",
+    "bedrijfsnaamPlaceholder": "Your company name",
+    "straat": "Street and house number",
+    "straatPlaceholder": "123 Example Street",
+    "postcode": "Postcode",
+    "postcodePlaceholder": "1234 AB",
+    "plaats": "Town",
+    "plaatsPlaceholder": "Town name",
+    "land": "Country",
+    "landPlaceholder": "Netherlands",
+    "landDefault": "Netherlands",
+    "verzendingSub": "Please choose a delivery option.",
+    "betalingSub": "Please choose a payment method.",
+    "controleSub": "Please review your order before placing it.",
+    "maat": "Size",
+    "stuk": "{count, plural, one {# item} other {# items}}",
+    "afleveringAan": "Delivery to",
+    "vorige": "Previous",
+    "winkelwagen": "Basket",
+    "bezig": "Processing…",
+    "bestellingPlaatsen": "Place order",
+    "volgende": "Next",
+    "errorGeneric": "Something went wrong while placing your order.",
+    "errorRetry": "Something went wrong while placing your order. Please try again.",
+    "prijsExclNote": "Prices are excl. VAT; your customer discount has already been applied.",
+    "uwBestelling": "Your order",
+    "subtotaal": "Subtotal (excl. VAT)",
+    "klantkorting": "Customer discount · {group} · {pct}%",
+    "btw": "VAT 21%",
+    "totaal": "Total (incl. VAT)"
+  },
+  "quickOrder": {
+    "eyebrow": "Order",
+    "title": "Quick order",
+    "intro": "Do you know the article numbers? Enter them below, choose a size and quantity, and add everything to your basket in one go.",
+    "gateTitle": "Log in to order quickly",
+    "gateText": "Quick ordering by article number is available to approved B2B accounts. Please log in or request an account.",
+    "inloggen": "Log in",
+    "accountAanvragen": "Request an account",
+    "colArtikelnummer": "Article number",
+    "colArtikel": "Article",
+    "colMaat": "Size",
+    "colAantal": "Quantity",
+    "colVerwijderen": "Remove",
+    "skuPlaceholder": "e.g. SC-PAK-1001",
+    "exclBtw": "excl. VAT",
+    "nietGevonden": "Article number not found",
+    "vulSku": "Please enter an article number",
+    "maat": "Size",
+    "regelVerwijderen": "Remove row",
+    "regelToevoegen": "Add row",
+    "toevoegenAanWinkelwagen": "Add to basket",
+    "regelsToegevoegd": "{count, plural, one {# row added to your basket.} other {# rows added to your basket.}}",
+    "naarWinkelwagen": "Go to the basket",
+    "geenGeldigeRegels": "No valid rows found. Please check the article numbers and sizes."
+  },
+  "bedankt": {
+    "metaTitle": "Thank you for your order",
+    "title": "Thank you for your order",
+    "ordernummer": "Your order number is <b>{order}</b>.",
+    "text": "You will receive a confirmation by email. We will process your order and keep you informed about the delivery. Thank you for placing your trust in Suitconcern.",
+    "naarAccount": "Go to my account",
+    "verderWinkelen": "Continue shopping"
   }
 }

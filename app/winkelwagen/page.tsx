@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Lock, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { buttonVariants } from "@/components/ui/button";
@@ -13,6 +14,7 @@ import { cn, formatPrice } from "@/lib/utils";
 const BTW_RATE = 0.21;
 
 function GatedState() {
+  const t = useTranslations("cart");
   return (
     <section className="bg-paper py-24 lg:py-32">
       <Container>
@@ -20,21 +22,17 @@ function GatedState() {
           <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-paper">
             <Lock className="size-5 text-ink" strokeWidth={1.75} />
           </span>
-          <h1 className="mt-6 text-2xl text-ink">Log in om te bestellen</h1>
-          <p className="mt-3 text-sm leading-relaxed text-muted">
-            Bestellen en prijzen zijn uitsluitend beschikbaar voor een ingelogd
-            én goedgekeurd B2B-account. Vraag een account aan of log in om uw
-            winkelwagen te bekijken.
-          </p>
+          <h1 className="mt-6 text-2xl text-ink">{t("gateTitle")}</h1>
+          <p className="mt-3 text-sm leading-relaxed text-muted">{t("gateText")}</p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link href="/login" className={cn(buttonVariants({ variant: "primary" }))}>
-              Inloggen
+              {t("inloggen")}
             </Link>
             <Link
               href="/b2b-account-aanvragen"
               className={cn(buttonVariants({ variant: "outline" }))}
             >
-              Account aanvragen
+              {t("accountAanvragen")}
             </Link>
           </div>
         </div>
@@ -46,6 +44,7 @@ function GatedState() {
 export default function WinkelwagenPage() {
   const { isApproved, discountPct, group } = useSession();
   const { items, setQty, remove, subtotalExclVat } = useCart();
+  const t = useTranslations("cart");
 
   const totals = useMemo(() => {
     const subtotal = subtotalExclVat;
@@ -68,16 +67,13 @@ export default function WinkelwagenPage() {
             <span className="flex size-12 items-center justify-center rounded-full bg-paper">
               <ShoppingBag className="size-5 text-ink" strokeWidth={1.75} />
             </span>
-            <h1 className="mt-6 font-serif text-2xl text-ink">Uw winkelwagen is leeg</h1>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
-              Blader door de collecties en voeg artikelen toe om een bestelling
-              te starten.
-            </p>
+            <h1 className="mt-6 font-serif text-2xl text-ink">{t("leegTitle")}</h1>
+            <p className="mt-3 text-sm leading-relaxed text-muted">{t("leegText")}</p>
             <Link
               href="/collecties"
               className={cn(buttonVariants({ variant: "primary" }), "mt-8")}
             >
-              Naar de collecties
+              {t("naarCollecties")}
               <ArrowRight className="size-4" strokeWidth={1.75} />
             </Link>
           </div>
@@ -90,12 +86,9 @@ export default function WinkelwagenPage() {
     <section className="bg-paper py-16 lg:py-20">
       <Container>
         <div className="max-w-2xl">
-          <p className="eyebrow mb-3 text-accent-dark">Bestellen</p>
-          <h1 className="text-3xl sm:text-4xl">Winkelwagen</h1>
-          <p className="mt-4 text-base leading-relaxed text-muted">
-            Controleer uw selectie en pas de aantallen aan voordat u naar het
-            afrekenen gaat.
-          </p>
+          <p className="eyebrow mb-3 text-accent-dark">{t("eyebrow")}</p>
+          <h1 className="text-3xl sm:text-4xl">{t("title")}</h1>
+          <p className="mt-4 text-base leading-relaxed text-muted">{t("intro")}</p>
         </div>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-12">
@@ -142,7 +135,7 @@ export default function WinkelwagenPage() {
                               </Link>
                             </h2>
                             <p className="mt-0.5 text-xs text-muted">
-                              <span className="text-ink/70">{item.sku}</span> · Maat{" "}
+                              <span className="text-ink/70">{item.sku}</span> · {t("maat")}{" "}
                               {item.size}
                             </p>
                           </div>
@@ -150,7 +143,7 @@ export default function WinkelwagenPage() {
                           <button
                             type="button"
                             onClick={() => remove(item.sku, item.size)}
-                            aria-label={`${item.name} verwijderen`}
+                            aria-label={t("verwijderen", { name: item.name })}
                             className="shrink-0 rounded-card p-2 text-muted transition-colors hover:bg-paper hover:text-ink"
                           >
                             <Trash2 className="size-4" strokeWidth={1.75} />
@@ -165,7 +158,7 @@ export default function WinkelwagenPage() {
                               onClick={() =>
                                 setQty(item.sku, item.size, item.qty - 1)
                               }
-                              aria-label="Aantal verlagen"
+                              aria-label={t("aantalVerlagen")}
                               className="flex size-8 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-ink"
                             >
                               <Minus className="size-3.5" strokeWidth={2} />
@@ -178,7 +171,7 @@ export default function WinkelwagenPage() {
                               onClick={() =>
                                 setQty(item.sku, item.size, item.qty + 1)
                               }
-                              aria-label="Aantal verhogen"
+                              aria-label={t("aantalVerhogen")}
                               className="flex size-8 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-ink"
                             >
                               <Plus className="size-3.5" strokeWidth={2} />
@@ -203,25 +196,23 @@ export default function WinkelwagenPage() {
               })}
             </ul>
 
-            <p className="mt-6 text-xs text-muted">
-              Prijzen zijn excl. btw; klantkorting is al verwerkt.
-            </p>
+            <p className="mt-6 text-xs text-muted">{t("prijsExclNote")}</p>
           </div>
 
           {/* Besteloverzicht */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-card border border-line bg-white p-6">
-              <h2 className="font-serif text-xl text-ink">Overzicht</h2>
+              <h2 className="font-serif text-xl text-ink">{t("overzicht")}</h2>
 
               <dl className="mt-6 space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-muted">Subtotaal (excl. btw)</dt>
+                  <dt className="text-muted">{t("subtotaal")}</dt>
                   <dd className="tabular-nums text-ink">{formatPrice(totals.subtotal)}</dd>
                 </div>
                 {hasDiscount ? (
                   <div className="flex justify-between">
                     <dt className="text-muted">
-                      Klantkorting · {group} · {discountPct}%
+                      {t("klantkorting", { group: group ?? "", pct: discountPct })}
                     </dt>
                     <dd className="tabular-nums text-accent-dark">
                       − {formatPrice(totals.discount)}
@@ -229,11 +220,11 @@ export default function WinkelwagenPage() {
                   </div>
                 ) : null}
                 <div className="flex justify-between">
-                  <dt className="text-muted">Btw 21%</dt>
+                  <dt className="text-muted">{t("btw")}</dt>
                   <dd className="tabular-nums text-ink">{formatPrice(totals.vat)}</dd>
                 </div>
                 <div className="flex justify-between border-t border-line pt-3 text-base">
-                  <dt className="font-medium text-ink">Totaal (incl. btw)</dt>
+                  <dt className="font-medium text-ink">{t("totaal")}</dt>
                   <dd className="font-medium tabular-nums text-ink">
                     {formatPrice(totals.total)}
                   </dd>
@@ -244,14 +235,14 @@ export default function WinkelwagenPage() {
                 href="/checkout"
                 className={cn(buttonVariants({ variant: "primary", size: "lg" }), "mt-7 w-full")}
               >
-                Naar afrekenen
+                {t("naarAfrekenen")}
                 <ArrowRight className="size-4" strokeWidth={1.75} />
               </Link>
               <Link
                 href="/collecties"
                 className="mt-4 block text-center text-sm font-medium text-ink underline-offset-4 hover:underline"
               >
-                Verder winkelen
+                {t("verderWinkelen")}
               </Link>
             </div>
           </aside>

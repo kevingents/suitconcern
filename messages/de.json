@@ -50,10 +50,22 @@
       "subtitle": "Anzüge, Smokings und Accessoires für Einzelhändler und Unternehmen. Schnelle Lieferung, attraktive Preise und persönlicher Service — der zuverlässige Partner für Gala- und Geschäftskleidung."
     },
     "usps": {
-      "warehouse": { "title": "Großhandelsspezialist", "description": "Seit Jahren der feste Partner für Gala- und Geschäftskleidung." },
-      "tag": { "title": "Umfangreiches Sortiment", "description": "Anzüge, Smokings, Sakkos, Westen und Accessoires ab Lager." },
-      "truck": { "title": "Schnelle Lieferung", "description": "Never-out-of-Stock-Kernkollektion, heute bestellt, schnell geliefert." },
-      "ruler": { "title": "Große Größenrange", "description": "Von Slim-Fit bis Extra-Langgrößen — die passende Größe für jeden Kunden." }
+      "warehouse": {
+        "title": "Großhandelsspezialist",
+        "description": "Seit Jahren der feste Partner für Gala- und Geschäftskleidung."
+      },
+      "tag": {
+        "title": "Umfangreiches Sortiment",
+        "description": "Anzüge, Smokings, Sakkos, Westen und Accessoires ab Lager."
+      },
+      "truck": {
+        "title": "Schnelle Lieferung",
+        "description": "Never-out-of-Stock-Kernkollektion, heute bestellt, schnell geliefert."
+      },
+      "ruler": {
+        "title": "Große Größenrange",
+        "description": "Von Slim-Fit bis Extra-Langgrößen — die passende Größe für jeden Kunden."
+      }
     },
     "collectionsSection": {
       "eyebrow": "Sortiment",
@@ -61,12 +73,30 @@
       "description": "Ein clever abgestimmtes Sortiment für jeden Anlass — von geschäftlich bis Zeremonie."
     },
     "collections": {
-      "pakken": { "title": "Anzüge", "description": "Geschäftliche und festliche Anzüge in einer breiten Größenrange." },
-      "smokings": { "title": "Smokings", "description": "Klassische und moderne Smokings für Gala und Zeremonie." },
-      "colberts": { "title": "Sakkos", "description": "Einzelne Sakkos und Blazer für einen vielseitigen Look." },
-      "gilets": { "title": "Westen", "description": "Passende und einzelne Westen, um jedes Set abzurunden." },
-      "overhemden": { "title": "Hemden", "description": "Business- und Zeremonie-Hemden in allen Kragen und Größen." },
-      "accessoires": { "title": "Accessoires", "description": "Krawatten, Fliegen, Einstecktücher, Hosenträger und Manschettenknöpfe." }
+      "pakken": {
+        "title": "Anzüge",
+        "description": "Geschäftliche und festliche Anzüge in einer breiten Größenrange."
+      },
+      "smokings": {
+        "title": "Smokings",
+        "description": "Klassische und moderne Smokings für Gala und Zeremonie."
+      },
+      "colberts": {
+        "title": "Sakkos",
+        "description": "Einzelne Sakkos und Blazer für einen vielseitigen Look."
+      },
+      "gilets": {
+        "title": "Westen",
+        "description": "Passende und einzelne Westen, um jedes Set abzurunden."
+      },
+      "overhemden": {
+        "title": "Hemden",
+        "description": "Business- und Zeremonie-Hemden in allen Kragen und Größen."
+      },
+      "accessoires": {
+        "title": "Accessoires",
+        "description": "Krawatten, Fliegen, Einstecktücher, Hosenträger und Manschettenknöpfe."
+      }
     },
     "bestsellers": {
       "eyebrow": "Topseller",
@@ -243,5 +273,125 @@
       "p1": "Lagerartikel werden in der Regel innerhalb von 1–3 Werktagen geliefert. Bestellungen, die vor dem täglichen Cut-off eingehen, gehen noch am selben Tag raus.",
       "p2": "Die Lieferung erfolgt frei Haus ab dem mit Ihnen vereinbarten Bestellwert. Nachlieferungen und Rückstände werden automatisch aus dem Lagerprogramm aufgefüllt."
     }
+  },
+  "cart": {
+    "eyebrow": "Bestellen",
+    "title": "Warenkorb",
+    "intro": "Überprüfen Sie Ihre Auswahl und passen Sie die Mengen an, bevor Sie zur Kasse gehen.",
+    "gateTitle": "Melden Sie sich an, um zu bestellen",
+    "gateText": "Bestellungen und Preise sind ausschließlich für ein angemeldetes und freigegebenes B2B-Konto verfügbar. Beantragen Sie ein Konto oder melden Sie sich an, um Ihren Warenkorb einzusehen.",
+    "inloggen": "Anmelden",
+    "accountAanvragen": "Konto beantragen",
+    "leegTitle": "Ihr Warenkorb ist leer",
+    "leegText": "Stöbern Sie durch die Kollektionen und fügen Sie Artikel hinzu, um eine Bestellung zu starten.",
+    "naarCollecties": "Zu den Kollektionen",
+    "maat": "Größe",
+    "verwijderen": "{name} entfernen",
+    "aantalVerlagen": "Menge verringern",
+    "aantalVerhogen": "Menge erhöhen",
+    "prijsExclNote": "Preise verstehen sich zzgl. MwSt.; der Kundenrabatt ist bereits berücksichtigt.",
+    "overzicht": "Übersicht",
+    "subtotaal": "Zwischensumme (zzgl. MwSt.)",
+    "klantkorting": "Kundenrabatt · {group} · {pct}%",
+    "btw": "MwSt. 21%",
+    "totaal": "Gesamt (inkl. MwSt.)",
+    "naarAfrekenen": "Zur Kasse",
+    "verderWinkelen": "Weiter einkaufen"
+  },
+  "checkout": {
+    "eyebrow": "Kasse",
+    "title": "Bestellung abschließen",
+    "leegTitle": "Ihr Warenkorb ist leer",
+    "leegText": "Fügen Sie zunächst Artikel zu Ihrem Warenkorb hinzu, bevor Sie zur Kasse gehen.",
+    "naarCollecties": "Zu den Kollektionen",
+    "gateTitle": "Melden Sie sich an, um zu bestellen",
+    "gateText": "Kasse und Preise sind ausschließlich für ein angemeldetes und freigegebenes B2B-Konto verfügbar. Beantragen Sie ein Konto oder melden Sie sich an, um Ihre Bestellung abzuschließen.",
+    "inloggen": "Anmelden",
+    "accountAanvragen": "Konto beantragen",
+    "steps": {
+      "gegevens": "Daten",
+      "verzending": "Versand",
+      "betaling": "Zahlung",
+      "controle": "Prüfung"
+    },
+    "shipping": {
+      "standaardLabel": "Standardlieferung",
+      "standaardNote": "1–3 Werktage · an Rechnungs- oder Lieferadresse",
+      "expressLabel": "Express-Lieferung",
+      "expressNote": "Nächster Werktag · Zuschlag wird an der Kasse berechnet",
+      "afhalenLabel": "Abholung Showroom",
+      "afhalenNote": "Kostenlos · nach Vereinbarung im Showroom"
+    },
+    "payment": {
+      "creditcard": "Kreditkarte",
+      "klarna": "Klarna Geschäftlich",
+      "banktransfer": "Vorab-Überweisung",
+      "invoice": "Auf Rechnung (nachträglich)",
+      "invoiceNote": "Nur sofern für Ihr Konto aktiviert."
+    },
+    "gegevensSub": "Geben Sie Ihre Firmen- und Lieferadresse ein.",
+    "bedrijfsnaam": "Firmenname",
+    "bedrijfsnaamPlaceholder": "Ihr Firmenname",
+    "straat": "Straße und Hausnummer",
+    "straatPlaceholder": "Musterstraße 12",
+    "postcode": "Postleitzahl",
+    "postcodePlaceholder": "12345",
+    "plaats": "Ort",
+    "plaatsPlaceholder": "Ortsname",
+    "land": "Land",
+    "landPlaceholder": "Niederlande",
+    "landDefault": "Niederlande",
+    "verzendingSub": "Wählen Sie eine Lieferoption.",
+    "betalingSub": "Wählen Sie eine Zahlungsmethode.",
+    "controleSub": "Überprüfen Sie Ihre Bestellung, bevor Sie sie aufgeben.",
+    "maat": "Größe",
+    "stuk": "{count, plural, one {# Stück} other {# Stück}}",
+    "afleveringAan": "Lieferung an",
+    "vorige": "Zurück",
+    "winkelwagen": "Warenkorb",
+    "bezig": "Wird bearbeitet…",
+    "bestellingPlaatsen": "Bestellung aufgeben",
+    "volgende": "Weiter",
+    "errorGeneric": "Bei der Aufgabe der Bestellung ist ein Fehler aufgetreten.",
+    "errorRetry": "Bei der Aufgabe der Bestellung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+    "prijsExclNote": "Preise verstehen sich zzgl. MwSt.; der Kundenrabatt ist bereits berücksichtigt.",
+    "uwBestelling": "Ihre Bestellung",
+    "subtotaal": "Zwischensumme (zzgl. MwSt.)",
+    "klantkorting": "Kundenrabatt · {group} · {pct}%",
+    "btw": "MwSt. 21%",
+    "totaal": "Gesamt (inkl. MwSt.)"
+  },
+  "quickOrder": {
+    "eyebrow": "Bestellen",
+    "title": "Schnellbestellung",
+    "intro": "Kennen Sie die Artikelnummern? Geben Sie sie unten ein, wählen Sie Größe und Menge und fügen Sie alles auf einmal zu Ihrem Warenkorb hinzu.",
+    "gateTitle": "Melden Sie sich an, um schnell zu bestellen",
+    "gateText": "Die Schnellbestellung per Artikelnummer ist für freigegebene B2B-Konten verfügbar. Melden Sie sich an oder beantragen Sie ein Konto.",
+    "inloggen": "Anmelden",
+    "accountAanvragen": "Konto beantragen",
+    "colArtikelnummer": "Artikelnummer",
+    "colArtikel": "Artikel",
+    "colMaat": "Größe",
+    "colAantal": "Menge",
+    "colVerwijderen": "Entfernen",
+    "skuPlaceholder": "z. B. SC-PAK-1001",
+    "exclBtw": "zzgl. MwSt.",
+    "nietGevonden": "Artikelnummer nicht gefunden",
+    "vulSku": "Geben Sie eine Artikelnummer ein",
+    "maat": "Größe",
+    "regelVerwijderen": "Zeile entfernen",
+    "regelToevoegen": "Zeile hinzufügen",
+    "toevoegenAanWinkelwagen": "Zum Warenkorb hinzufügen",
+    "regelsToegevoegd": "{count, plural, one {# Zeile zu Ihrem Warenkorb hinzugefügt.} other {# Zeilen zu Ihrem Warenkorb hinzugefügt.}}",
+    "naarWinkelwagen": "Zum Warenkorb",
+    "geenGeldigeRegels": "Keine gültigen Zeilen gefunden. Überprüfen Sie die Artikelnummern und Größen."
+  },
+  "bedankt": {
+    "metaTitle": "Vielen Dank für Ihre Bestellung",
+    "title": "Vielen Dank für Ihre Bestellung",
+    "ordernummer": "Ihre Bestellnummer lautet <b>{order}</b>.",
+    "text": "Sie erhalten eine Bestätigung per E-Mail. Wir bearbeiten Ihre Bestellung und halten Sie über die Lieferung auf dem Laufenden. Vielen Dank für Ihr Vertrauen in Suitconcern.",
+    "naarAccount": "Zu meinem Konto",
+    "verderWinkelen": "Weiter einkaufen"
   }
 }

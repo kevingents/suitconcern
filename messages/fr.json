@@ -50,10 +50,22 @@
       "subtitle": "Costumes, smokings et accessoires pour les détaillants et les entreprises. Livraison rapide, prix compétitifs et service personnalisé — le partenaire fiable pour vos vêtements de cérémonie et de ville."
     },
     "usps": {
-      "warehouse": { "title": "Spécialiste grossiste", "description": "Depuis des années, le partenaire de référence pour les vêtements de cérémonie et de ville." },
-      "tag": { "title": "Large assortiment", "description": "Costumes, smokings, vestes, gilets et accessoires disponibles en stock." },
-      "truck": { "title": "Livraison rapide", "description": "Collection essentielle Never-out-of-stock, commandée aujourd'hui, livrée rapidement." },
-      "ruler": { "title": "Large gamme de tailles", "description": "Du slim-fit aux longueurs supplémentaires — une taille adaptée à chaque client." }
+      "warehouse": {
+        "title": "Spécialiste grossiste",
+        "description": "Depuis des années, le partenaire de référence pour les vêtements de cérémonie et de ville."
+      },
+      "tag": {
+        "title": "Large assortiment",
+        "description": "Costumes, smokings, vestes, gilets et accessoires disponibles en stock."
+      },
+      "truck": {
+        "title": "Livraison rapide",
+        "description": "Collection essentielle Never-out-of-stock, commandée aujourd'hui, livrée rapidement."
+      },
+      "ruler": {
+        "title": "Large gamme de tailles",
+        "description": "Du slim-fit aux longueurs supplémentaires — une taille adaptée à chaque client."
+      }
     },
     "collectionsSection": {
       "eyebrow": "Assortiment",
@@ -61,12 +73,30 @@
       "description": "Un assortiment soigneusement composé pour chaque occasion — du professionnel à la cérémonie."
     },
     "collections": {
-      "pakken": { "title": "Costumes", "description": "Costumes professionnels et de fête dans une large gamme de tailles." },
-      "smokings": { "title": "Smokings", "description": "Smokings classiques et modernes pour le gala et la cérémonie." },
-      "colberts": { "title": "Vestes", "description": "Vestes et blazers dépareillés pour un look polyvalent." },
-      "gilets": { "title": "Gilets", "description": "Gilets assortis et dépareillés pour parfaire chaque ensemble." },
-      "overhemden": { "title": "Chemises", "description": "Chemises business et de cérémonie dans tous les cols et toutes les tailles." },
-      "accessoires": { "title": "Accessoires", "description": "Cravates, nœuds papillon, pochettes, bretelles et boutons de manchette." }
+      "pakken": {
+        "title": "Costumes",
+        "description": "Costumes professionnels et de fête dans une large gamme de tailles."
+      },
+      "smokings": {
+        "title": "Smokings",
+        "description": "Smokings classiques et modernes pour le gala et la cérémonie."
+      },
+      "colberts": {
+        "title": "Vestes",
+        "description": "Vestes et blazers dépareillés pour un look polyvalent."
+      },
+      "gilets": {
+        "title": "Gilets",
+        "description": "Gilets assortis et dépareillés pour parfaire chaque ensemble."
+      },
+      "overhemden": {
+        "title": "Chemises",
+        "description": "Chemises business et de cérémonie dans tous les cols et toutes les tailles."
+      },
+      "accessoires": {
+        "title": "Accessoires",
+        "description": "Cravates, nœuds papillon, pochettes, bretelles et boutons de manchette."
+      }
     },
     "bestsellers": {
       "eyebrow": "Meilleures ventes",
@@ -243,5 +273,125 @@
       "p1": "Les articles en stock sont généralement livrés sous 1 à 3 jours ouvrés. Les commandes passées avant le cut-off quotidien partent le jour même.",
       "p2": "La livraison est franco de port à partir du montant de commande convenu avec vous. Les réassorts et les reliquats sont automatiquement complétés depuis le programme de stock."
     }
+  },
+  "cart": {
+    "eyebrow": "Commander",
+    "title": "Panier",
+    "intro": "Vérifiez votre sélection et ajustez les quantités avant de passer au paiement.",
+    "gateTitle": "Connectez-vous pour commander",
+    "gateText": "La commande et les prix sont exclusivement réservés aux comptes B2B connectés et approuvés. Demandez un compte ou connectez-vous pour consulter votre panier.",
+    "inloggen": "Se connecter",
+    "accountAanvragen": "Demander un compte",
+    "leegTitle": "Votre panier est vide",
+    "leegText": "Parcourez les collections et ajoutez des articles pour démarrer une commande.",
+    "naarCollecties": "Vers les collections",
+    "maat": "Taille",
+    "verwijderen": "Supprimer {name}",
+    "aantalVerlagen": "Diminuer la quantité",
+    "aantalVerhogen": "Augmenter la quantité",
+    "prijsExclNote": "Les prix sont indiqués HT ; la remise client est déjà appliquée.",
+    "overzicht": "Récapitulatif",
+    "subtotaal": "Sous-total (HT)",
+    "klantkorting": "Remise client · {group} · {pct}%",
+    "btw": "TVA 21%",
+    "totaal": "Total (TTC)",
+    "naarAfrekenen": "Passer au paiement",
+    "verderWinkelen": "Continuer mes achats"
+  },
+  "checkout": {
+    "eyebrow": "Paiement",
+    "title": "Finaliser la commande",
+    "leegTitle": "Votre panier est vide",
+    "leegText": "Ajoutez d'abord des articles à votre panier avant de procéder au paiement.",
+    "naarCollecties": "Vers les collections",
+    "gateTitle": "Connectez-vous pour commander",
+    "gateText": "Le paiement et les prix sont exclusivement réservés aux comptes B2B connectés et approuvés. Demandez un compte ou connectez-vous pour finaliser votre commande.",
+    "inloggen": "Se connecter",
+    "accountAanvragen": "Demander un compte",
+    "steps": {
+      "gegevens": "Coordonnées",
+      "verzending": "Expédition",
+      "betaling": "Paiement",
+      "controle": "Vérification"
+    },
+    "shipping": {
+      "standaardLabel": "Livraison standard",
+      "standaardNote": "1 à 3 jours ouvrés · à l'adresse de facturation ou de livraison",
+      "expressLabel": "Livraison express",
+      "expressNote": "Jour ouvré suivant · le supplément est calculé au moment du paiement",
+      "afhalenLabel": "Retrait au showroom",
+      "afhalenNote": "Gratuit · sur rendez-vous au showroom"
+    },
+    "payment": {
+      "creditcard": "Carte de crédit",
+      "klarna": "Klarna Professionnel",
+      "banktransfer": "Virement bancaire à l'avance",
+      "invoice": "Sur facture (paiement différé)",
+      "invoiceNote": "Uniquement si activé pour votre compte."
+    },
+    "gegevensSub": "Renseignez votre adresse d'entreprise et de livraison.",
+    "bedrijfsnaam": "Nom de l'entreprise",
+    "bedrijfsnaamPlaceholder": "Le nom de votre entreprise",
+    "straat": "Rue et numéro",
+    "straatPlaceholder": "12 rue Exemple",
+    "postcode": "Code postal",
+    "postcodePlaceholder": "75001",
+    "plaats": "Ville",
+    "plaatsPlaceholder": "Nom de la ville",
+    "land": "Pays",
+    "landPlaceholder": "Pays-Bas",
+    "landDefault": "Pays-Bas",
+    "verzendingSub": "Choisissez une option de livraison.",
+    "betalingSub": "Choisissez un mode de paiement.",
+    "controleSub": "Vérifiez votre commande avant de la valider.",
+    "maat": "Taille",
+    "stuk": "{count, plural, one {# pièce} other {# pièces}}",
+    "afleveringAan": "Livraison à",
+    "vorige": "Précédent",
+    "winkelwagen": "Panier",
+    "bezig": "En cours…",
+    "bestellingPlaatsen": "Valider la commande",
+    "volgende": "Suivant",
+    "errorGeneric": "Une erreur est survenue lors de la validation de la commande.",
+    "errorRetry": "Une erreur est survenue lors de la validation de la commande. Veuillez réessayer.",
+    "prijsExclNote": "Les prix sont indiqués HT ; la remise client est déjà appliquée.",
+    "uwBestelling": "Votre commande",
+    "subtotaal": "Sous-total (HT)",
+    "klantkorting": "Remise client · {group} · {pct}%",
+    "btw": "TVA 21%",
+    "totaal": "Total (TTC)"
+  },
+  "quickOrder": {
+    "eyebrow": "Commander",
+    "title": "Commande rapide",
+    "intro": "Vous connaissez les références ? Saisissez-les ci-dessous, choisissez une taille et une quantité, et ajoutez le tout en une seule fois à votre panier.",
+    "gateTitle": "Connectez-vous pour commander rapidement",
+    "gateText": "La commande rapide par référence est réservée aux comptes B2B approuvés. Connectez-vous ou demandez un compte.",
+    "inloggen": "Se connecter",
+    "accountAanvragen": "Demander un compte",
+    "colArtikelnummer": "Référence",
+    "colArtikel": "Article",
+    "colMaat": "Taille",
+    "colAantal": "Quantité",
+    "colVerwijderen": "Supprimer",
+    "skuPlaceholder": "p. ex. SC-PAK-1001",
+    "exclBtw": "HT",
+    "nietGevonden": "Référence introuvable",
+    "vulSku": "Saisissez une référence",
+    "maat": "Taille",
+    "regelVerwijderen": "Supprimer la ligne",
+    "regelToevoegen": "Ajouter une ligne",
+    "toevoegenAanWinkelwagen": "Ajouter au panier",
+    "regelsToegevoegd": "{count, plural, one {# ligne ajoutée à votre panier.} other {# lignes ajoutées à votre panier.}}",
+    "naarWinkelwagen": "Vers le panier",
+    "geenGeldigeRegels": "Aucune ligne valide trouvée. Vérifiez les références et les tailles."
+  },
+  "bedankt": {
+    "metaTitle": "Merci pour votre commande",
+    "title": "Merci pour votre commande",
+    "ordernummer": "Votre numéro de commande est <b>{order}</b>.",
+    "text": "Vous recevrez une confirmation par e-mail. Nous traitons votre commande et vous tiendrons informé de la livraison. Merci de votre confiance envers Suitconcern.",
+    "naarAccount": "Vers mon compte",
+    "verderWinkelen": "Continuer mes achats"
   }
 }
