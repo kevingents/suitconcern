@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { ArrowRight, Check } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -6,59 +8,30 @@ import { PlaceholderImage } from "@/components/shop/placeholder-image";
 import { buttonVariants } from "@/components/ui/button";
 import { collections } from "@/lib/data";
 
-export const metadata = {
-  title: "Voorraadprogramma",
-  description:
-    "Het never-out-of-stock voorraadprogramma van Suitconcern: een vaste kerncollectie die altijd leverbaar is, met directe naleveringen en zonder seizoensrisico.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("voorraad");
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  };
+}
 
-const steps = [
-  {
-    step: "01",
-    title: "Kies uit de kerncollectie",
-    description:
-      "Selecteer de modellen, kleuren en maten uit het vaste assortiment die passen bij uw klantenkring.",
-  },
-  {
-    step: "02",
-    title: "Bestel wat u nodig heeft",
-    description:
-      "Bestel precies de aantallen die u nu verkoopt — geen voorraadrisico en geen onnodige inkoop.",
-  },
-  {
-    step: "03",
-    title: "Bestel moeiteloos na",
-    description:
-      "Verkocht? Bestel dezelfde dag bij en ontvang uw nalevering snel uit ons centrale magazijn.",
-  },
-];
-
-const benefits = [
-  "Vaste kerncollectie, het hele jaar leverbaar",
-  "Directe naleveringen vanuit voorraad",
-  "Geen seizoensrisico of restpartijen",
-  "Consistente pasvorm en kwaliteit per model",
-  "Volledige matenrange continu beschikbaar",
-  "Bestel klein in en vul moeiteloos aan",
-];
+const stepNumbers = ["01", "02", "03"] as const;
+const benefitKeys = ["benefit1", "benefit2", "benefit3", "benefit4", "benefit5", "benefit6"] as const;
 
 const stockCollections = collections.filter((collection) => collection.featured);
 
-export default function VoorraadprogrammaPage() {
+export default async function VoorraadprogrammaPage() {
+  const t = await getTranslations("voorraad");
+  const tc = await getTranslations("cta");
+  const tcol = await getTranslations("home.collections");
   return (
     <>
       <section className="bg-ink text-white">
         <Container className="py-16 lg:py-20">
-          <p className="eyebrow text-accent">Never out of stock</p>
-          <h1 className="mt-4 font-serif text-4xl sm:text-5xl">
-            Altijd leverbaar, zonder voorraadrisico
-          </h1>
-          <p className="mt-4 max-w-2xl text-white/70">
-            Het voorraadprogramma is de ruggengraat van uw assortiment: een
-            vaste kerncollectie die altijd uit voorraad leverbaar is. Directe
-            naleveringen, geen seizoensrisico en altijd dezelfde betrouwbare
-            pasvorm.
-          </p>
+          <p className="eyebrow text-accent">{t("heroEyebrow")}</p>
+          <h1 className="mt-4 font-serif text-4xl sm:text-5xl">{t("heroTitle")}</h1>
+          <p className="mt-4 max-w-2xl text-white/70">{t("heroText")}</p>
         </Container>
       </section>
 
@@ -66,24 +39,19 @@ export default function VoorraadprogrammaPage() {
         <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <SectionHeading
-              eyebrow="Het principe"
-              title="Een kerncollectie waar u op kunt bouwen"
-              description="Geen uitverkochte maten en geen gemiste verkoop. Wat verkocht is, bestelt u eenvoudig na — zo houdt u uw rekken altijd gevuld zonder zelf grote voorraden aan te hoeven houden."
+              eyebrow={t("principeEyebrow")}
+              title={t("principeTitle")}
+              description={t("principeDescription")}
             />
             <div className="mt-6 space-y-4 text-sm leading-relaxed text-ink/80">
-              <p>
-                Het voorraadprogramma draait om voorspelbaarheid. De modellen in
-                de kerncollectie blijven seizoen na seizoen beschikbaar, in de
-                volledige matenrange. Zo investeert u in doorverkoop in plaats
-                van in risico.
-              </p>
+              <p>{t("principeP1")}</p>
             </div>
           </div>
           <div>
             <PlaceholderImage
               tone="from-neutral-800 to-black"
               ratio="aspect-[4/3]"
-              label="Kerncollectie uit voorraad"
+              label={t("imageLabel")}
               className="rounded-card"
             />
           </div>
@@ -93,24 +61,24 @@ export default function VoorraadprogrammaPage() {
       <section className="bg-paper py-20 lg:py-24">
         <Container>
           <SectionHeading
-            eyebrow="Hoe het werkt"
-            title="In drie stappen op voorraad"
+            eyebrow={t("stappenEyebrow")}
+            title={t("stappenTitle")}
             align="center"
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {steps.map((step) => (
+            {stepNumbers.map((num, i) => (
               <div
-                key={step.step}
+                key={num}
                 className="rounded-card border border-line bg-white p-8"
               >
                 <span className="font-serif text-3xl text-accent-dark">
-                  {step.step}
+                  {num}
                 </span>
                 <h3 className="mt-4 font-serif text-lg text-ink">
-                  {step.title}
+                  {t(`step${i + 1}Title`)}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {step.description}
+                  {t(`step${i + 1}Desc`)}
                 </p>
               </div>
             ))}
@@ -122,31 +90,28 @@ export default function VoorraadprogrammaPage() {
         <Container className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <SectionHeading
-              eyebrow="De voordelen"
-              title="Wat het programma u oplevert"
+              eyebrow={t("voordelenEyebrow")}
+              title={t("voordelenTitle")}
             />
             <ul className="mt-8 space-y-3.5">
-              {benefits.map((benefit) => (
+              {benefitKeys.map((key) => (
                 <li
-                  key={benefit}
+                  key={key}
                   className="flex items-center gap-3 text-sm text-ink/80"
                 >
                   <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent-dark">
                     <Check className="size-3" strokeWidth={2.5} />
                   </span>
-                  {benefit}
+                  {t(key)}
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="eyebrow text-accent-dark">In het programma</p>
-            <h2 className="mt-3 text-3xl text-ink sm:text-4xl">
-              Categorieën uit voorraad
-            </h2>
+            <p className="eyebrow text-accent-dark">{t("categorieEyebrow")}</p>
+            <h2 className="mt-3 text-3xl text-ink sm:text-4xl">{t("categorieTitle")}</h2>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted">
-              Deze categorieën vormen de kern van het voorraadprogramma en zijn
-              continu leverbaar.
+              {t("categorieText")}
             </p>
             <div className="mt-8 space-y-3">
               {stockCollections.map((collection) => (
@@ -156,14 +121,14 @@ export default function VoorraadprogrammaPage() {
                 >
                   <div>
                     <p className="font-serif text-base text-ink">
-                      {collection.title}
+                      {tcol(`${collection.slug}.title`)}
                     </p>
                     <p className="mt-0.5 text-sm text-muted">
-                      {collection.description}
+                      {tcol(`${collection.slug}.description`)}
                     </p>
                   </div>
                   <span className="ml-4 shrink-0 text-sm text-muted">
-                    {collection.count} artikelen
+                    {collection.count} {t("artikelen")}
                   </span>
                 </div>
               ))}
@@ -176,27 +141,26 @@ export default function VoorraadprogrammaPage() {
         <Container>
           <div className="relative isolate overflow-hidden rounded-card bg-ink px-6 py-16 text-center text-white sm:px-12 lg:py-20">
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(70%_120%_at_50%_0%,rgba(200,178,138,0.22),transparent_60%)]" />
-            <p className="eyebrow text-accent">Aan de slag</p>
+            <p className="eyebrow text-accent">{t("ctaEyebrow")}</p>
             <h2 className="mx-auto mt-4 max-w-2xl font-serif text-3xl sm:text-5xl">
-              Houd uw rekken altijd gevuld
+              {t("ctaTitle")}
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/70">
-              Vraag een B2B-account aan of log in om de actuele voorraad en
-              prijzen van het volledige programma te bekijken.
+              {t("ctaText")}
             </p>
             <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
               <Link
                 href="/b2b-account-aanvragen"
                 className={buttonVariants({ variant: "light", size: "lg" })}
               >
-                Account aanvragen
+                {tc("accountAanvragen")}
                 <ArrowRight className="size-4" strokeWidth={1.75} />
               </Link>
               <Link
                 href="/login"
                 className={buttonVariants({ variant: "light-outline", size: "lg" })}
               >
-                Inloggen
+                {tc("inloggen")}
               </Link>
             </div>
           </div>
