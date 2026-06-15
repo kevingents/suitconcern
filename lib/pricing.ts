@@ -43,7 +43,7 @@ async function fetchBlobPrices(): Promise<PriceList> {
     const result = await list({ prefix: BLOB_PATH, limit: 1, token });
     const blob = result.blobs.find((b) => b.pathname === BLOB_PATH);
     if (!blob) return {};
-    const res = await fetch(`${blob.url}?_=${Date.now()}`, { cache: "no-store" });
+    const res = await fetch(blob.url, { next: { revalidate: 300 } });
     if (!res.ok) return {};
     const data = (await res.json()) as { prices?: Record<string, unknown> };
     const out: PriceList = {};

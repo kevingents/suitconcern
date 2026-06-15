@@ -133,8 +133,19 @@ export function SessionProvider({
   return <DemoSessionProvider>{children}</DemoSessionProvider>;
 }
 
+// Veilige gast-default zodat een (transient) ontbrekende context tijdens SSR/
+// streaming nooit crasht — gating valt dan terug op "gast" (geen prijzen).
+const GUEST_VALUE: SessionContextValue = {
+  status: "guest",
+  company: null,
+  group: "Bronze",
+  discountPct: 0,
+  isApproved: false,
+  isAdmin: false,
+  demo: process.env.NEXT_PUBLIC_AUTH_ENABLED !== "true",
+  setDemoStatus: () => {},
+};
+
 export function useSession() {
-  const ctx = useContext(SessionContext);
-  if (!ctx) throw new Error("useSession moet binnen <SessionProvider> gebruikt worden");
-  return ctx;
+  return useContext(SessionContext) ?? GUEST_VALUE;
 }

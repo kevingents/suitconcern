@@ -69,7 +69,7 @@ async function fetchBranch(branchId: string): Promise<BranchSnapshot> {
   const blob = result.blobs.find((b) => b.pathname === path);
   if (!blob) return empty;
 
-  const res = await fetch(`${blob.url}?_=${Date.now()}`, { cache: "no-store" });
+  const res = await fetch(blob.url, { next: { revalidate: 300 } });
   if (!res.ok) return empty;
   const data = (await res.json()) as { rows?: unknown[]; updatedAt?: string };
   const rows = Array.isArray(data?.rows)

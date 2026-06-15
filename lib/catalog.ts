@@ -1,6 +1,7 @@
 import "server-only";
 import { cache } from "react";
 import { products as mockProducts, type Product } from "@/lib/data";
+import { getShopifyCatalog } from "@/lib/shopify";
 import { getSrsCatalog } from "@/lib/srs/catalog";
 import productImagesJson from "@/lib/data/product-images.json";
 
@@ -29,15 +30,27 @@ function withImages(list: Product[]): Product[] {
 
 export const loadProducts = cache(async (): Promise<Product[]> => {
   try {
-    const srs = await getSrsCatalog();
-    if (srs && srs.length) return srs;
+    const shop = await getShopifyCatalog();
+    if (shop && shop.length) return withImages(shop);
   } catch (e) {
-    console.error("[catalog] SRS-catalogus faalde — val terug op mock:", e instanceof Error ? e.message : e);
+    console.error("[catalog] Shopify-catalogus faalde:", e instanceof Error ? e.message : e);
+  }
+  try {
+    const srs = await getSrsCatalog();
+    if (srs && srs.length) return withImages(srs);
+  } catch (e) {
+    console.error("[catalog] SRS-catalogus faalde:", e instanceof Error ? e.message : e);
   }
   return withImages(mockProducts);
 });
 
-export const catalogSource = cache(async (): Promise<"srs" | "mock"> => {
+export const catalogSource = cache(async (): Promise<"shopify" | "srs" | "mock"> => {
+  try {
+    const shop = await getShopifyCatalog();
+    if (shop && shop.length) return "shopify";
+  } catch {
+    /* val terug */
+  }
   try {
     const srs = await getSrsCatalog();
     if (srs && srs.length) return "srs";

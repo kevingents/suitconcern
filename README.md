@@ -107,9 +107,16 @@ Next Image (Cloudinary/Uploadthing) zodra die gekoppeld zijn.
 
 ## Data: SRS-voorraad, prijzen & beeld
 
-De catalogus draait via één toegangslaag ([`lib/catalog.ts`](lib/catalog.ts)): **SRS-data
-wanneer geconfigureerd, anders mock-data**. Zo werkt de site lokaal zonder secrets en
-schakelt hij in productie vanzelf over op live data.
+De catalogus draait via één toegangslaag ([`lib/catalog.ts`](lib/catalog.ts)), met bron-
+voorrang **Shopify → SRS → mock**. Zo werkt de site lokaal zonder secrets en schakelt hij
+in productie vanzelf over op live data.
+
+- **Productcatalogus (Shopify-master)** — rijke data (titel, **maat**, **kleur**, SKU) uit de
+  Shopify-collections, gemapt op onze categorieën ([`lib/shopify.ts`](lib/shopify.ts)).
+  Activeren met `SHOPIFY_SHOP_DOMAIN` + `SHOPIFY_ADMIN_ACCESS_TOKEN`. Cacheable (ISR, 10 min)
+  zodat catalogus-pagina's statisch prerenderen. **Nooit Shopify-foto's of het "GENTS"-merk**
+  — titels worden gesanitiseerd, beeld komt uit fashn/illustratie. Voorraad voorlopig uit
+  Shopify-inventory; per-filiaal 702/704-voorraad volgt zodra de SRS-snapshot gevuld is.
 
 - **Voorraad & artikelen (SRS)** — Suitconcern = **SRS-filiaal 702 (verkoop) + 704
   (magazijn)**. Bron is de stock-snapshot in de (storegents) blobstore
