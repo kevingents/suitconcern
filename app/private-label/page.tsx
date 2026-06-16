@@ -16,6 +16,7 @@ import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { PlaceholderImage } from "@/components/shop/placeholder-image";
 import { buttonVariants } from "@/components/ui/button";
+import siteImages from "@/lib/data/site-images.json";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("privateLabel");
@@ -76,6 +77,7 @@ export default async function PrivateLabelPage() {
               tone="from-stone-700 to-neutral-900"
               ratio="aspect-[4/3]"
               label={t("imageLabel")}
+              src={siteImages.privatelabel}
               className="rounded-card"
             />
           </div>

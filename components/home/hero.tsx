@@ -1,19 +1,28 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ArrowRight, LogIn } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import siteImages from "@/lib/data/site-images.json";
 
 export function Hero() {
   const t = useTranslations("home.hero");
   const tc = useTranslations("common");
   return (
     <section className="relative isolate overflow-hidden bg-ink text-white">
-      {/* Achtergrond — placeholder voor full-width hero fotografie */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-neutral-800 via-ink to-black" />
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(80%_60%_at_75%_20%,rgba(200,178,138,0.18),transparent_55%)]" />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(17,17,17,0.85),rgba(17,17,17,0.35))]" />
+      {/* Achtergrond — full-width hero fotografie (fal.ai) + leesbaarheids-scrim */}
+      <Image
+        src={siteImages.hero}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="-z-20 object-cover"
+      />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(17,17,17,0.9),rgba(17,17,17,0.55))]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(80%_60%_at_75%_20%,rgba(200,178,138,0.2),transparent_55%)]" />
 
       <Container className="flex min-h-[78vh] max-w-[1280px] flex-col justify-center py-24 lg:py-32">
         <div className="max-w-2xl">

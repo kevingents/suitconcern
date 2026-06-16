@@ -1,12 +1,12 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { GarmentIllustration } from "@/components/shop/garment-illustration";
 
 /**
- * Premium placeholder voor productfotografie tijdens de prototypefase.
- * Toont een fijne pinstripe-textuur + een line-art garment per categorie, zodat
- * elk artikel/collectie een herkenbaar, on-brand beeld krijgt. Wordt later
- * vervangen door <Image> (Cloudinary / fashn.ai-output). De `tone` is een
- * Tailwind-gradient uit de datalaag; `category` bepaalt de illustratie.
+ * Premium beeld-slot. Met `src` toont het echte (fashn/fal) fotografie; zonder
+ * `src` valt het terug op een on-brand placeholder: pinstripe-textuur + een
+ * line-art garment per categorie. De `tone` is een Tailwind-gradient uit de
+ * datalaag; `category` bepaalt de illustratie.
  */
 export function PlaceholderImage({
   tone,
@@ -14,13 +14,27 @@ export function PlaceholderImage({
   className,
   ratio = "aspect-[4/5]",
   category,
+  src,
+  sizes = "(max-width: 1024px) 100vw, 50vw",
 }: {
   tone: string;
   label?: string;
   className?: string;
   ratio?: string;
   category?: string;
+  src?: string;
+  sizes?: string;
 }) {
+  if (src) {
+    return (
+      <div className={cn("relative overflow-hidden bg-paper", ratio, className)}>
+        <Image src={src} alt={label ?? ""} fill sizes={sizes} className="object-cover" />
+        <span className="absolute right-4 top-4 font-serif text-sm text-white/70 drop-shadow">
+          sc<span className="text-accent">.</span>
+        </span>
+      </div>
+    );
+  }
   return (
     <div
       className={cn("relative overflow-hidden bg-gradient-to-br", tone, ratio, className)}

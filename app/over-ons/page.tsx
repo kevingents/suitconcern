@@ -12,6 +12,7 @@ import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { PlaceholderImage } from "@/components/shop/placeholder-image";
 import { buttonVariants } from "@/components/ui/button";
+import siteImages from "@/lib/data/site-images.json";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("overOns");
@@ -61,6 +62,7 @@ export default async function OverOnsPage() {
               tone="from-stone-700 to-neutral-950"
               ratio="aspect-[4/3]"
               label={t("imageLabel")}
+              src={siteImages.overons}
               className="rounded-card"
             />
           </div>

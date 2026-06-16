@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { PlaceholderImage } from "@/components/shop/placeholder-image";
 import { buttonVariants } from "@/components/ui/button";
 import { collections } from "@/lib/data";
+import siteImages from "@/lib/data/site-images.json";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("voorraad");
@@ -52,6 +53,7 @@ export default async function VoorraadprogrammaPage() {
               tone="from-neutral-800 to-black"
               ratio="aspect-[4/3]"
               label={t("imageLabel")}
+              src={siteImages.voorraad}
               className="rounded-card"
             />
           </div>

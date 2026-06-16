@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { PlaceholderImage } from "@/components/shop/placeholder-image";
 import { buttonVariants } from "@/components/ui/button";
+import siteImages from "@/lib/data/site-images.json";
 
 export function About() {
   const t = useTranslations("home.about");
@@ -40,6 +41,7 @@ export function About() {
             tone="from-stone-700 to-neutral-950"
             ratio="aspect-[4/3]"
             label={t("imageLabel")}
+            src={siteImages.about}
             className="rounded-card"
           />
         </div>
